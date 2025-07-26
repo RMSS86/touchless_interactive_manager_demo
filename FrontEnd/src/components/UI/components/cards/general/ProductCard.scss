@@ -1,0 +1,159 @@
+@use '../../../../../sass/layout/layout-elements';
+@use '../../../../../sass/libs/mixins';
+.card{
+    @include layout-elements.card_product(
+        $pad:0, $bg:#ffffff96,
+        $border_r:6px, $height:32.6em);
+    
+    &_header{
+        position: relative;
+    }
+
+    &_img{
+        @include mixins.image_autofit(
+            $height:23rem,
+            $width: 96%,
+            $border_rad:6px,
+        );
+
+
+        margin-top: 1rem;
+        box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.2);
+        &:hover{
+            transition: all 1s;
+            transform: scale(1.01);
+            // filter: blur(1px);
+        }
+    }
+
+    &_logo{
+        height: 5.4rem;
+        border-radius: 6px;
+        position: absolute;
+        left: 0.5rem;
+        margin-top: 0.5rem;
+        box-shadow: 6px 6px 6px rgba(0, 0, 0, 0.2);
+
+         &:hover{
+            transition: all 1s;
+            transform: scale(1.1);
+        }
+    }
+
+    &_title{
+        padding: 1rem 4rem;
+        position: absolute;
+        top: 0.4rem;
+        right: 1rem;
+        background-color: #161616ec;
+        border-radius: 4.5px;
+        font-size: 1.2rem;
+    }
+
+    &_like{
+        left: 1rem;
+        bottom: 0.4rem;
+        padding: .5rem 1.2rem;
+        position: absolute;
+        border-radius: 4.5px;
+        // background-color: #0000001f;
+    }
+
+    &_info{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;  
+    }
+
+    &_descs{
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+        padding: .5rem;
+        margin-left: 1rem;
+
+        &_count{
+            padding: 1rem 1.8rem;
+            background-color: #2b2a2ad0;
+            border-radius: 4.5px;
+            font-size: 1.6rem;
+            color: #ffffffb5;
+        }
+
+        &_cathegory{
+            border: 1px solid #fafafa5c;
+            background-color: #b82ec7dd;
+            padding: 0.6rem 2.4rem;
+            color: #fffefee0;
+            font-size: 1.4rem;
+            margin: 0 0.7rem ;
+            border-radius: 4.5px;
+            transition: all 1s ease;
+        }
+        
+        &_desc{
+            color: #000;
+            font-size: 1.5rem;
+            font-weight: 400;
+        }
+
+    }
+    
+    &_code{
+        color: #fff;
+        text-align: end;
+        background-color: #1976d2;
+        border-radius: 0 0 6px 6px;
+        font-size: 1.2rem;
+        padding: 1rem;
+    }
+    
+    &_action{
+        margin-top: .25rem;
+        filter: invert(1);
+        background-color: #00000000;
+        border-radius: 7px;
+        padding: .25rem;
+        margin-right: 1rem;
+        align-content: center;
+
+        &-icon{
+            transition: all 1s ease-in-out;
+
+            &:hover{
+                transform: scale(1.1);
+                filter: brightness(1)
+            }
+        }
+    }
+    
+    &_actions{
+        position: absolute;
+        bottom: 1rem;
+        display: flex;
+        flex-direction: column;
+        right: 2rem;
+
+        background-color: #0000001f;
+        border-radius: 7px;
+        padding: 1rem;
+    
+        &-icon{
+            height: 2.4rem;
+
+            margin: 0.25rem;
+            transition: all 1s ease-in-out;
+
+            &:hover{
+                transform: scale(1.1);
+                filter: brightness(1)
+            }
+        }
+    }
+}
+.minus_margin{
+        margin: -0.25rem;
+}
+
+       //##59C3FF

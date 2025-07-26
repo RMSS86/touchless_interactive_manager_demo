@@ -1,0 +1,150 @@
+:root{
+    /* ////////////////////////LIGHT THEME */
+  --color-general-bg: #e7e3e3;
+  --color-surface-light: #fff;
+  --color-primary-light: #5079F2;
+  --color-secondary-light: #6B8DF2;
+  --color-inverse-primary-light: #F2F2F2;
+  --color-inverse-secondary-light: #C4D0F2;
+  --color-surfaceDim-light: #ffff;
+  --color-complementary-negative: #F2C550;
+  --color-surfaceContainerLow-light: #ffff;
+  --color-primaryFixedDim-light: #ffff;
+  --color-inverseSurface-light: #ffff;
+  --color-tertiary-light: #ffff;
+
+  /* ////////////////////////DARK THEME */
+  --color-surface-dark: #5079F2;
+  --color-primary-dark: #222633;
+  --color-secondary-dark: #ffff;
+  --color-inverse-primary-dark: #222633;
+  --color-surfaceDim-dark: #4E5159;
+  --color-surfaceContainerLow-dark: #ffff;
+  --color-primaryFixedDim-dark: #ffff;
+  --color-inverseSurface-dark: #ffff;
+  --color-tertiary-dark: #ffff;
+
+  /* //> UI */
+  --UI-layout-default-color: #222633;
+  --UI-footer-default: var(--UI-layout-default-color);
+  --UI-header-default: var(--UI-layout-default-color);
+
+
+  /* //> TRANSPARENT */
+  --color-transaprent: rgba(255, 255, 255, 0);
+
+  /* //> MODAL */
+  --color-surface-modal-dark: #1d1c1cce;
+
+  /* //> GRADIENTS */
+  --color-gradient-A: #ffff;
+  --color-gradient-B: #ffff;
+
+  /* //> SHADOWS //> LIGHT */
+  --color-Surface-box-light: #e4e2e2d7;
+
+  /* //> SHADOWS //> DARK */
+  --color-Surface-box-shadow: #fffbfb33;
+  --color-Surface-box-shadow-med: #3f3c3c8a;
+  --color-Surface-box-shadow-hard: #3f3c3ccc;
+  --color-surface-dark-soft: #35333357;
+  --color-inverseSurface-box-shadow: #00000033;
+  --color-inverseSurface-box-shadow-b: #0000005c;
+
+  /* //> TYPO */
+  --color-branding-letter-main: #faf8f8f1;
+  --color-branding-letter-sub: #f3efefdc;
+  --color-branding-letter-main-inverse: #1d1d1df1;
+  --color-branding-letter-sub-inverse: #4b4b4bdc;
+  --font-default-size: 1.2rem;
+
+  /* //> BTN */
+  --colors-regular-btn: #2222224b;
+  --colors-regular-btn-letering: #ffffffd0;
+  --colors-nav-btn: #52505065;
+
+  /* //> BG's */
+  --colors-footer-opacity: #262629;
+  --colors-top-navigator-bg: #22222252;
+
+  /* //> CURATED DESIGN */
+  --colors-sections-base: #ffffff1f;
+  --colors-section-wrapper: #000000b0;
+  --colors-section-wrapper-shadow: #1d1c1cce;
+  --colors-section-wrapper-pale: #00000026;
+
+  --default-color: #ffff;
+  --default-grid-cols: 2;
+  --default-grid-rows: auto 1fr auto;
+  --default-sidebar-width: auto;
+  --remember-blue: #1974D2;
+
+  /* //> ANIMATIONS */
+  --animation-duration-default: 1s;
+  --animation-scale-default: 1.1;
+
+  /* //> BORDER RADIOUS */
+  --border-radius-default: 12px;
+  --border-radius-only-top: var(--border-radius-default) var(--border-radius-default) 0  0;
+  --border-radius-only-bottom: 0  0  var(--border-radius-default) var(--border-radius-default) ;
+
+  /* //> BOX SHADOWS */
+  --wp--preset--shadow--natural: 6px 6px 9px var(--color-inverseSurface-box-shadow);
+  --wp--preset--shadow--natural-simple: 3px 3px 4.5px rgba(0, 0, 0, 0.2);
+  --wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);
+  --wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);
+  --wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);
+  --wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);
+
+}
+
+.grid{
+  /* GENERAL LAYOUT RESPONSIVE GRID */
+  /* FOR DESIGN DETAILS USE SASS MEDIA QUERIES */
+  display: grid; 
+  min-height: 100vh;
+  grid-template-columns: var(--default-sidebar-width) 1fr ;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: 
+  'navbar navbar'
+  'sidebar main'
+  'footer footer';
+ 
+}
+
+aside{
+    height: 84vh;
+    top: 67px;
+  /* left: -100%; */
+  position: fixed;
+  align-self: start;
+  transition: all 1s ease-in-out;
+}
+
+.nav_fix {
+  top: 0;
+  position: sticky;
+
+}
+
+@media(max-width:800px){
+  body{
+    grid-template-columns: 1fr;
+  }
+  aside{
+    position: fixed;
+    width: 300px;
+  }
+
+}
+
+#sidebar-active:checked ~ aside {
+    opacity:0;
+    left: 0;
+    position: fixed;
+    transform: translateX(-72%);
+    transition: all 0.5s ease-in-out;
+    transition-behavior: allow-discrete;
+}
+
+

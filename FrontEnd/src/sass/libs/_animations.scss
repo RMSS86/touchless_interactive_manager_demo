@@ -1,0 +1,10 @@
+
+//> MAKE GENERIC
+@mixin hover_1_1($scale:1.1,$border_rad:12px){
+    transition: all 1s ease;
+    border-radius: $border_rad;
+    &:hover{
+        transform: scale($scale);
+        box-shadow:  1px 1px 7px 0px #222633d6;
+    }
+}

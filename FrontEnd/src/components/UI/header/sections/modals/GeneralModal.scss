@@ -1,0 +1,37 @@
+@use "../../../sass/libs/mixins";
+@use "../../../sass/base/themeColors";
+@use "../../../sass/libs/animations";
+
+.result {
+  &__modal {
+    top: 27%;
+    border: none;
+    border-radius: 8px;
+    /* padding: 2rem; */
+    background-color: rgba(242, 255, 254, 0.9294117647);
+    position: absolute;
+    height: 29rem;
+    width: 72rem;
+    left: 18%;
+    & [open] {
+      animation: slide-in-from-top 0.6s ease-out;
+    }
+    &::backdrop {
+      background: #0000008a;
+    }
+  }
+}
+// @keyframes slide {
+//   @include animations.slide-in-from-top;
+// }
+
+@keyframes slide-in-from-top {
+  0% {
+    transform: translateY(-15%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

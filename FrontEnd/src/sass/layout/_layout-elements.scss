@@ -1,0 +1,59 @@
+
+//> COMPONENETS
+//> CARDS
+@mixin card_product(
+    $pad: 2rem,
+    $margin: 0,
+    $border: false,
+    $border_color: #2a2929,
+    $border_r:12px,
+    $bg:#424242,
+    $align:center,
+    $color:#fff,
+    $height:fit-content,
+    $max_h:15rem,
+){
+        padding: $pad;
+        @if $border{ border: 1px solid $border_color; }
+        border-radius: $border_r;
+        background-color: $bg;
+        text-align: $align;
+        margin: $margin;
+        color: $color;
+        // max-height: $max_h;
+        height: $height;
+
+}
+
+//> POSITIONERS AND CLEANERS
+@mixin header_layout($top:0){
+    top: $top;
+    position: sticky;
+}
+
+@mixin top_nav(){
+    display: flex;
+    justify-content: space-between;
+}
+
+@mixin footer_nav(){
+    display: flex;
+    justify-content: center;
+}
+
+//> CYCLICAL HTML DECORATORS 
+@mixin ul_cleaner($align:row){
+    //> ul ON FLEX ROW DISPLAY
+    flex-direction: $align;
+    display: flex;
+}
+
+@mixin li_cleaner(){
+    //> li REMOVES LINING DOT
+    list-style-type: none;
+}
+
+@mixin a_cleaner(){
+    //> a REMOVES UNDESLINED DECORATION
+    text-decoration: none;
+}

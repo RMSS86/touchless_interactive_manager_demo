@@ -1,0 +1,60 @@
+@use "../../../sass/layout/grid";
+@use "../../../sass/layout/layout-elements";
+@use "../../../sass/base/themeColors";
+@use "../../../sass/libs/mixins";
+
+.footer {
+  //> DECLARES GRID GLOBAL LAYOUT VALUE
+  @include grid.area_footer();
+  background-color: var(--UI-footer-default);
+  border-radius: var(--border-radius-default);
+
+  &__nav {
+    @include layout-elements.ul_cleaner();
+    @include layout-elements.footer_nav();
+    margin: 3.3rem;
+  }
+
+  &__item {
+    @include layout-elements.li_cleaner();
+    @include layout-elements.li_cleaner();
+    font-size: calc(var(--font-default-size) + 0.3rem);
+    transition: all var(--animation-duration-default);
+    margin: 0 0.5%;
+
+    &:hover {
+      transform: scale(var(--animation-scale-default));
+    }
+  }
+
+  &__link {
+    @include layout-elements.a_cleaner();
+    transition: all var(--animation-duration-default);
+    color: var(--color-branding-letter-main);
+    &:hover {
+      color: var(--color-branding-letter-sub-inverse);
+    }
+  }
+
+  &__foot {
+    text-align: center;
+    font-size: var(--font-default-size);
+    margin: 0 2rem;
+  }
+
+  &__logo {
+    margin-bottom: 2rem;
+    margin: 2rem 2rem 1rem 2rem;
+    border-radius: 12px;
+    height: 15rem;
+    transition: all 1s;
+    &:hover {
+      transform: scale(var(--animation-scale-default));
+    }
+  }
+
+  &-credit {
+    color: var(--color-branding-letter-sub);
+    margin-bottom: 4.2rem;
+  }
+}

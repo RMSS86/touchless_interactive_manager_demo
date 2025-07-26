@@ -1,0 +1,59 @@
+$--color-tertiary: #ff585f;
+$--color-primary-darker: #4bbb7d;
+$--color-secondary-darker: #fab228;
+$--color-secondary-darker-plus: #e4b228c5;
+$--color-tertiary-darker: #fd424b;
+$--color-primary-opacity: #5ec5763a;
+$--color-secondary-opacity: #ffcd0331;
+$--color-tertiary-opacity: #ff58602d;
+$--color-fourth--opacity: #2020209a;
+$--color-fith--opacity: #37383d;
+$--color-lettering-main: #eee;
+$--color-lettering-pale: #aaa;
+
+$--color-fourth--light: #5e5c179a;
+
+.footer {
+  padding: 10rem 3rem;
+  background-color: $--color-fith--opacity;
+
+  &__nav {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5rem;
+  }
+
+  &__item {
+    margin-right: 4rem;
+  }
+
+  &__link {
+    font-size: 1.6rem;
+    color: $--color-lettering-main;
+    text-decoration: none;
+  }
+
+  &__copyright {
+    font-size: 1.4rem;
+    color: $--color-lettering-main;
+    text-decoration: none;
+  }
+
+  &__logo {
+    height: 6rem;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 5rem;
+  }
+
+  &__copyright {
+    font-size: 1.4rem;
+    color: $--color-lettering-pale;
+    text-align: center;
+  }
+
+  &__copyright &__link {
+    font-size: 1.4rem;
+  }
+}

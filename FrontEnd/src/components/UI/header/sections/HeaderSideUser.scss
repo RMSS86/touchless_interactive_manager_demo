@@ -1,0 +1,53 @@
+@use "../../../../sass/libs/mixins";
+
+.sider_btn {
+  background-color: #000000ab; // #222633;
+  border-radius: 12px;
+  flex-direction: row;
+  display: flex;
+  justify-content: end;
+  font-size: 1.8rem;
+  box-shadow: 1px 1px 4px rgba(34, 38, 51, 0.8392156863);
+  transition: all 1s;
+
+  @include mixins.respond(phone-large) {
+    border-radius: 3px 12px 12px 3px;
+    flex: 1 0 auto;
+    margin-left: 0.3rem;
+  }
+
+  &:hover {
+    background: #1974d2;
+  }
+
+  &__tag {
+    color: #ffffffd5;
+    padding: 2.3rem 1.2rem 1rem 2rem;
+    transition: all 1s;
+
+    &:hover {
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    @include mixins.respond(phone-large) {
+      padding-left: 84%;
+    }
+    //> CHANGES SIZE OF ELEMENT
+    @include mixins.respond(phone) {
+      // padding: 2.3rem 0.5rem 1rem 9rem;
+      padding-left: 64%;
+    }
+  }
+
+  &__user {
+    height: 6rem;
+    margin: 0.3rem;
+    border-radius: 12px;
+
+    &:hover {
+      transform: scale(0.9);
+      transition: all 1s;
+    }
+  }
+}

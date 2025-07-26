@@ -1,0 +1,6 @@
+@use "../../../sass/layout/grid";
+
+.outlet {
+  @include grid.area_main();
+  //   height: fit-content;
+}

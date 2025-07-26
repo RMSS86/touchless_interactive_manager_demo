@@ -1,0 +1,113 @@
+///////////////////////////////////////
+///////////////////////GENERAL UI VARS
+///BODY HEIGHT 
+$default-body-height: 100vh;
+/// $bp-largest: 75em; // 1200px
+$bp-large: 68.75em; // 1100px
+$bp-medium: 56.25em; // 900px
+$bp-small: 37.5em; // 600px
+$bp-smallest: 31.25em; // 500px
+
+///////////////GRID
+$grid-grid: 114rem;
+$grid-margin: 60px;
+$grid-gap-simple: 15px;
+
+// GRID
+$grid-width: 114rem;
+$gutter-vertical: 8rem;
+$gutter-vertical-small: 6rem;
+$gutter-horizontal: 6rem;
+$gutter-horizontal-small: 2rem;
+
+///font
+$default-font-size: 1.6rem;
+$default-link-font-size: 1.5rem;
+///BUTONS SIZES
+$default-btn-font-size: 1.8rem;
+
+///BORDER RADIUS
+$default-border-radius: 30px;
+$default-border-radius-b: 3%;
+$default-border-radius-b-px: 45px;
+
+$btn-border-radius_a: 25%;
+$btn-border-radius_b: 50%;
+
+///GENERAL PADDING
+$body-padding-small: 0.5rem;
+$body-padding-medium: 2rem;
+$body-padding-large: 3rem;
+
+//GENERAL BORDER RADIUS
+$section-border-radius: 25px;
+
+////DURATIONS
+$transition-duration-short: 0.25s;
+$transition-duration-medium: 0.5s;
+$transition-duration-medium-plus: 0.75s;
+$transition-duration-slow: 1s;
+$transition-duration-slow-plus: 1.5s;
+$duration-mixed: (
+  transition: 0.25s,
+  gallery-lightbox-fadein: 0.5s,
+);
+
+// Misc.
+$misc: (
+  z-index-base: 10000,
+  gallery-lightbox-opacity: 0.875,
+);
+
+// Size.
+$size: (
+  border-radius: 0.325rem,
+  element-height: 3rem,
+  element-margin: 2rem,
+  header-width: 25rem,
+  subheader-width: 22rem,
+  content-width: 60rem,
+  line-width: 2px,
+  form-gutter: 2rem,
+  gallery-gutter: 1.25rem,
+);
+
+// Font.
+$font: (
+  family: (
+    "Source Sans Pro",
+    Helvetica,
+    sans-serif,
+  ),
+  family-fixed: (
+    "Courier New",
+    monospace,
+  ),
+  family-heading: (
+    "Raleway",
+    Helvetica,
+    sans-serif,
+  ),
+  weight: 300,
+  weight-bold: 600,
+  weight-extrabold: 700,
+  weight-heading: 800,
+  weight-heading-light: 600,
+  kerning: 0.0375em,
+  kerning-heading: 0.175em,
+  kerning-heading-alt: -0.05em,
+);
+
+// Palette.
+$palette: (
+  bg: #ffffff,
+  fg: #000000,
+  fg-bold: #000000,
+  fg-light: rgba(0, 0, 0, 0.25),
+  border: rgba(144, 144, 144, 0.25),
+  border-bg: rgba(144, 144, 144, 0.1),
+  accent: #49fcd4,
+  // accent-border: desaturate(darken(#49fcd4, 8), 30),
+  // accent-alt: desaturate(darken(#49fcd4, 10), 20),
+  // accent-bg: transparentize(#49fcd4, 0.75),,,,,,,,,,,,,,,
+);

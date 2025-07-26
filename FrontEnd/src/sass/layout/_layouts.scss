@@ -1,0 +1,156 @@
+@use "../base/themeColors";
+@use "../libs/mixins";
+@use "../libs/vars";
+
+//> GENERAL CONTEN PADDINGS
+@mixin dynamic_Padding($min:50%, $min_val:4%){
+  padding: min($min, $min_val);
+}
+
+//////FLEXED SECTIONS////FLEXED SECTIONS////FLEXED SECTIONS////FLEXED SECTIONS///////
+//////FLEXED SECTIONS////FLEXED SECTIONS////FLEXED SECTIONS////FLEXED SECTIONS///////
+@mixin section_base(
+  //> set double on wrapper
+  $height: 50.7vh,
+  $width: 100%,
+  $media-query: "tab-land",
+  $borderRadius: vars.$section-border-radius,
+  $bgColor: themeColors.$colors-sections-base
+) {
+  background-color: $bgColor;
+  height: $height;
+  width: $width;
+  border-radius: $borderRadius;
+
+  @include mixins.respond($media-query) {
+    height: calc((#{$height} * 2));
+  }
+}
+
+@mixin section_wrapper(
+  //> on media Query sets double of bases' vh
+  $height: 95%,
+  $width: 98.5%,
+  $margin: 1.6rem,
+  $display: flex,
+  $flexDirection: row,
+  $padding: 0.06rem,
+  $media-query: "tab-land",
+  $shadox: themeColors.$colors-section-wrapper-shadow,
+  $borderRadius: vars.$section-border-radius,
+  $bgColor: themeColors.$colors-sections-base
+) {
+  background-color: themeColors.$colors-section-wrapper;
+  border-radius: $borderRadius;
+  height: $height;
+  margin: $margin;
+  width: $width;
+  display: $display;
+  flex-direction: $flexDirection;
+  padding: $padding;
+  box-shadow: 0 0 2.1rem 0.6rem themeColors.$colors-section-wrapper-shadow;
+
+  @include mixins.respond($media-query) {
+    flex-direction: column;
+  }
+}
+
+@mixin section_wrapped(
+  $width: 100%,
+  $margin: 0.6rem,
+  $margin-left: $margin,
+  $media-query: "tab-land",
+  $borderRadius: vars.$section-border-radius
+) {
+  @include mixins.background(themeColors.$color-surface-dark);
+  width: $width;
+  margin: $margin;
+  border-radius: $borderRadius;
+  margin-left: $margin-left;
+
+  @include mixins.respond($media-query) {
+    height: inherit;
+    width: auto;
+    margin-left: $margin;
+  }
+}
+//////FLEXED SECTIONS////FLEXED SECTIONS////FLEXED SECTIONS////FLEXED SECTIONS///////
+//////FLEXED SECTIONS////FLEXED SECTIONS////FLEXED SECTIONS////FLEXED SECTIONS///////
+
+//////DYNAMIC GRID//////DYNAMIC GRID//////DYNAMIC GRID//////DYNAMIC GRID//////DYNAMIC GRID/////
+//////DYNAMIC GRID//////DYNAMIC GRID//////DYNAMIC GRID//////DYNAMIC GRID//////DYNAMIC GRID/////
+@mixin section_base_frame(
+  $width: 100%,
+  $display: flex,
+  $flexDirection: column
+) {
+  display: $display;
+  flex-direction: $flexDirection;
+  width: $width;
+}
+
+@mixin section_frame_row(
+  $max-width: 97%,
+  $overflow-XY: "y",
+  $overflow: hidden,
+  $bgColor: themeColors.$colors-section-wrapper-pale,
+  $borderRadius: vars.$section-border-radius,
+  $padding: 0 6rem,
+  $margin: 0 3rem,
+  $padding-top: 1rem,
+  $padding-bottom: 0,
+  $margin-top: 0,
+  $margin-bottom: 0,
+  $margin-bottom-last: 4rem
+) {
+  overflow: $overflow;
+
+  @if ($overflow-XY == "y") {
+    overflow-y: scroll;
+  } @else {
+    overflow-x: scroll;
+  }
+  max-width: $max-width;
+  scrollbar-width: none;
+  background-color: $bgColor;
+  border-radius: $borderRadius;
+  padding: $padding;
+  padding-top: $padding-top;
+  padding-bottom: $padding-bottom;
+  margin: $margin;
+  margin-top: $margin-top;
+  margin-bottom: $margin-bottom;
+
+  &:not(:last-child) {
+    margin-bottom: $margin-bottom-last;
+  }
+}
+
+@mixin section_frame_middle(
+  $display: grid,
+  $columns: 3,
+  $grid-gap: 2.4rem,
+  $grid-row-gap: 1.5rem
+) {
+  display: $display;
+  grid-template-columns: repeat($columns, 1fr);
+  grid-gap: $grid-gap;
+  grid-row-gap: $grid-row-gap;
+}
+
+@mixin section_frame_wrapped(
+  $simetric-margin-vertical: 3rem,
+  $simetric-margin-horizontal: 0,
+  $min-width: 42rem,
+  $margin: $simetric-margin-vertical $simetric-margin-horizontal,
+  $margin-top: 0,
+  $margin-bottom: 0,
+  $float: left
+) {
+  margin: $margin;
+  min-width: $min-width;
+  background-color: themeColors.$color-transaprent !important;
+  float: $float;
+}
+//////DYNAMIC GRID//////DYNAMIC GRID//////DYNAMIC GRID//////DYNAMIC GRID//////DYNAMIC GRID/////
+//////DYNAMIC GRID//////DYNAMIC GRID//////DYNAMIC GRID//////DYNAMIC GRID//////DYNAMIC GRID/////

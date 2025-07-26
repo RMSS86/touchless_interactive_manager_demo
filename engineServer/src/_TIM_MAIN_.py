@@ -1,0 +1,165 @@
+# Face Recognition / Video Processing
+import time
+import cv2
+import numpy as np
+import face_recognition
+# # Tensor FLow Lite-MediaPipe
+# import mediapipe as mp
+# import pyautogui
+# # DataFrames / dataBase Connection Modules
+# from sqlalchemy import create_engine
+# import pandas as pd
+# # System Module
+# import sys
+# import os
+###
+# Email / TextMessage sending Modules
+# import smtplib
+# from email.mime.multipart import MIMEMultipart
+# from email.mime.text import MIMEText
+# from email.mime.base import MIMEBase
+# from email import encoders
+# # Image processing
+# import io
+# from PIL import Image, ImageDraw, ImageFont
+# from io import BytesIO
+# # GeoLocation Module
+# import geocoder
+
+import io
+
+########CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA###
+########CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA###
+from _CAMERA_ import _VIDEO_
+########CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA###
+########CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA###
+#from _ROUTER_ import _Router_I_
+#####IMPORTING ROUTER#####IMPORTING ROUTER#####IMPORTING ROUTER#####IMPORTING ROUTER#####IMPORTING ROUTER####
+#####IMPORTING ROUTER#####IMPORTING ROUTER#####IMPORTING ROUTER#####IMPORTING ROUTER#####IMPORTING ROUTER####
+###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
+###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
+from _TIM_SWITCHER_ import _SWITCHER_
+###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
+###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
+########MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES##########
+########MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES##########
+###LOADING FACE RECOGNITION MODULE###LOADING FACE RECOGNITION MODULE###LOADING FACE RECOGNITION MODULE###
+###LOADING FACE RECOGNITION MODULE###LOADING FACE RECOGNITION MODULE###LOADING FACE RECOGNITION MODULE###
+from _Face_Recognition_Module import FaceRecognition
+###LOADING AUTO MOUSE###LOADING AUTO MOUSE###LOADING AUTO MOUSE###LOADING AUTO MOUSE###LOADING AUTO MOUSE###
+###LOADING AUTO MOUSE###LOADING AUTO MOUSE###LOADING AUTO MOUSE###LOADING AUTO MOUSE###LOADING AUTO MOUSE###
+from _AUTO_Mouse_Module_ import  AutoMouse
+###LOADING HAND DECODER[SIGNED VER]###LOADING HAND DECODER[SIGNED VER]###LOADING HAND DECODER[SIGNED VER]###
+###LOADING HAND DECODER[SIGNED VER]###LOADING HAND DECODER[SIGNED VER]###LOADING HAND DECODER[SIGNED VER]###
+from _Hand_Counter_Module import HandRecongnition
+
+########MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES##########
+########MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES##########
+
+######MAIN APP######MAIN APP#####MAIN APP#####MAIN APP#####MAIN APP#####MAIN APP#####MAIN APP#####MAIN APP######MAIN APP######
+######MAIN APP######MAIN APP#####MAIN APP#####MAIN APP#####MAIN APP#####MAIN APP#####MAIN APP#####MAIN APP######MAIN APP######
+######MAIN APP######MAIN APP#####MAIN APP#####MAIN APP#####MAIN APP#####MAIN APP#####MAIN APP#####MAIN APP######MAIN APP######
+######MAIN APP######MAIN APP#####MAIN APP#####MAIN APP#####MAIN APP#####MAIN APP#####MAIN APP#####MAIN APP######MAIN APP######
+class _App_():
+    def __init__(self,*args,**kwargs):
+        self.delay_ = 1.0 / 30.0
+        self._NX_video = None
+
+######INCOMING VIDEO####INCOMING VIDEO####INCOMING VIDEO####INCOMING VIDEO####INCOMING VIDEO####
+######INCOMING VIDEO####INCOMING VIDEO####INCOMING VIDEO####INCOMING VIDEO####INCOMING VIDEO####
+######INCOMING VIDEO####INCOMING VIDEO####INCOMING VIDEO####INCOMING VIDEO####INCOMING VIDEO####
+    def _NX__router_IN_(self):
+        self.val_ = _VD_._Stream_()[0]
+        self.vid_ = _VD_._Stream_()[1]
+        return self.val_, self.vid_
+######INCOMING VIDEO####INCOMING VIDEO####INCOMING VIDEO####INCOMING VIDEO####INCOMING VIDEO####
+######INCOMING VIDEO####INCOMING VIDEO####INCOMING VIDEO####INCOMING VIDEO####INCOMING VIDEO####
+######INCOMING VIDEO####INCOMING VIDEO####INCOMING VIDEO####INCOMING VIDEO####INCOMING VIDEO####EO####
+
+    def __updateManager__(self, *args):
+        ####UNPACKING RAW VIDEO####UNPACKING RAW VIDEO####UNPACKING RAW VIDEO####
+        ####UNPACKING RAW VIDEO####UNPACKING RAW VIDEO####UNPACKING RAW VIDEO####
+        self._ret_ = self._NX__router_IN_()[0]
+        self.frame = self._NX__router_IN_()[1]
+        self._FM = _FR_.FacialRotor(self.frame)
+        ####UNPACKING RAW VIDEO####UNPACKING RAW VIDEO####UNPACKING RAW VIDEO####
+        ####UNPACKING RAW VIDEO####UNPACKING RAW VIDEO####UNPACKING RAW VIDEO####
+
+        if self._ret_:
+            ###SWITCH DYNAMIC IMPLEMENTATION###SWITCH DYNAMIC IMPLEMENTATION###SWITCH DYNAMIC IMPLEMENTATION
+            ###SWITCH DYNAMIC IMPLEMENTATION###SWITCH DYNAMIC IMPLEMENTATION###SWITCH DYNAMIC IMPLEMENTATION
+            self.COMP_mode_Selector = _SWITCHER_().COMM_brindge(comm_=_FR_.bridge)###Commands OnRoute
+            ###SWITCH DYNAMIC IMPLEMENTATION###SWITCH DYNAMIC IMPLEMENTATION###SWITCH DYNAMIC IMPLEMENTATION
+            ###SWITCH DYNAMIC IMPLEMENTATION###SWITCH DYNAMIC IMPLEMENTATION###SWITCH DYNAMIC IMPLEMENTATION
+
+            ###STREAMER ON AUTO MODE FROM FACE ENCODING ASSESMENT###STREAMER ON AUTO MODE FROM FACE ENCODING ASSESMENT
+            ###STREAMER ON AUTO MODE FROM FACE ENCODING ASSESMENT###STREAMER ON AUTO MODE FROM FACE ENCODING ASSESMENT
+            self.dist = cv2.addWeighted(self._FM, .8, self.COMP_Router_(self.COMP_mode_Selector),.5, 0)
+            ###STREAMER ON AUTO MODE FROM FACE ENCODING ASSESMENT###STREAMER ON AUTO MODE FROM FACE ENCODING ASSESMENT
+            ###STREAMER ON AUTO MODE FROM FACE ENCODING ASSESMENT###STREAMER ON AUTO MODE FROM FACE ENCODING ASSESMENT
+
+            #####MAIN VIDEO OUTPUT#####MAIN VIDEO OUTPUT###########MAIN VIDEO OUTPUT#####MAIN VIDEO OUTPUT######
+            #####MAIN VIDEO OUTPUT#####MAIN VIDEO OUTPUT###########MAIN VIDEO OUTPUT#####MAIN VIDEO OUTPUT######
+            return self.dist
+            #####MAIN VIDEO OUTPUT#####MAIN VIDEO OUTPUT###########MAIN VIDEO OUTPUT#####MAIN VIDEO OUTPUT######
+            #####MAIN VIDEO OUTPUT#####MAIN VIDEO OUTPUT###########MAIN VIDEO OUTPUT#####MAIN VIDEO OUTPUT######
+
+    ###TO_UI_IMAGE###TO_UI_IMAGE###TO_UI_IMAGE###TO_UI_IMAGE###TO_UI_IMAGE###TO_UI_IMAGE###TO_UI_IMAGE###
+    ###TO_UI_IMAGE###TO_UI_IMAGE###TO_UI_IMAGE###TO_UI_IMAGE###TO_UI_IMAGE###TO_UI_IMAGE###TO_UI_IMAGE###
+    def COMP_Router_(self, comm):
+        self.router = comm
+        ####MAIN_CLASSES_ROUTE####MAIN_CLASSES_ROUTE####MAIN_CLASSES_ROUTE####MAIN_CLASSES_ROUTE####
+        ####MAIN_CLASSES_ROUTE####MAIN_CLASSES_ROUTE####MAIN_CLASSES_ROUTE####MAIN_CLASSES_ROUTE####
+
+        if self.router  == 'MOUSE':
+            self._FM_ = _AUMO_._auto_mouse_(self.frame)  # AutoMouse Router
+            print('AUTO-MOUSE SELECTED')
+            return self._FM_
+        elif self.router == 'COUNT':
+            self._FM_ = _HR_.HandCounter(self.frame)  # HandCounter Router
+            print('HAND-COUNTER SELECTED')
+            return self._FM_
+        elif self.router == 'HAND-GESTURE':
+            self._FM_ = _HR_.HandCounter(self.frame)  # HandCounter Router
+            print('HAND-GESTURE INTERPRETER SELECTED')
+            return self._FM_
+    ####MOVEMENTS###MOVEMENTS###MOVEMENTS###MOVEMENTS###MOVEMENTS###MOVEMENTS###MOVEMENTS###
+    ####MOVEMENTS###MOVEMENTS###MOVEMENTS###MOVEMENTS###MOVEMENTS###MOVEMENTS###MOVEMENTS###
+
+######OUTCOMING PROCESSED SIGNAL######OUTCOMING PROCESSED SIGNAL######OUTCOMING PROCESSED SIGNAL#####
+######OUTCOMING PROCESSED SIGNAL######OUTCOMING PROCESSED SIGNAL######OUTCOMING PROCESSED SIGNAL#####
+######OUTCOMING PROCESSED SIGNAL######OUTCOMING PROCESSED SIGNAL######OUTCOMING PROCESSED SIGNAL#####
+    def _NX__router_OUT_(self):
+        self.vid__= self.__updateManager__()
+        # self.val__= self._NX__router_IN_()[0]
+        # self.vid__= self._NX__router_IN_()[1]
+        # # print('FROM: _NX__router_OUT_',self.val__)
+        return self.vid__
+######OUTCOMING PROCESSED SIGNAL######OUTCOMING PROCESSED SIGNAL######OUTCOMING PROCESSED SIGNAL#####
+######OUTCOMING PROCESSED SIGNAL######OUTCOMING PROCESSED SIGNAL######OUTCOMING PROCESSED SIGNAL#####
+######OUTCOMING PROCESSED SIGNAL######OUTCOMING PROCESSED SIGNAL######OUTCOMING PROCESSED SIGNAL#####
+
+######INVOKING MODULES####INVOKING MODULES####INVOKING MODULES####INVOKING MODULES####INVOKING MODULES#####
+######INVOKING MODULES####INVOKING MODULES####INVOKING MODULES####INVOKING MODULES####INVOKING MODULES#####
+######INVOKING MODULES####INVOKING MODULES####INVOKING MODULES####INVOKING MODULES####INVOKING MODULES#####
+_SW_ = _SWITCHER_()
+_FR_ = FaceRecognition()
+_AUMO_ = AutoMouse()
+_HR_ = HandRecongnition()
+_MA_ = _App_()
+_VD_=_VIDEO_()
+
+######INVOKING MODULES####INVOKING MODULES####INVOKING MODULES####INVOKING MODULES####INVOKING MODULES#####
+######INVOKING MODULES####INVOKING MODULES####INVOKING MODULES####INVOKING MODULES####INVOKING MODULES#####
+######INVOKING MODULES####INVOKING MODULES####INVOKING MODULES####INVOKING MODULES####INVOKING MODULES#####
+
+
+
+
+
+
+
+
+
+
+

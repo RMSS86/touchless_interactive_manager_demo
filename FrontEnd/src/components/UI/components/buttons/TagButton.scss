@@ -1,0 +1,37 @@
+@use '../../../../sass/libs/mixins';
+
+.btn {
+    background-color: #000000ab; // #222633c5;
+    color: #fff;
+    height: 4.5rem;
+    width: 15rem;
+    margin-top: 1rem;
+    border-radius: 1rem;
+    text-align: center;
+    text-decoration: none;
+    flex-wrap: wrap;
+    font-size: 1.8rem;
+    left: 21%;
+    box-shadow: var(--wp--preset--shadow--natural);
+    padding: 1.2rem 29.6rem;
+    display: flex;
+    justify-content: center;
+    transition: all 1s;
+    @include mixins.respond(tab-port){
+        width: 43rem;
+        padding: 1.2rem;
+        margin-top: -6rem;
+    } 
+ 
+    @include mixins.respond(phone){
+        width: 17rem;
+        margin-top: -6rem;
+
+    }
+
+    &:hover{
+        background-color: #1974D2;
+        transform: scale(1.1);
+    }
+}
+

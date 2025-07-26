@@ -1,0 +1,18 @@
+@mixin animationModel($mode, $timer) {
+    //fadeIn
+    animation-name: $mode;
+    animation-duration: $timer;
+    animation-timing-function: ease-out;
+    backface-visibility: hidden;
+  }
+  
+  //Hover Animation A
+  @mixin hoverFx($scaling, $toner) {
+    transition: all 1s; //justify transitions
+  
+    &:hover {
+      transform: translateY(-0.3rem);
+      box-shadow: 0 1rem 2rem $toner;
+      transform: scale($scaling);
+    }
+  }

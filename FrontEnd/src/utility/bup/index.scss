@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap");
+
+@import "./styles/sass/_abstracts//ThemeColors.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  /*  // 1rem = 10px, 10px/16px = 62.5% */
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  // color: $--color-grey-dark-2;
+  color: #feffff;
+  /* background-image: linear-gradient(
+    to right bottom,
+    $--color-primary-light,
+    $--color-primary-dark
+  );
+  background-size: cover;
+  background-repeat: no-repeat;*/
+
+  min-height: 100vh;
+}

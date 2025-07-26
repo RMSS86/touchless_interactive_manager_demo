@@ -1,0 +1,35 @@
+//border-radius: 0 0 0 10px ;
+.gallery {
+  position: relative;
+  display: grid;
+
+  &__item {
+    height: 100%;
+  }
+
+  &__photo {
+    width: 100%;
+    display: block;
+  }
+}
+
+.brand_logo {
+  position: absolute;
+  height: 15rem;
+  top: 81%;
+  right: 2.3%;
+}
+
+.command__tag {
+  position: absolute;
+  height: 33rem;
+  top: -1%;
+  left: 0.1%;
+}
+
+.command__mode {
+  position: absolute;
+  height: 27rem;
+  top: -1%;
+  left: 81%;
+}

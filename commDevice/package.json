@@ -1,0 +1,20 @@
+{
+  "name": "timv_comm__device",
+  "version": "1.0.0",
+  "description": "Comunnication Device",
+  "main": "./remoteIO/socketNodeIO.js",
+  "scripts": {
+    "start": "nodemon -L ./remoteIO/socketNodeIO.js"
+  },
+  "author": "Robbie Trevor on 21TIGERS",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "slugify": "~1.3.4",
+    "socket.io": "^4.7.2",
+    "zeromq": "^5.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.11"
+  }
+}

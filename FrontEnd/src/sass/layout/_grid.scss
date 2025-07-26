@@ -1,0 +1,135 @@
+///////////////////////////////////////
+////////////////////////GRID TEMPLATE
+@use "../libs/mixins";
+@use "../base/themeColors";
+@use "../libs/vars";
+
+/// Makes an element's :before pseudoelement a FontAwesome icon.
+/// @param {string} $min_val Gets minimum element width.
+/// @param {string} $max_val Optional sets the else width.
+/// @param {auto-fit} $fit how many elements will fit in place.
+@mixin grid_general(
+  $min_val: 240px,
+  $max_val: 1fr,
+  $fit: auto-fit,
+  $gap: 0.6rem,
+  $border_rad: 12px,
+  $content_just: center,
+  $border: false,
+  $border_w: 2.4px
+) {
+  display: grid;
+  border-radius: $border;
+  @if $border {
+    border: $border_w solid burlywood;
+  }
+  //> ADJUST ATOMATICALLY THE WITDH TO FIT SCREEN
+  // grid-template-columns: repeat(4, 1fr);
+  //> ADJUST COLS ON FIXED WITDH
+  // grid-template-columns: repeat(auto-fit, 300px);
+  // GETS AUTO FIT ON MINIMUM INITIAL WIDTH VAL TO MAX POSSIBLE
+  grid-template-columns: repeat($fit, minmax($min_val, $max_val));
+
+  gap: $gap; //> isntead of margin
+  justify-content: $content_just;
+}
+
+@mixin grid_body($cols: 2, $rep: 1fr) {
+  display: grid; //> GENERAL GRID DISPLAY
+  grid-template-columns: repeat($cols, $rep);
+  grid-template-areas:
+    "navbar navbar"
+    "sidebar main"
+    "sidebar footer";
+}
+
+////////////////////////GRID TEMPLATES
+@mixin area_header() {
+  grid-area: navbar;
+}
+
+@mixin area_main() {
+  grid-area: main;
+}
+
+@mixin area_aside() {
+  grid-area: sidebar;
+}
+
+@mixin area_footer() {
+  grid-area: footer;
+}
+
+///////////////////////////////////////////////
+//////////////////////////////////////// 1 OF 2
+@mixin grid_1_2($margin, $gutter, $bgcolor) {
+  width: calc((100% - #{$gutter}) / 2);
+  @include mixins.background($bgcolor);
+  float: left;
+
+  &:not(:last-child) {
+    margin-right: $margin;
+  }
+}
+
+///////////////////////////////////////////////
+//////////////////////////////////////// 1 OF 3
+@mixin grid_1_3($margin, $gutter, $bgcolor) {
+  width: calc((100% - 2 * #{$gutter}) / 3);
+  @include mixins.background($bgcolor);
+
+  float: left;
+
+  &:not(:last-child) {
+    margin-right: $margin;
+  }
+}
+
+///////////////////////////////////////////////
+//////////////////////////////////////// 1 OF 4
+@mixin grid_1_4($margin, $gutter, $bgcolor) {
+  width: calc((100% - 3 * #{$gutter}) / 4);
+  @include mixins.background($bgcolor);
+
+  float: left;
+
+  &:not(:last-child) {
+    margin-right: $margin;
+  }
+}
+
+///////////////////////////////////////////////
+//////////////////////////////////////// 2 OF 3
+@mixin grid_2_3($margin, $gutter, $bgcolor) {
+  width: calc(2 * ((100% - 2 * #{$gutter}) / 3) + #{$gutter});
+  @include mixins.background($bgcolor);
+  float: left;
+
+  &:not(:last-child) {
+    margin-right: $margin;
+  }
+}
+
+///////////////////////////////////////////////
+//////////////////////////////////////// 2 OF 4
+@mixin grid_2_4($margin, $gutter, $bgcolor) {
+  width: calc(2 * ((100% - 3 * #{$gutter}) / 4) + #{$gutter});
+  @include mixins.background($bgcolor);
+  float: left;
+
+  &:not(:last-child) {
+    margin-right: $margin;
+  }
+}
+
+///////////////////////////////////////////////
+//////////////////////////////////////// 3 OF 4
+@mixin grid_3_4($margin, $gutter, $bgcolor) {
+  width: calc(3 * ((100% - 3 * #{$gutter}) / 4) + 2 * #{$gutter});
+  @include mixins.background($bgcolor);
+  float: left;
+
+  &:not(:last-child) {
+    margin-right: $margin;
+  }
+}

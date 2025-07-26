@@ -1,0 +1,88 @@
+@use "../../../../abstracts/mixins";
+@use "../../../../abstracts/themeColors";
+@use "../../../../abstracts/variables";
+@use "../../../../base/utilities";
+
+.composition {
+  position: relative;
+  @include mixins.respond(tab-port) {
+    @include mixins.center-pad;
+  }
+
+  &__photo {
+    width: 55%;
+    box-shadow: 0 0.9rem 2rem themeColors.$color-Surface-box-shadow;
+    border-radius: 8%;
+    position: absolute;
+    z-index: 10;
+    transition: all 0.4s;
+    outline-offset: 5px;
+
+    @include mixins.respond(tab-port) {
+      float: right;
+      position: relative;
+      width: 33.33333333%;
+    }
+
+    &-p1 {
+      left: 0;
+      top: -1rem;
+      @include mixins.respond(tab-port) {
+        left: -30%;
+        top: 3rem;
+        transform: scale(1.8);
+        z-index: 100;
+      }
+    }
+
+    &-p2 {
+      left: 60%;
+      top: -1rem;
+      @include mixins.respond(tab-port) {
+        left: 57%;
+        top: 3rem;
+        transform: scale(1.8);
+        z-index: 100;
+      }
+    }
+
+    &-p3 {
+      left: 0;
+      top: 21rem;
+      // @include mixins.respond(tab-port) {
+      //   left: 157%;
+      //   top: 3rem;
+      //   transform: scale(1.8);
+      //   z-index: 100;
+      // }
+    }
+
+    &__logo {
+      width: 50%;
+      left: 60%;
+      top: 21rem;
+      // @include mixins.respond(tab-port) {
+      //   margin-top: 3rem;
+      //   margin-bottom: 3rem;
+
+      //   left: 35%;
+      //   top: 18rem;
+      //   transform: scale(1.8);
+      //   z-index: 100;
+      // }
+    }
+
+    &:hover {
+      left: 70;
+      top: 10rem;
+      outline: 1.5rem solid themeColors.$color-Surface-box-shadow;
+      transform: scale(1.8) translateY(-0.5rem);
+      box-shadow: 0 1.5rem 2rem themeColors.$color-Surface-box-shadow;
+      z-index: 20;
+    }
+  }
+
+  &:hover &__photo:not(:hover) {
+    transform: scale(0.9);
+  }
+}

@@ -1,0 +1,71 @@
+////////////////////////////////////
+////////////////////////LIGHT THEME
+$color-general-bg: #e7e3e3; // ORI> #BFBFBF;
+$color-surface-light: #fff;
+$color-primary-light: #5079F2;
+$color-secondary-light: #6B8DF2;
+
+$color-inverse-primary-light: #F2F2F2;
+$color-inverse-secondary-light: #C4D0F2;
+$color-surfaceDim-light: #ffff;
+$color-complementary-negative: #F2C550;
+
+$color-surfaceContainerLow-light: #ffff;
+$color-primaryFixedDim-light: #ffff;
+$color-inverseSurface-light: #ffff;
+$color-tertiary-light: #ffff;
+
+//> DARK THEME
+$color-surface-dark: #5079F2;
+$color-primary-dark: #28b485;
+$color-secondary-dark: #ffff;
+
+$color-inverse-primary-dark: #222633;
+$color-surfaceDim-dark: #4E5159;
+
+$color-surfaceContainerLow-dark: #ffff;
+$color-primaryFixedDim-dark: #ffff;
+$color-inverseSurface-dark: #ffff;
+$color-tertiary-dark: #ffff;
+
+//> TRANSPARENT
+$color-transaprent: rgba(255, 255, 255, 0);
+
+//> MODAL
+$color-surface-modal-dark: #1d1c1cce;
+
+//> GRADIENTS
+$color-gradient-A: #ffff;
+$color-gradient-B: #ffff;
+
+//> SHADOWS
+//>LIGHT
+$color-Surface-box-light: rgba(228, 226, 226, 0.842);
+
+//>DARK
+$color-Surface-box-shadow: rgba(255, 251, 251, 0.2);
+$color-Surface-box-shadow-med: rgba(63, 60, 60, 0.54);
+$color-Surface-box-shadow-hard: rgba(63, 60, 60, 0.8);
+
+$color-surface-dark-soft: #35333357;
+$color-inverseSurface-box-shadow: rgb(0, 0, 0, 0.15);
+$color-inverseSurface-box-shadow-b: rgba(0, 0, 0, 0.36);
+
+//> TYPO
+$color-branding-letter-main: #faf8f8f1;
+$color-branding-letter-sub: #f3efefdc;
+
+//> BTN
+$colors-regular-btn: #2222224b;
+$colors-regular-btn-letering: #ffffffd0;
+$colors-nav-btn: #52505065;
+
+//> BG's
+$colors-footer-opacity: #262629;
+$colors-top-navigator-bg: #22222252;
+
+//> CURATED DESIGN
+$colors-sections-base: #ffffff1f;
+$colors-section-wrapper: #000000b0;
+$colors-section-wrapper-shadow: #1d1c1cce;
+$colors-section-wrapper-pale: #00000026;

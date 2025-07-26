@@ -1,0 +1,10 @@
+@use "../../../sass/layout/grid";
+@use "../../../sass/layout/layout-elements";
+
+//> MAIN GRID TAG SELECTOR
+.header {
+  //> DEFINES HEADER ON THE GLOBAL GRID
+  @include grid.area_header();
+  background-color: var(--UI-footer-default);
+  border-radius: var(--border-radius-default);
+}

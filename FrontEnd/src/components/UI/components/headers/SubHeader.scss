@@ -1,0 +1,64 @@
+@use '../../../../sass/libs/mixins';
+
+.sub-header {
+    margin-bottom: 1.2rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    border-radius:12px; 
+    position: relative;
+    z-index: 10;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    box-shadow: 0 4px 20px #25252525;
+    padding: 9px 30px; 
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    transition: all 1s;
+    margin-top: -2rem;
+
+    @include mixins.respond(tab-land){
+    margin-top: -1rem;
+   
+    }
+    //> CHANGES SIZE OF ELEMENT ori > 15px 30px; [ for mobile  ]
+    @include mixins.respond(phone-large){
+    margin-top: 1.5rem;
+
+    padding: 15px 30px;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    }
+
+    @include mixins.respond(phone){
+    margin-left: 0;
+
+    }
+
+
+    &_logo {
+        margin: 8px;
+        height: 30px;
+        list-style: none;
+        font-weight: 500;
+        transition: transform 0.3s ease-in-out;
+
+    }
+    li {
+        margin: 8px;
+        height: 27px;
+        list-style: none;
+        font-size: 1.8rem;
+        font-weight: 600;
+
+        transition: transform 0.3s ease-in-out;
+    }
+    &-nav {
+        ul {
+            display: flex;
+      
+    }
+
+       
+    }
+}

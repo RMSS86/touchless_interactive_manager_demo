@@ -1,0 +1,16 @@
+@use "../../../../sass/layout/layout-elements";
+@use "../../../../sass/libs/mixins";
+@use "../../../../sass/base/themeColors";
+
+.top-nav {
+  @include layout-elements.top_nav();
+  margin: 0.9rem 0.9rem 0.9rem 0;
+
+  //> CHANGE ARRAGE POSITION OF ELEMENTS
+  @include mixins.respond(phone-large) {
+    margin: 0 0.9rem;
+  }
+  @include mixins.respond(phone) {
+    margin: 1.2rem 0.9rem 0.9rem 0;
+  }
+}

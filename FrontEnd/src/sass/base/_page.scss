@@ -1,0 +1,89 @@
+@use "../libs/mixins";
+@use "../libs/vars";
+@use "../base/themeColors";
+@use "../libs/breakpoints";
+@use "../layout/grid";
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+html,
+body {
+  overflow-x: hidden;
+  scrollbar-width: none;
+  --me-overflow-style:none;
+  //min-height: vars.$default-body-height; //> DEFAULT HEIGHT
+}
+html {
+  // This defines what 1rem is
+  font-size: 62.5%;
+
+  // //1 rem = 10px; 10px/16px = 62.5%
+ 
+  @include mixins.respond(phone) {
+    // width < 1200?
+    font-size: 42%; //1 rem = 9px, 9/16 = 50%
+  }
+  @include mixins.respond(tab-land) {
+    // width < 1200?
+    font-size: 43.1%; //1 rem = 9px, 9/16 = 50%
+  }
+  @include mixins.respond(tab-port) {
+    // width < 900?
+    font-size: 45%; //1 rem = 8px, 8/16 = 50%
+  }
+  @include mixins.respond(tab-land-plus) {
+    // width < 900?
+    font-size: 46%; //1 rem = 8px, 8/16 = 50%
+  }
+  @include mixins.respond(lap-top) {
+    font-size: 46.25%;
+  }
+  @include mixins.respond(lap-top-medium) {
+    // width < 900?
+    font-size: 48.5%; //1 rem = 8px, 8/16 = 50%
+  }
+  @include mixins.respond(lap-top-large) {
+    // width < 900?
+    font-size: 48.5%; //1 rem = 8px, 8/16 = 50%
+  }
+  @include mixins.respond(big-desktop) {
+    font-size: 48.25%; //1rem = 12, 12/16
+  }
+}
+
+//
+//using inheritance for font family def
+body {
+  font-family: "Quicksand", sans-serif;
+  font-weight: 400;
+  line-height: 1.2;
+
+  box-sizing: border-box;
+  padding: vars.$body-padding-small;
+  @include mixins.background(themeColors.$color-general-bg);
+  color: themeColors.$color-surface-dark;
+
+}
+
+.root{
+  
+  // @include grid.grid_body();
+  // @include mixins.respond(tab-port) {
+  //   padding: 0;
+  // }
+  
+}
+
+.modal{
+  display: none;
+}
+
+// ::selection {
+//   @include mixins.background(themeColors.$color-surface-dark);
+//   color: themeColors.$color-surface-light;
+// }

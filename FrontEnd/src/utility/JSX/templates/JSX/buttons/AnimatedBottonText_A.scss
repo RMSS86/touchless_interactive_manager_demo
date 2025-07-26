@@ -1,0 +1,47 @@
+@use "../../../abstracts/mixins";
+@use "../../../abstracts/themeColors";
+@use "../../../abstracts/variables";
+@use "../../../base/utilities";
+
+.botton-text-A {
+  &:link,
+  &:visited {
+    font-size: variables.$default-font-size;
+    color: themeColors.$color-secondary-light;
+    padding: 15px 40px;
+    display: inline-block;
+    text-decoration: none;
+    transition: all 0.2s;
+    border-bottom: 1px solid themeColors.$color-secondary-light;
+    padding: 3px;
+  }
+  @include mixins.respond(tab-port) {
+    margin-top: 5rem;
+    font-size: 3rem;
+  }
+
+  &:hover {
+    background-color: themeColors.$color-secondary-light;
+    color: themeColors.$color-surface-light;
+    border-radius: 5px;
+    box-shadow: 0 1rem 2rem themeColors.$color-Surface-box-shadow;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    box-shadow: 0 0.5rem 1rem themeColors.$color-Surface-box-shadow;
+    transform: translateY(0);
+  }
+}
+
+//////Bottun style skeleton
+// &:link,
+// &:visited {
+// }
+
+// &:hover {
+// }
+
+// &:active{
+
+// }

@@ -1,0 +1,56 @@
+@use "../../../../sass/base/themeColors";
+@use "../../../../sass/libs/mixins";
+
+.side_btn {
+  background-color: #000000ab; //#222633;
+  border-radius: 12px;
+  flex-direction: row;
+  display: flex;
+  position: sticky;
+  font-size: 1.8rem;
+  box-shadow: 1px 1px 4px rgba(34, 38, 51, 0.8392156863);
+  transition: all 1s ease-in-out;
+
+  @include mixins.respond(phone-large) {
+    border-radius: 12px 3px 3px 12px;
+  }
+  &:hover {
+    background-color: #1974d2;
+    box-shadow: inset 0px 1px 4px rgba(34, 38, 51, 0.8392156863);
+  }
+
+  &__text {
+    color: #ffff;
+    padding: 2rem 3rem 2rem 0.5rem;
+    transition: all 1s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  &__logo {
+    height: 6rem;
+    margin: 0.3rem;
+    margin-right: 1.5rem;
+    border-radius: 12px;
+    &:hover {
+      transform: scale(0.9);
+      transition: all 1s;
+    }
+  }
+}
+
+#sidebar-active {
+  display: none;
+}
+
+#sidebar-active:checked ~ .sidebar {
+  display: block;
+  opacity: 0;
+  left: 0;
+  position: fixed;
+  transform: translateX(-72%);
+  transition: all 0.5s ease-in-out;
+  transition-behavior: allow-discrete;
+}

@@ -1,0 +1,105 @@
+.u-center-text {
+  text-align: center !important;
+}
+@mixin u-center-text {
+  text-align: center !important;
+}
+
+.u-centered-element {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+@mixin u-centered-element {
+  position: absolute;
+  left: 50%; /* relative to nearest positioned ancestor or body element */
+  top: 50%; /*  relative to nearest positioned ancestor or body element */
+  transform: translate(-50%, -50%); /* relative to element's height & width */
+}
+
+@mixin u-centered-element-flex {
+  display: flex; /* establish flex container */
+  justify-content: center; /* center flex items horizontally, in this case */
+  align-items: center; /* center flex items vertically, in this case */
+}
+
+.u-margin-bottom-small {
+  margin-bottom: 1.5rem !important;
+}
+.u-margin-bottom-medium {
+  margin-bottom: 4rem !important;
+
+  // @include respond(tab-port) {
+  //     margin-bottom: 3rem !important;
+  // }
+}
+
+.u-margin-bottom-big {
+  margin-bottom: 8rem !important;
+
+  // @include respond(tab-port) {
+  //     margin-bottom: 5rem !important;
+  // }
+}
+
+.u-margin-top-small {
+  margin-top: 1.5rem !important;
+}
+.u-margin-top-medium {
+  margin-top: 4rem !important;
+
+  // @include respond(tab-port) {
+  //     margin-top: 3rem !important;
+  // }
+}
+.u-margin-top-big {
+  margin-top: 8rem !important;
+}
+
+.u-margin-top-big-plus {
+  margin-top: 10rem !important;
+}
+.u-margin-top-huge {
+  margin-top: 18rem !important;
+}
+
+//////centring
+.center-pad {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center; //this will affect button!
+}
+
+////////
+%after-botton-A-face {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+%hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scroll-y {
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scroll-x {
+  overflow-x: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

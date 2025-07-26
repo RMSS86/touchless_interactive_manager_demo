@@ -1,0 +1,61 @@
+@use "../../../abstracts/mixins";
+@use "../../../abstracts/themeColors";
+@use "../../../abstracts/variables";
+@use "../../../base/utilities";
+
+.animated-botton-A {
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 15px 40px;
+    display: inline-block;
+    border-radius: 30px;
+    transition: all 0.2s;
+    position: relative;
+    font-size: variables.$default-font-size;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px themeColors.$color-inverseSurface-box-shadow;
+
+    &::after {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px themeColors.$color-inverseSurface-box-shadow;
+  } //psudo element for when we click the item
+
+  &-white {
+    background-color: themeColors.$color-surface-light;
+    color: themeColors.$color-surface-dark;
+
+    &::after {
+      background-color: themeColors.$color-surface-light;
+    }
+  }
+  &-green {
+    background-color: themeColors.$color-secondary-light;
+    color: themeColors.$color-surface-light;
+
+    &::after {
+      background-color: themeColors.$color-secondary-light;
+    }
+  }
+  //visited when the user clicked the element
+
+  &::after {
+    @extend %after-botton-A-face;
+  }
+
+  &-animated {
+    @include mixins.animationModel(moveUp, 0.5s, ease-out);
+    animation-fill-mode: backwards;
+    //aniation duration type delay
+  }
+}

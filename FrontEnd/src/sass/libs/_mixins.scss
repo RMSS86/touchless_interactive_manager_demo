@@ -1,0 +1,250 @@
+@mixin background($color) {
+  background-color: $color !important;
+}
+
+@mixin box-shadow($color) {
+  background-color: $color !important;
+}
+
+///////////////////////////////////////////////
+//////////////////////////RESPONSIVENESS MIXINS
+///////////////////////////////////////////////
+@mixin respond($breakpoint) {
+    @if $breakpoint == phone-xsmall {
+    @media only screen and (max-width: 20em) {
+      @content;
+    } //> 320px
+  }
+  @if $breakpoint == phone-small {
+    @media only screen and (max-width: 27em) {
+      @content;
+    } //> 432px
+  }
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 37.5em) {
+      @content;
+    } //> 600px
+  }
+  @if $breakpoint == phone-large {
+    @media only screen and (max-width: 46em) {
+      @content;
+    } //> 736px
+  }
+  @if $breakpoint == tab-port {
+    @media only screen and (max-width: 57em) {
+      @content;
+    } //> 912px
+  }
+  @if $breakpoint == tab-land {
+    @media only screen and (max-width: 72.9em) {
+      @content;
+    } //> 1164.4px
+  }
+  @if $breakpoint == tab-land-plus {
+    @media only screen and (max-width: 81em) {
+      @content;
+    } //1296px
+  }
+  @if $breakpoint == lap-top {
+    @media only screen and (max-width: 93.75em) {
+      @content;
+    } //> 1500px
+  }
+  @if $breakpoint == lap-top-medium {
+    @media only screen and (min-width: 93.76em) {
+      @content;
+    } //> 1296px
+  }
+  @if $breakpoint == lap-top-large {
+    @media only screen and (min-width: 100em) {
+      @content;
+    } //> 1600px
+  }
+  @if $breakpoint == big-desktop {
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    } //> 1800px
+  }
+}
+
+/// Makes an element's :before pseudoelement a FontAwesome icon.
+/// @param {string} $content Optional content value to use.
+/// @param {string} $category Optional category to use.
+/// @param {string} $where Optional pseudoelement to target (before or after).
+@mixin icon($content: false, $category: regular, $where: before) {
+  text-decoration: none;
+
+  &:#{$where} {
+    @if $content {
+      content: $content;
+    }
+
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    text-transform: none !important;
+
+    @if ($category == brands) {
+      font-family: "Font Awesome 5 Brands";
+    }
+    @if ($category == solid) {
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+    } @else {
+      font-family: "Font Awesome 5 Free";
+      font-weight: 400;
+    }
+  }
+}
+
+/// Applies padding to an element, taking the current element-margin value into account.
+/// @param {mixed} $tb Top/bottom padding.
+/// @param {mixed} $lr Left/right padding.
+/// @param {list} $pad Optional extra padding (in the following order top, right, bottom, left)
+/// @param {bool} $important If true, adds !important.
+@mixin padding($tb, $lr, $pad: (0, 0, 0, 0), $important: null) {
+  @if $important {
+    $important: "!important";
+  }
+
+  $x: 0.1em;
+
+  @if unit(_size(element-margin)) == "rem" {
+    $x: 0.1rem;
+  }
+
+  padding: ($tb + nth($pad, 1)) ($lr + nth($pad, 2))
+    max($x, $tb - _size(element-margin) + nth($pad, 3)) ($lr + nth($pad, 4)) #{$important};
+}
+
+/// Encodes a SVG data URL so IE doesn't choke (via codepen.io/jakob-e/pen/YXXBrp).
+/// @param {string} $svg SVG data URL.
+/// @return {string} Encoded SVG data URL.
+@function svg-url($svg) {
+  $svg: str-replace($svg, '"', "'");
+  $svg: str-replace($svg, "%", "%25");
+  $svg: str-replace($svg, "<", "%3C");
+  $svg: str-replace($svg, ">", "%3E");
+  $svg: str-replace($svg, "&", "%26");
+  $svg: str-replace($svg, "#", "%23");
+  $svg: str-replace($svg, "{", "%7B");
+  $svg: str-replace($svg, "}", "%7D");
+  $svg: str-replace($svg, ";", "%3B");
+
+  @return url("data:image/svg+xml;charset=utf8,#{$svg}");
+}
+
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+} //fixing possitioning
+
+////////////////////////////////////////////
+/////////////////////////////UTILITY MIXINS
+@mixin u-margin-Bottom($margin) {
+  margin-bottom: $margin;
+}
+
+///////////////////////////////////////////
+@mixin center-pad {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center; //this will affect button!
+}
+
+@mixin webkit-clipped-corner {
+  //from https://bennettfeely.com/clippy/
+  clip-path: polygon(
+    20% 0%,
+    75% 0,
+    100% 0,
+    100% 89%,
+    89% 100%,
+    20% 100%,
+    0 100%,
+    0 0
+  );
+}
+@mixin clipped-corner {
+  //from https://bennettfeely.com/clippy/
+  clip-path: polygon(
+    20% 0%,
+    75% 0,
+    100% 0,
+    100% 89%,
+    89% 100%,
+    20% 100%,
+    0 100%,
+    0 0
+  );
+}
+
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+//////FILTERS READY//////FILTERS READY//////FILTERS READY//////FILTERS READY/////
+//////FILTERS READY//////FILTERS READY//////FILTERS READY//////FILTERS READY/////
+@mixin saturate($val: 3) {
+  filter: saturate($val);
+}
+@mixin grayscale($val: 100%) {
+  filter: grayscale($val);
+}
+@mixin contrast($val: 160%) {
+  filter: contrast($val);
+}
+@mixin brightness($val: 0.25) {
+  filter: brightness($val);
+}
+@mixin blur($val: 3px) {
+  filter: blur($val);
+}
+@mixin invert($val: 100%) {
+  filter: invert($val);
+}
+@mixin sepia($val: 100%) {
+  filter: sepia($val);
+}
+@mixin huerotate($val: 180deg) {
+  filter: hue-rotate($val);
+}
+@mixin opacity($val: 50%) {
+  filter: opacity($val);
+}
+//////FILTERS READY//////FILTERS READY//////FILTERS READY//////FILTERS READY/////
+//////FILTERS READY//////FILTERS READY//////FILTERS READY//////FILTERS READY/////
+
+/// TAKES AN IMAGE AND PRESERVES RATIO WHILE SCALING HEIGH.
+/// @param {vh} $height SVG data URL.
+@mixin image_autosize($height:50vh){
+    height: auto;
+    width: 100%;
+    max-height: $height;
+}
+
+/// TAKES AN IMAGE AND PRESERVES RATIO WHILE SCALING HEIGH.
+/// @param {vh} $height SVG data URL.
+@mixin image_autofit(
+  $height:50vh,
+  $width:100%,
+  $border_rad:6px,
+  ){
+    border-radius: $border_rad;
+    width: $width;
+    object-fit: cover;
+    max-height: $height;
+    min-height: $height;
+}

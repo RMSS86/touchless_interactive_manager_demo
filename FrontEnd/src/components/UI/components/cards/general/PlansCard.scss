@@ -1,0 +1,27 @@
+.plans_card {
+    margin-top: 3rem; 
+
+    &-body {
+        border-radius: 12px;
+        padding: 3rem;
+        background-color: #fff;
+        border: 2px solid #c0ced5;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        height: 100%;
+        text-align: left;
+    }
+
+    &-header{
+        margin-bottom: 2.7rem;
+    }
+
+    &-descriptions{}
+
+    &-features{}
+
+    &-button{}
+
+}
