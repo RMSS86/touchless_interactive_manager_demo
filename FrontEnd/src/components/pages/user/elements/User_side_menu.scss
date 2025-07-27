@@ -1,0 +1,106 @@
+.user_sidebar {
+  border-radius: var(--border-radius-default) 0 0 var(--border-radius-default);
+  background-color: #3333337c; // $--color-grey-dark-1
+  max-width: 30rem;
+  flex: 0 0 18%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--wp--preset--shadow--minimal);
+  z-index: 12;
+  height: 82vh;
+}
+
+.side-nav {
+  font-size: 1.6rem;
+  list-style: none;
+  margin-top: 3.5rem;
+  padding-right: 0.2rem;
+
+  &__item {
+    position: relative;
+    background-color: #24242472;
+    border-radius: 0 10px 10px 0;
+
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &__item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    background-color: #1976d2ea;
+    transform: scaleY(0);
+    transition: transform 0.2s, width 0.4s cubic-bezier(1, 0, 1, 1) 0.2s,
+      background-color 0.1s;
+  }
+
+  &__item:hover::before,
+  &__item--active::before {
+    transform: scaleY(0.93);
+    transform: scaleX(0.96);
+    width: 100%;
+    border-radius: 0 10px 10px 0;
+  }
+  /*
+  &__item:hover {
+    transform: scaleX(1.04);
+    transition: all 1s;
+  }
+  */
+  &__item:active::before {
+    background-color: #1a1d1f9c;
+  }
+
+  &__link:link,
+  &__link:visited {
+    color: #faf9f9;
+    text-decoration: none;
+    text-transform: uppercase;
+    display: block;
+    padding: 1.5rem 2.4rem;
+    position: relative;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+  }
+
+  &__icon {
+    width: 3.6rem;
+    height: 3.6rem;
+    margin-right: 1.5rem;
+    fill: currentColor;
+  }
+  &__logo {
+    height: 10rem;
+    margin-left: 1.2rem;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+  }
+  &__logo_btn {
+    height: 15rem;
+    margin-left: 8.4rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.legal {
+  font-size: 1rem;
+  //color: var(--color-grey-light-1);
+  color: #ffffff;
+  border-radius: 0 0 0 var(--border-radius-default);
+  text-align: center;
+  padding: 2.5rem;
+  background-color: #1817174b;
+
+  //   @media only screen and (max-width: $bp-medium) {
+  //     display: none;
+  //   }
+}

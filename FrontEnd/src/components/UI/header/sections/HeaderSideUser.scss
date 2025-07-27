@@ -1,12 +1,12 @@
 @use "../../../../sass/libs/mixins";
 
 .sider_btn {
-  background-color: #000000ab; // #222633;
-  border-radius: 12px;
+  border-radius: var(--border-radius-default);
   flex-direction: row;
   display: flex;
   justify-content: end;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
+  padding-right: 0.3rem;
   box-shadow: 1px 1px 4px rgba(34, 38, 51, 0.8392156863);
   transition: all 1s;
 
@@ -31,23 +31,26 @@
     }
 
     @include mixins.respond(phone-large) {
-      padding-left: 84%;
+      padding: auto;
+      padding-left: auto;
     }
     //> CHANGES SIZE OF ELEMENT
     @include mixins.respond(phone) {
-      // padding: 2.3rem 0.5rem 1rem 9rem;
+      padding: 1rem 1.5rem 1rem 2rem;
       padding-left: 64%;
     }
   }
 
   &__user {
     height: 6rem;
+    width: 6rem;
     margin: 0.3rem;
-    border-radius: 12px;
+    object-fit: cover;
+    border-radius: var(--border-radius-circular);
+    transition: all 1s;
 
     &:hover {
-      transform: scale(0.9);
-      transition: all 1s;
+      transform: scale(1.05);
     }
   }
 }

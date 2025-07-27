@@ -99,7 +99,7 @@ export default function TopNavigator({
         {/* //NAV-LINKS// */}
         <TopNavLinks _userContext={globalUser} _invokeModal={_invokeModal} />
         {/* //USER AVATAR// */}
-        <HeaderSideUser />
+        <HeaderSideUser _userContext={globalUser} />
       </ContextType>
     </>
   );

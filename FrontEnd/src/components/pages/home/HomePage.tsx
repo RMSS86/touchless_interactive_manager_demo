@@ -26,7 +26,7 @@ export default function HomePage({
         onClick={_onClick}
         style={_style}
       >
-        <h1>Hello!</h1>
+        <Landing_section_opener />
 
         {/* 
       <Landing_section_opener />
@@ -80,5 +80,5 @@ import {
 // import Landing_section_brand from "./sections/Landing_Section_Brand.js";
 // import Landing_section_product from "./sections/Landing_section_product.js";
 // import Landing_section_action from "./sections/Landing_section_action.js";
-// import Landing_section_opener from "./sections/Landing_section_opener.js";
+import Landing_section_opener from "./sections/Landing_section_opener";
 // import LandingSectionsPlans from "./sections/Landing_section_plans.js";

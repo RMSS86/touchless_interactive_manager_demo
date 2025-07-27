@@ -1,0 +1,13 @@
+.user_page {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 1rem;
+  &-wrapper {
+    width: 33vw;
+    z-index: 9;
+    margin-right: -1.2rem;
+    background-color: #323232;
+    border-radius: var(--border-radius-default);
+    box-shadow: var(--wp--preset--shadow--minimal);
+  }
+}

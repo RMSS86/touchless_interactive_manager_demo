@@ -1,5 +1,5 @@
 :root{
-    /* ////////////////////////LIGHT THEME */
+  /* ////////////////////////LIGHT THEME */
   --color-general-bg: #e7e3e3;
   --color-surface-light: #fff;
   --color-primary-light: #5079F2;
@@ -24,11 +24,10 @@
   --color-inverseSurface-dark: #ffff;
   --color-tertiary-dark: #ffff;
 
-  /* //> UI */
-  --UI-layout-default-color: #222633;
+  /* //> UI  #181717a9 #222633 */
+  --UI-layout-default-color: #181717;
   --UI-footer-default: var(--UI-layout-default-color);
   --UI-header-default: var(--UI-layout-default-color);
-
 
   /* //> TRANSPARENT */
   --color-transaprent: rgba(255, 255, 255, 0);
@@ -57,6 +56,9 @@
   --color-branding-letter-main-inverse: #1d1d1df1;
   --color-branding-letter-sub-inverse: #4b4b4bdc;
   --font-default-size: 1.2rem;
+
+  /* //> HEADER HOVER COLOR  */
+  --hover-color-default: var(--color-general-bg);
 
   /* //> BTN */
   --colors-regular-btn: #2222224b;
@@ -87,6 +89,7 @@
   --border-radius-default: 12px;
   --border-radius-only-top: var(--border-radius-default) var(--border-radius-default) 0  0;
   --border-radius-only-bottom: 0  0  var(--border-radius-default) var(--border-radius-default) ;
+  --border-radius-circular: 50%;
 
   /* //> BOX SHADOWS */
   --wp--preset--shadow--natural: 6px 6px 9px var(--color-inverseSurface-box-shadow);
@@ -95,7 +98,7 @@
   --wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);
   --wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);
   --wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);
-
+  --wp--preset--shadow--minimal: 0px 1px 4px #222633d6;
 }
 
 .grid{
@@ -109,7 +112,6 @@
   'navbar navbar'
   'sidebar main'
   'footer footer';
- 
 }
 
 aside{

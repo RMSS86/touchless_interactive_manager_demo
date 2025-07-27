@@ -14,6 +14,13 @@ const FOOTER_DATA: footerTag[] = [
   { tag: "Contact us", link: "https://www.linkedin.com/in/robert-solis-stevenson-6a458a265/" },
 ];
 
+//HOMEPAGE
+const HOMEPAGE_DATA: _heading_text[] = [
+  {id: 1, tag: 'Landing_title', text: 'Interactive Touchless Manager' },
+  {id: 2, tag: 'Landing_paragraph', text: 'This product is designed for a new era where the conditions about entering in contact with the incorrect person could be critical, this system integrates Computer vision and Machine Learning models for assistance porpuses.' },
+
+
+]
 
 const BRAND_NAME: string = 'TIM'
 
@@ -29,8 +36,13 @@ const BRAND_NAME: string = 'TIM'
     position: PointTuple;
     assets?: '';
   };
-  
-export { HEADER_DATA, FOOTER_DATA ,ASSETS_LOCATIONS ,BRAND_NAME};  
+   type _heading_text = {
+    id: number;
+    tag: string;
+    text: string;
+
+   };
+export { HEADER_DATA, FOOTER_DATA ,ASSETS_LOCATIONS ,BRAND_NAME, HOMEPAGE_DATA};  
 // export { LOCAIION_TILE_ITEMS,SUB_HEADER_ITEMS }; 
 
 /////TYPES/////TYPES/////TYPES/////TYPES/////TYPES/////TYPES/////TYPES////

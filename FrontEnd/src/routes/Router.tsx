@@ -3,6 +3,7 @@ export const GlobalRouterElments = createBrowserRouter(
     <>
       <Route path="/" element={<RootLayout />} errorElement={<ErrorPage />}>
         <Route index={true} element={<HomePage />} />
+        <Route path="/user" element={<UserPage />} />
       </Route>
     </>
   )
@@ -17,3 +18,4 @@ import {
 import RootLayout from "../components/UI/Layout/LayOut.js";
 import HomePage from "../components/pages/home/HomePage.js";
 import ErrorPage from "../components/pages/error/ErrorPage.js";
+import UserPage from "../components/pages/user/UserPage.js";

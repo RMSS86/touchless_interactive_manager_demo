@@ -1,12 +1,10 @@
-@use '../../../sass/layout/grid';
+@use "../../../sass/layout/grid";
 
-
-.error{
-    &__layout{
-        @include grid.area_main();
-    }
+.error {
+  &__layout {
+    @include grid.area_main();
+  }
 }
-
 
 // @use "../../../sass/libs/mixins";
 

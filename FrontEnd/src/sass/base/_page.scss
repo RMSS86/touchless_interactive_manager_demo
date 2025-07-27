@@ -15,7 +15,7 @@ html,
 body {
   overflow-x: hidden;
   scrollbar-width: none;
-  --me-overflow-style:none;
+  --me-overflow-style: none;
   //min-height: vars.$default-body-height; //> DEFAULT HEIGHT
 }
 html {
@@ -23,7 +23,7 @@ html {
   font-size: 62.5%;
 
   // //1 rem = 10px; 10px/16px = 62.5%
- 
+
   @include mixins.respond(phone) {
     // width < 1200?
     font-size: 42%; //1 rem = 9px, 9/16 = 50%
@@ -67,19 +67,16 @@ body {
   padding: vars.$body-padding-small;
   @include mixins.background(themeColors.$color-general-bg);
   color: themeColors.$color-surface-dark;
-
 }
 
-.root{
-  
+.root {
   // @include grid.grid_body();
   // @include mixins.respond(tab-port) {
   //   padding: 0;
   // }
-  
 }
 
-.modal{
+.modal {
   display: none;
 }
 

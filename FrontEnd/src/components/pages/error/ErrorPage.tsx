@@ -36,8 +36,8 @@ export default function ErrorPage({
       onClick={_onClick}
       style={_style}
     >
-      {/* <Header />
-      <Sidebar /> */}
+      <Header />
+      {/* <Sidebar /> */}
       <ErrorPageContents
         _className="outlet"
         _errStatus={_errStatus}
@@ -45,7 +45,7 @@ export default function ErrorPage({
         _errStsText={_errStsText}
         // _errLogoMain={ErrorIcon}
       />
-      {/* <Footer /> */}
+      <Footer />
     </ContextType>
   );
 }
@@ -67,3 +67,6 @@ import { useRouteError } from "react-router-dom";
 //@ts-ignore
 import "./ErrorPage.scss";
 import ErrorPageContents from "./elements/ErrorPageContents";
+import Footer from "../../UI/footer/Footer";
+import Header from "../../UI/header/Header";
+import Sidebar from "../../UI/components/side/Sidebar";

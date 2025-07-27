@@ -1,0 +1,21 @@
+.designer {
+  &-footer {
+    display: flex;
+    justify-content: end;
+    text-align: center;
+    align-items: center;
+    margin-right: 5.4rem;
+  }
+
+  &-foot {
+    filter: invert(1);
+    height: 7.2rem;
+  }
+
+  &-credit {
+    margin-left: 1rem;
+    width: 3rem;
+    font-size: 1.8rem;
+    color: white;
+  }
+}

@@ -29,7 +29,7 @@ export default function ErrorPageContents({
         // background: `url(${BGImg}) no-repeat`,
         backgroundSize: "cover",
         backgroundPosition: "top",
-        height: "89vh",
+        height: "81vh",
       }}
     >
       <div className="error">

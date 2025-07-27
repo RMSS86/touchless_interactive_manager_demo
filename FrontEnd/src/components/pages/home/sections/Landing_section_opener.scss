@@ -1,0 +1,65 @@
+@use "../../../../sass/libs/mixins";
+
+.landing_opener {
+  min-height: 84vh;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  height: fit-content;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+
+    &-left {
+      &_logo {
+        @include mixins.image_autosize($height: 69rem);
+      }
+    }
+
+    &-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 3rem;
+
+      &_title {
+        margin-bottom: 1.5rem;
+        color: #0b0b0b;
+        font-size: 5.4rem;
+        max-width: min-content;
+        font-weight: 400;
+      }
+
+      &_about {
+        border-radius: 12px;
+        color: #000000;
+        font-size: 2.1rem;
+        max-width: 30vw;
+        font-weight: 300;
+        /* background-color: rgba(0, 0, 0, 0.5176470588); */
+        padding: 1rem 0;
+        /* box-shadow: var(--wp--preset--shadow--minimal); */
+        @include mixins.respond(phone-large) {
+          max-width: 72vw;
+        }
+      }
+
+      &_foot {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: center;
+        margin-top: 2rem;
+
+        &-logo {
+          height: 10rem;
+          margin-right: 2.1rem;
+        }
+      }
+    }
+  }
+}

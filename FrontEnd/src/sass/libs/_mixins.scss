@@ -10,7 +10,7 @@
 //////////////////////////RESPONSIVENESS MIXINS
 ///////////////////////////////////////////////
 @mixin respond($breakpoint) {
-    @if $breakpoint == phone-xsmall {
+  @if $breakpoint == phone-xsmall {
     @media only screen and (max-width: 20em) {
       @content;
     } //> 320px
@@ -229,22 +229,18 @@
 
 /// TAKES AN IMAGE AND PRESERVES RATIO WHILE SCALING HEIGH.
 /// @param {vh} $height SVG data URL.
-@mixin image_autosize($height:50vh){
-    height: auto;
-    width: 100%;
-    max-height: $height;
+@mixin image_autosize($height: 50vh) {
+  height: auto;
+  width: 100%;
+  max-height: $height;
 }
 
 /// TAKES AN IMAGE AND PRESERVES RATIO WHILE SCALING HEIGH.
 /// @param {vh} $height SVG data URL.
-@mixin image_autofit(
-  $height:50vh,
-  $width:100%,
-  $border_rad:6px,
-  ){
-    border-radius: $border_rad;
-    width: $width;
-    object-fit: cover;
-    max-height: $height;
-    min-height: $height;
+@mixin image_autofit($height: 50vh, $width: 100%, $border_rad: 6px) {
+  border-radius: $border_rad;
+  width: $width;
+  object-fit: cover;
+  max-height: $height;
+  min-height: $height;
 }

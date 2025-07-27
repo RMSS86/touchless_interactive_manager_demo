@@ -8,6 +8,7 @@
   @include grid.area_footer();
   background-color: var(--UI-footer-default);
   border-radius: var(--border-radius-default);
+  box-shadow: var(--wp--preset--shadow--minimal);
 
   &__nav {
     @include layout-elements.ul_cleaner();
@@ -31,6 +32,7 @@
     @include layout-elements.a_cleaner();
     transition: all var(--animation-duration-default);
     color: var(--color-branding-letter-main);
+    margin: 0 1rem;
     &:hover {
       color: var(--color-branding-letter-sub-inverse);
     }

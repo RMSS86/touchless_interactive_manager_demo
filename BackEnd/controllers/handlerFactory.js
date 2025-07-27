@@ -2,103 +2,9 @@ const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const APIFeatures = require('./../utils/apiFeatures');
 
-
-  exports.createOne = Model =>
-  catchAsync(async (req, res, next) => {
-    const doc = await Model.create(req.body);
-
-    res.status(201).json({
-      status: 'success',
-      data: {
-        data: doc
-      }
-    });
-  });
-
-
-  exports.deleteOne = Model =>
-  catchAsync(async (req, res, next) => {
-    const _persona = await Model.findByIdAndDelete({ _id: req.params.id });
-    
-
-    if (!_persona) {
-      return next(new AppError('No document found with that ID', 404));
-    }
-
-    res.status(200).json({
-      message: 'Deleted Persona!' 
-    });
-  });
-
-  exports.getOne = (Model, popOptions) =>
-  catchAsync(async (req, res, next) => {
-    let query = Model.findById(req.params.id);
-    if (popOptions) query = query.populate(popOptions);
-    const doc = await query;
-
-    if (!doc) {
-      return next(new AppError('No document found with that ID', 404));
-    }
-
-    res.status(200).json({
-      status: 'success',
-      data: {
-        data: doc
-      }
-    });
-  });
-
-  exports.getAll = Model =>
-  catchAsync(async (req, res, next) => {
-    console.log('TRYING TO FETCH Person INFO!');
-
-    const _persona = await Model.find();
-    res.status(200).json({
-      
-      _persona:_persona.map((persona) => ({
-        id: persona.id,
-        text: persona.text,
-      }))
-
-    });
-  });
-
-/*
-
-exports.createOne = Model =>
-  catchAsync(async (req, res, next) => {
-    const _persona = await Model.create(req.body);
-    console.log(req.body);
-
-    res.status(201).json({
-      goal:{id: goal.id,
-        text: goal.text}
-
-    });
-  }); 
-
-  Model.insert
-
-
-  exports.getOne = (Model, popOptions) =>
-  catchAsync(async (req, res, next) => {
-    let query = Model.findById(req.params.id);
-    if (popOptions) query = query.populate(popOptions);
-    const doc = await query;
-
-    if (!doc) {
-      return next(new AppError('No document found with that ID', 404));
-    }
-
-    res.status(200).json({
-      status: 'success',
-      data: {
-        data: doc
-      }
-    });
-  });
-
-exports.deleteOne = Model =>
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+exports.deleteOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.findByIdAndDelete(req.params.id);
 
@@ -108,15 +14,17 @@ exports.deleteOne = Model =>
 
     res.status(204).json({
       status: 'success',
-      data: null
+      data: null,
     });
   });
 
-exports.updateOne = Model =>
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+exports.updateOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
-      runValidators: true
+      runValidators: true,
     });
 
     if (!doc) {
@@ -126,23 +34,27 @@ exports.updateOne = Model =>
     res.status(200).json({
       status: 'success',
       data: {
-        data: doc
-      }
+        data: doc,
+      },
     });
   });
 
-exports.createOne = Model =>
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+exports.createOne = (Model) =>
   catchAsync(async (req, res, next) => {
     const doc = await Model.create(req.body);
 
     res.status(201).json({
       status: 'success',
       data: {
-        data: doc
-      }
+        data: doc,
+      },
     });
   });
 
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
 exports.getOne = (Model, popOptions) =>
   catchAsync(async (req, res, next) => {
     let query = Model.findById(req.params.id);
@@ -156,12 +68,14 @@ exports.getOne = (Model, popOptions) =>
     res.status(200).json({
       status: 'success',
       data: {
-        data: doc
-      }
+        data: doc,
+      },
     });
   });
 
-exports.getAll = Model =>
+/////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////
+exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
     // To allow for nested GET reviews on tour (hack)
     let filter = {};
@@ -180,9 +94,7 @@ exports.getAll = Model =>
       status: 'success',
       results: doc.length,
       data: {
-        data: doc
-      }
+        data: doc,
+      },
     });
   });
-
-  */

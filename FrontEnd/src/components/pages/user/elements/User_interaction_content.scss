@@ -1,0 +1,50 @@
+.user_interactive {
+  border-radius: 0 var(--border-radius-default) var(--border-radius-default) 0;
+  background-color: #fff;
+
+  flex: 1;
+}
+
+.display {
+  position: relative;
+  display: grid;
+
+  &__item {
+    height: 100%;
+  }
+
+  &__photo {
+    width: 100%;
+    display: block;
+  }
+}
+
+.brand_logo {
+  position: absolute;
+  height: 15rem;
+  top: 81%;
+  right: 2.3%;
+}
+
+.command__tag {
+  position: absolute;
+  height: 24rem;
+  top: -1%;
+  left: 0.1%;
+}
+
+.command__mode {
+  position: absolute;
+  height: 24rem;
+  top: -1%;
+  left: 84%;
+}
+
+figure {
+  display: block;
+}
+
+img {
+  overflow-clip-margin: content-box;
+  overflow: clip;
+}

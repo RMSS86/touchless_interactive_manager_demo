@@ -4,6 +4,39 @@ import GeneralLogo from '../assets/branding/logo/Touchless_Interactive_Manager_L
 import User from "/media/avatar.jpg";
 import userLogo from "../assets/avatars/user.png";
 
+
+// BRANDING ASSETS
+import Touchless_Interactive_Manager_Logo_Base_A from '../assets/branding/logo/Touchless_Interactive_Manager_Logo_Base_A.png';
+import Touchless_Interactive_Manager_Logo_Block_NL_White from '../assets/branding/logo/Touchless_Interactive_Manager_Logo_Block_NL_White.png'
+import Touchless_Interactive_Manager_Logo_Icon_w_Letters_SM_ICon from '../assets/branding/logo/Touchless_Interactive_Manager_Logo_Icon_w_Letters_SM_ICon.png';
+import Touchless_Interactive_Manager_Logo_Base_TRNSP_C from '../assets/branding/logo/Touchless_Interactive_Manager_Logo_Base_TRNSP_C.png';
+
+
+/// COMMAND ASSETS
+import _CMD_MOUSE_MODE_ from "../assets/pointers/TIM_Finger_Commands_AUTO-MOUSE_.png";
+import _CMD_TAG_ZERO_ from "../assets/pointers/TIM_Finger_Commands_COMMAND_ZERO_.png";
+import _CMD_TAG_ONE_ from "../assets/pointers/TIM_Finger_Commands_COMMAND_ONE_.png";
+import _CMD_TAG_TWO_ from "../assets/pointers/TIM_Finger_Commands_COMMAND_TWO_.png";
+import _CMD_TAG_THREE_ from "../assets/pointers/TIM_Finger_Commands_COMMAND_THREE_.png";
+import _CMD_TAG_FOUR_ from "../assets/pointers/TIM_Finger_Commands_COMMAND_FOUR_.png";
+import _CMD_TAG_FIVE_ from "../assets/pointers/TIM_Finger_Commands_COMMAND_FIVE_.png";
+
+export {_CMD_MOUSE_MODE_, _CMD_TAG_ZERO_, _CMD_TAG_ONE_,_CMD_TAG_TWO_, _CMD_TAG_THREE_,_CMD_TAG_FOUR_,_CMD_TAG_FIVE_}
+
+
+
+import HOME_LOGO from "../assets/img/icons/Custom_Icons_Badge_Menu_B.png";
+import LOGIN_LOGO from "../assets/img/icons/Custom_Icons_Badge_login_A.png";
+import LOGOUT_LOGO from "../assets/img/icons/Custom_Icons_Badge_logout_A.png";
+import OPTIONS_LOGO from "../assets/img/icons/Options_Icon_A.png";
+import AUTOMOUSE_LOGO from "../assets/img/icons/Custom_Icons_Badge_sleept_A.png";
+import SLEEP_LOGO from "../assets/img/icons/Custom_Icons_Badge_sleep_B.png";
+
+import SIDE_LOGO from "../assets/branding/logo/Touchless_Interactive_Manager_Letters_plus_logo_C.png";
+import SIDE_LOGO_BTN from "../assets/branding/logo/Touchless_Interactive_Manager_Logo_Base_A.png";
+
+export {HOME_LOGO, LOGIN_LOGO,LOGOUT_LOGO,OPTIONS_LOGO,AUTOMOUSE_LOGO,SLEEP_LOGO,SIDE_LOGO,SIDE_LOGO_BTN};
+
 // import GeneralLogo from "../assets/img/branding/logo/Touchless_Interactive_Manager_Logo_Base_A.png";
 // import MotherTechLogo from '../assets/branding/logo/general-logo.png';
 // // ///////USERS
@@ -47,6 +80,10 @@ export {
     GeneralLogo,
     User,
     userLogo,
+    Touchless_Interactive_Manager_Logo_Base_A,
+    Touchless_Interactive_Manager_Logo_Block_NL_White,
+    Touchless_Interactive_Manager_Logo_Icon_w_Letters_SM_ICon,
+    Touchless_Interactive_Manager_Logo_Base_TRNSP_C,
     // Branding_big_one,
     // Branding_big_two,
     // MotherTechLogo,

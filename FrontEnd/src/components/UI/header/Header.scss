@@ -7,4 +7,5 @@
   @include grid.area_header();
   background-color: var(--UI-footer-default);
   border-radius: var(--border-radius-default);
+  box-shadow: var(--wp--preset--shadow--minimal);
 }

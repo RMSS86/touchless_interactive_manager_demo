@@ -17,7 +17,6 @@ export default function TopNavLinks({
 }: _defaultProps) {
   ///////FUNCTIONS//////////FUNCTIONS///////////FUNCTIONS///////////
   ///////FUNCTIONS//////////FUNCTIONS///////////FUNCTIONS///////////
-  console.log(HEADER_DATA);
 
   ////////RETURN/////RETURN/////RETURN/////RETURN/////RETURN/////
   ////////RETURN/////RETURN/////RETURN/////RETURN/////RETURN/////
