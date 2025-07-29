@@ -22,9 +22,7 @@
               </a>
             </p>
 
-T.I.M. (Touchless Interactive Manager), is a web-based dynamic tool that uses CV2 library for computer vision and ML to create face recognition, and hand interpreter for interactive porpuses, mainly focuses on preventing users from touching no interface in order to accomplish certain health protocols, this version of TIM is the Assistance Manager with mobile Token Auth.
-
-Originally designed to work with a raspberrypi as an IoT device, it's web version for demo porpuses resulted the best option.
+T.I.M. (Touchless Interactive Manager), is a web-based dynamic tool that uses CV2 library for computer vision and ML to create face recognition, and hand interpreter for interactive porpuses, mainly focuses on preventing users from touching no interface in order to accomplish certain health protocols, this version of TIM is the Assistance Manager with mobile Token Auth. Originally designed to work with a raspberrypi as an IoT device, it's web version for demo porpuses resulted the best option.
 
 > HomePage
 
