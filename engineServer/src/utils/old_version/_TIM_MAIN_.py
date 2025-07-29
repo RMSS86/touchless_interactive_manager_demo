@@ -1,7 +1,5 @@
 # Face Recognition / Video Processing
-import time
 import cv2
-import numpy as np
 import face_recognition
 # # Tensor FLow Lite-MediaPipe
 # import mediapipe as mp
@@ -26,11 +24,9 @@ import face_recognition
 # # GeoLocation Module
 # import geocoder
 
-import io
-
 ########CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA###
 ########CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA###
-from _CAMERA_ import _VIDEO_
+from src.utils.old_version.modules.functional_modules._CAMERA_ import _VIDEO_
 ########CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA###
 ########CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA#####CAMERA###
 #from _ROUTER_ import _Router_I_
@@ -38,20 +34,20 @@ from _CAMERA_ import _VIDEO_
 #####IMPORTING ROUTER#####IMPORTING ROUTER#####IMPORTING ROUTER#####IMPORTING ROUTER#####IMPORTING ROUTER####
 ###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
 ###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
-from _TIM_SWITCHER_ import _SWITCHER_
+from src.utils.old_version.modules.functional_modules._TIM_SWITCHER_ import _SWITCHER_
 ###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
 ###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
 ########MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES##########
 ########MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES##########
 ###LOADING FACE RECOGNITION MODULE###LOADING FACE RECOGNITION MODULE###LOADING FACE RECOGNITION MODULE###
 ###LOADING FACE RECOGNITION MODULE###LOADING FACE RECOGNITION MODULE###LOADING FACE RECOGNITION MODULE###
-from _Face_Recognition_Module import FaceRecognition
+from src.utils.old_version.modules._Face_Recognition_Module import FaceRecognition
 ###LOADING AUTO MOUSE###LOADING AUTO MOUSE###LOADING AUTO MOUSE###LOADING AUTO MOUSE###LOADING AUTO MOUSE###
 ###LOADING AUTO MOUSE###LOADING AUTO MOUSE###LOADING AUTO MOUSE###LOADING AUTO MOUSE###LOADING AUTO MOUSE###
-from _AUTO_Mouse_Module_ import  AutoMouse
+from src.utils.old_version.modules._AUTO_Mouse_Module_ import  AutoMouse
 ###LOADING HAND DECODER[SIGNED VER]###LOADING HAND DECODER[SIGNED VER]###LOADING HAND DECODER[SIGNED VER]###
 ###LOADING HAND DECODER[SIGNED VER]###LOADING HAND DECODER[SIGNED VER]###LOADING HAND DECODER[SIGNED VER]###
-from _Hand_Counter_Module import HandRecongnition
+from src.utils.old_version.modules._Hand_Counter_Module import HandRecongnition
 
 ########MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES##########
 ########MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES###MODULES##########

@@ -15,16 +15,30 @@ app = Flask(__name__) # //> FLASK APP CREATION
 # //> VIDEO STREAMING ENDPOINT(DECODED)
 @app.route('/video_feed')
 def video_feed():
-    return Response(_engine._framer(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(_engine._framer(), mimetype='multipart/x-mixed-replace; boundary=frame', status=200)
 
 
 class Engine:
     # //> CLASS VARIABLES DECLARATION
     def __init__(self, __mode=0, __squares=False, __rec=False, __hc=True):
-
         # //> GLOBAL CLASS VARIABLES
         self.fps_ = None
+        self.handsNumber = 1
+        self.keyframeLen = 10
         self.bufferLen = 10
+        self.historyLen = 16
+        self._img = None
+        self.debug_image = None
+        self.debugged_image_OUT = None
+        self.min_dtc_conf = 0.5
+        self.padding_framer = 18
+        self.ingestion_index = None
+
+        # //> DATA INGESTION MODE SPECIFICS
+        self.recordingColor = (245, 117, 16)
+        self.waitColor = (16, 117, 245)
+        self.min_dtc_conf = 0.5
+        self.waitKey = 1000
 
         # //> FRAMER CALCULATION FOR MODULES
         self.fps_ = FPS(buffer_len=self.bufferLen)
@@ -42,6 +56,7 @@ class Engine:
             if not self._success:
                 break  # //> IF SOMETHING HAPPENS WITH WEBCAM LOOP WILL BREAK
             else:  # //< DYNAMIC MULTI MODULE STAGE WITH SAME VIDEO SIGNAL FLIP / RAW
+                # TODO: [ MODES MIDDLEWARE AREA ]
                 # //> BROADCASTING SIGNAL MODULE STAGE(CANVAS ONLY) ################################################## # //> SPLITSCREEN DYNAMIC MODULE EQUAL SIZE MODE
                 yield _BROADCAST_._broadcaster(_CAM_.driver_(), self._img)  ####### //> PRE-BROADCASTING SIGNAL STAGE
                 # //> BROADCASTING SIGNAL MODULE STAGE(CANVAS ONLY) ################################################# # //> SPLITSCREEN DYNAMIC MODULE EQUAL SIZE MODE

@@ -1,12 +1,11 @@
 # Face Recognition / Video Processing
 import cv2
-import numpy as np
 import face_recognition
 # Tensor FLow Lite-MediaPipe
 import mediapipe as mp
 import pyautogui
 
-from _TIM_SWITCHER_ import _SWITCHER_
+from src.utils.old_version.modules.functional_modules._TIM_SWITCHER_ import _SWITCHER_
 ######AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE######
 ######AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE######
 ######AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE######

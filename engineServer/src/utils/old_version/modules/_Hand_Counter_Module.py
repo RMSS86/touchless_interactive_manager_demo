@@ -1,13 +1,12 @@
 # Face Recognition / Video Processing
 import cv2
-import numpy as np
 import face_recognition
 # Tensor FLow Lite-MediaPipe
 import mediapipe as mp
 import pyautogui
 ####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####
 ####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####
-from _TIM_SWITCHER_ import _SWITCHER_
+from src.utils.old_version.modules.functional_modules._TIM_SWITCHER_ import _SWITCHER_
 ####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####
 ####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####
 

@@ -3,19 +3,16 @@ import cv2
 import numpy as np
 import face_recognition
 # Tensor FLow Lite-MediaPipe
-import mediapipe as mp
 import pyautogui
 
-import pandas as pd
 # System Module
-import sys
 import os
 
 
 ###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
 ###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
-from TIM_API_Module import UD_API
-from _TIM_SWITCHER_ import _SWITCHER_
+from src.utils.old_version.modules.functional_modules.TIM_API_Module import UD_API
+from src.utils.old_version.modules.functional_modules._TIM_SWITCHER_ import _SWITCHER_
 ###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
 ###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
 

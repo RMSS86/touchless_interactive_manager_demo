@@ -1,16 +1,12 @@
 # Face Recognition / Video Processing
 import cv2
-import numpy as np
 import face_recognition
 # Tensor FLow Lite-MediaPipe
-import mediapipe as mp
 import pyautogui
 # DataFrames / dataBase Connection Modules
 from sqlalchemy import create_engine
-import pandas as pd
 # System Module
 import sys
-import os
 # Kivy / KivyMD Modules
 import kivy
 from kivymd.app import MDApp
@@ -53,15 +49,7 @@ from kivymd.uix.list import OneLineAvatarIconListItem
 from kivy.core.image import Image as CoreImage
 from kivy.uix.image import Image as kiImage
 # Email / TextMessage sending Modules
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
 # Image processing
-import io
-from PIL import Image, ImageDraw, ImageFont
-from io import BytesIO
 # GeoLocation Module
 import geocoder
 
@@ -72,17 +60,17 @@ import geocoder
 
 ###LOADING FACE RECOGNITION MODULE###LOADING FACE RECOGNITION MODULE###LOADING FACE RECOGNITION MODULE###
 ###LOADING FACE RECOGNITION MODULE###LOADING FACE RECOGNITION MODULE###LOADING FACE RECOGNITION MODULE###
-from _Face_Recognition_Module import FaceRecognition
+from src.utils.old_version.modules._Face_Recognition_Module import FaceRecognition
 ###LOADING AUTO MOUSE###LOADING AUTO MOUSE###LOADING AUTO MOUSE###LOADING AUTO MOUSE###LOADING AUTO MOUSE###
 ###LOADING AUTO MOUSE###LOADING AUTO MOUSE###LOADING AUTO MOUSE###LOADING AUTO MOUSE###LOADING AUTO MOUSE###
-from _AUTO_Mouse_Module_ import  AutoMouse
+from src.utils.old_version.modules._AUTO_Mouse_Module_ import  AutoMouse
 ###LOADING HAND DECODER[SIGNED VER]###LOADING HAND DECODER[SIGNED VER]###LOADING HAND DECODER[SIGNED VER]###
 ###LOADING HAND DECODER[SIGNED VER]###LOADING HAND DECODER[SIGNED VER]###LOADING HAND DECODER[SIGNED VER]###
-from _Hand_Counter_Module import HandRecongnition
+from src.utils.old_version.modules._Hand_Counter_Module import HandRecongnition
 
 ###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
 ###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
-from _TIM_SWITCHER_ import _SWITCHER_
+from src.utils.old_version.modules.functional_modules._TIM_SWITCHER_ import _SWITCHER_
 ###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
 ###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
 

@@ -13,10 +13,32 @@ export default function User_interactive_content({
   ///////FUNCTIONS//////////FUNCTIONS///////////FUNCTIONS///////////
   ///////FUNCTIONS//////////FUNCTIONS///////////FUNCTIONS///////////
   const logoNamebase = "_CMD_TAG_";
-  const BROADCAST_ADDRESS = "http://localhost:5000/video_feed";
+
+  // MAKE A CLASSS
+  const BROADCAST_ADDRESS = "http://192.168.0.105:5000/video_feed"; //http://192.168.0.105:5000 ori_> "http://localhost:5000/video_feed"
+  const BROADCAST_ADDRESS_LOCAL = "http://localhost:5000/video_feed";
+
+  // TODO: MAKE A CLASSS
+  async function checkBroadcaststatus() {
+    const _bradcast_response = await fetch(BROADCAST_ADDRESS, {
+      method: "GET",
+    });
+    console.log(
+      `API endpoint ${BROADCAST_ADDRESS} is active (Status: ${_bradcast_response.status})`
+    );
+  }
+
+  useEffect(() => {
+    try {
+      checkBroadcaststatus();
+    } catch (_) {
+      console.log(_);
+    }
+  }, []);
 
   const [logoIndex, setLogoIndex] = useState(TIM_OFFLINE_);
 
+  // TODO: MAKE A CLASSS
   // import _socket from "../../remoteIO/remoteIU_cmd";
 
   //   useEffect(() => {
@@ -73,7 +95,7 @@ export default function User_interactive_content({
             alt="brandlogo"
           />
           <img
-            src={Touchless_Interactive_Manager_BG_edit_A}
+            src={BROADCAST_ADDRESS}
             alt="Web--Cam"
             className="gallery__photo "
           />
