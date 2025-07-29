@@ -34,18 +34,18 @@ html {
   }
   @include mixins.respond(tab-port) {
     // width < 900?
-    font-size: 45%; //1 rem = 8px, 8/16 = 50%
+    font-size: 44.5%; //1 rem = 8px, 8/16 = 50%
   }
   @include mixins.respond(tab-land-plus) {
     // width < 900?
-    font-size: 46%; //1 rem = 8px, 8/16 = 50%
+    font-size: 45%; //1 rem = 8px, 8/16 = 50%
   }
   @include mixins.respond(lap-top) {
-    font-size: 46.25%;
+    font-size: 45.25%;
   }
   @include mixins.respond(lap-top-medium) {
     // width < 900?
-    font-size: 46.25%; //1 rem = 8px, 8/16 = 50%
+    font-size: 45.25%; //1 rem = 8px, 8/16 = 50%
   }
   @include mixins.respond(lap-top-large) {
     // width < 900?
