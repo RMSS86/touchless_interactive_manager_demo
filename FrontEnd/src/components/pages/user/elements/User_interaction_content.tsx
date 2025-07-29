@@ -15,7 +15,7 @@ export default function User_interactive_content({
   const logoNamebase = "_CMD_TAG_";
   const BROADCAST_ADDRESS = "http://localhost:5000/video_feed";
 
-  const [logoIndex, setLogoIndex] = useState(_CMD_TAG_FIVE_);
+  const [logoIndex, setLogoIndex] = useState(TIM_OFFLINE_);
 
   // import _socket from "../../remoteIO/remoteIU_cmd";
 
@@ -114,6 +114,7 @@ type _altProps = {
 //@ts-ignore
 import "./User_interaction_content.scss";
 import {
+  TIM_OFFLINE_,
   _CMD_MOUSE_MODE_,
   _CMD_TAG_ZERO_,
   _CMD_TAG_ONE_,

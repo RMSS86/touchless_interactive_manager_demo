@@ -23,8 +23,12 @@ import _CMD_TAG_TWO_ from "../assets/pointers/TIM_Finger_Commands_COMMAND_TWO_.p
 import _CMD_TAG_THREE_ from "../assets/pointers/TIM_Finger_Commands_COMMAND_THREE_.png";
 import _CMD_TAG_FOUR_ from "../assets/pointers/TIM_Finger_Commands_COMMAND_FOUR_.png";
 import _CMD_TAG_FIVE_ from "../assets/pointers/TIM_Finger_Commands_COMMAND_FIVE_.png";
+import TIM_OFFLINE_ from "../assets/pointers/TIM_OFFLINE_.png";
 
-export {_CMD_MOUSE_MODE_, _CMD_TAG_ZERO_, _CMD_TAG_ONE_,_CMD_TAG_TWO_, _CMD_TAG_THREE_,_CMD_TAG_FOUR_,_CMD_TAG_FIVE_}
+
+
+
+export {TIM_OFFLINE_, _CMD_MOUSE_MODE_, _CMD_TAG_ZERO_, _CMD_TAG_ONE_,_CMD_TAG_TWO_, _CMD_TAG_THREE_,_CMD_TAG_FOUR_,_CMD_TAG_FIVE_}
 
 
 
