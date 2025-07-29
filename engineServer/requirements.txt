@@ -1,23 +1,9 @@
-                                    TIM Project
-[Coderials][ PYTHON, FLASK, NODE<JS>, DOCKER, TensorFLow, CV2, REACT, MONGODB, FLUTTER ]
-[Media][ Reason Studio, FLSTUDIO, A-Live11 Blender, Adobe Ps + Ai + Lr + Ae, Presonus S-One ]
 
 
-TODO: *Use _main general Switcher to coordinate main app's dance.
 
-TODO: **Create WorkFlow of the app life cycle.
 
-TODO: Create mobile Token Confirmation App in FLutter for validating clock in-out,
-    and various other interactions and add on fucntions
 
-TODO: Create Database for Employer and Employees...[for testing and developing]
-    [after tests]: create a self usage admin page for heach employer and create the "use template" option.
 
-TODO: Create video in FLStudio for the brand to be played on the background,
-    when no face is up front UIX
-	*After interaction back to main video
-	*after couple of seconds with no interaction back to menu
-	*Play more than One video on home screen(create/design/branding).
 
 
 
@@ -49,63 +35,3 @@ TODO: Create video in FLStudio for the brand to be played on the background,
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Self.Name Roberto Solis-Stevenson
-Comp.Name 21Tigers : NeonColoredOcean
-self.Speciality >>> Web & Mobile APP developer, Database Archytect, AI/Machine Learning, Productor Multimedia 
-Inviter=> Edwin Alvarado
-
-
-datos para tomas de desiciones o percepcion del humano
-
-
-6.seguimiento de referencias inmediatas mente>>>
-Infinitum l internet inteligente....(gina rosado).
-makbi Roberto Murillo.
-goldin bonilla
-amanda almengor
-Bacsa>>
-
-Alex Cabrera
-
-Ruth revolorio outsourcing
-david pineda > madera
-leonor lopez >> 
-street marketing >>
-Alvaro Paiz Grupo Peak
-Monica Cruz >> Dir guatemala BNI
-Chapin films
-ivan maisner el poder del aentrevista
-
-Connie Arana registro de marcas bujete jaurie y asocuados 
-
-jaquelin gonzales >> Kelly ajanel >>arte
-
-googl trending hrhr
-Blocs the busqueda para marketin digital, busquedas organicas, generacion de leads.
-**Libros al dia.
-
-aval...
-solcitud
-entrvista 
-
-pago de $50
-650 al annio
-
-pagar Q120 presencial 
-el talento gana partido spero el trabaho en equopi y la enteligencia ganan campoenatos. 
-
-Create a BNI replacement... 
