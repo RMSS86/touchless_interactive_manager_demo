@@ -1,8 +1,29 @@
+@use "../../../../sass/libs/mixins";
+
+$--local-tag-height: 24rem;
+
+@include mixins.respond(phone) {
+  $--local-tag-height: 15rem;
+}
+
 .user_interactive {
+  overflow: hidden;
+
   border-radius: 0 var(--border-radius-default) var(--border-radius-default) 0;
   background-color: #fff;
-
   flex: 1;
+  min-width: 90rem;
+  width: 100%;
+  min-height: 70vh;
+
+  @include mixins.respond(tab-land) {
+    border-radius: var(--border-radius-default);
+    margin-bottom: 1.2rem;
+    min-width: 30rem;
+  }
+  @include mixins.respond(phone) {
+    min-height: 42vh;
+  }
 }
 
 .display {
@@ -19,25 +40,70 @@
   }
 }
 
+.gallery {
+  position: relative;
+  display: grid;
+
+  &__item {
+    height: 100%;
+  }
+
+  &__photo {
+    height: 84vh;
+    width: 100%;
+    display: block;
+    border-radius: 0 var(--border-radius-default) var(--border-radius-default) 0;
+    object-fit: cover;
+    transition: all 1s ease;
+
+    @include mixins.respond(phone) {
+      border-radius: var(--border-radius-default);
+      box-shadow: var(--wp--preset--shadow--minimal);
+      height: 42vh;
+    }
+  }
+}
+
 .brand_logo {
   position: absolute;
   height: 15rem;
   top: 81%;
-  right: 2.3%;
+  right: 1.5%;
+
+  @include mixins.respond(phone) {
+    height: 6rem;
+    top: 82.59%;
+  }
 }
 
 .command__tag {
   position: absolute;
-  height: 24rem;
+  height: $--local-tag-height;
   top: -1%;
   left: 0.1%;
+
+  @include mixins.respond(tab-land) {
+    left: -1.5%;
+  }
+  @include mixins.respond(phone) {
+    height: 21rem;
+  }
+  @include mixins.respond(phone-small) {
+    height: 18rem;
+  }
 }
 
 .command__mode {
   position: absolute;
-  height: 24rem;
+  height: $--local-tag-height;
   top: -1%;
-  left: 84%;
+  right: -1.5%;
+  @include mixins.respond(phone) {
+    height: 21rem;
+  }
+  @include mixins.respond(phone-small) {
+    height: 18rem;
+  }
 }
 
 figure {

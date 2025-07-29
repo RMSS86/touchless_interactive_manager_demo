@@ -11,6 +11,17 @@ type User = {
   _img?: ImageBitmap | File | string | HTMLImageElement;
 };
 
+type _user_details = {
+    _id: string;
+    _name: string;
+    _account: string;
+    _wave: string;
+    _badge_ID: string;
+    _position: string;
+    _assistance: string;
+    // _assistance: _user_asistance;
+}
+
 type NewUser = {
   _name: string;
   _email: string;
@@ -43,6 +54,7 @@ type Email = {
 };
 export type {
   User,
+  _user_details,
   NewUser,
   PasswordReset,
   Login,

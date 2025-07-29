@@ -6,7 +6,7 @@
   --color-secondary-light: #6B8DF2;
   --color-inverse-primary-light: #F2F2F2;
   --color-inverse-secondary-light: #C4D0F2;
-  --color-surfaceDim-light: #ffff;
+  --color-surfaceDim-light: #676767;
   --color-complementary-negative: #F2C550;
   --color-surfaceContainerLow-light: #ffff;
   --color-primaryFixedDim-light: #ffff;
@@ -18,7 +18,8 @@
   --color-primary-dark: #222633;
   --color-secondary-dark: #ffff;
   --color-inverse-primary-dark: #222633;
-  --color-surfaceDim-dark: #4E5159;
+  --color-surfaceDim-dark: #5d5d5d;
+  --color-surfaceDim-dark-tiles: #393939;
   --color-surfaceContainerLow-dark: #ffff;
   --color-primaryFixedDim-dark: #ffff;
   --color-inverseSurface-dark: #ffff;
@@ -87,6 +88,7 @@
 
   /* //> BORDER RADIOUS */
   --border-radius-default: 12px;
+  --border-radius-low: 6px;
   --border-radius-only-top: var(--border-radius-default) var(--border-radius-default) 0  0;
   --border-radius-only-bottom: 0  0  var(--border-radius-default) var(--border-radius-default) ;
   --border-radius-circular: 50%;
@@ -99,6 +101,8 @@
   --wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);
   --wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);
   --wp--preset--shadow--minimal: 0px 1px 4px #222633d6;
+  --wp--preset--shadow--minimal-light: 0px 1px 4px #e8e9eed6;
+
 }
 
 .grid{

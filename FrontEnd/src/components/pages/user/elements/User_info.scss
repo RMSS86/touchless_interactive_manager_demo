@@ -1,7 +1,83 @@
-.user_info {
-  min-width: 36vw;
-  background-color: #bab9b9; //var(--UI-layout-default-color);
-  border-radius: 0 var(--border-radius-default) var(--border-radius-default) 0;
+@use "../../../../sass/libs/mixins";
 
+.user_info {
+  min-width: 39rem;
+  background-color: #323232; //var(--UI-layout-default-color);
+  border-radius: 0 var(--border-radius-default) var(--border-radius-default) 0;
+  position: relative;
   z-index: 10;
+
+  @include mixins.respond(phone-small) {
+    min-width: 25.2rem;
+  }
+
+  &-avatar {
+    height: 39vh;
+    width: 100%;
+    border-radius: 0 12px 24px 24px;
+    box-shadow: var(--wp--preset--shadow--minimal);
+
+    @include mixins.respond(phone-small) {
+      height: auto;
+    }
+  }
+
+  &-title_top {
+    background-color: #00000086;
+    position: absolute;
+    border-radius: 0 12px 0 12px;
+    justify-content: start;
+    height: fit-content;
+    top: 0;
+    right: 0;
+    width: 4.5rem;
+    color: #ffffffd4;
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-align: center;
+    padding: 1.5rem;
+    writing-mode: vertical-lr;
+  }
+
+  &-resume {
+    height: 44rem;
+    width: 99%;
+    position: relative;
+    top: 39.3vh;
+    padding: 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &-schedule {
+    height: 22.5rem;
+    padding: 0.6rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    border-radius: var(--border-radius-low);
+    background-color: var(--color-surfaceDim-dark-tiles);
+  }
+
+  &-info {
+    padding: 0.6rem;
+    height: 18rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: var(--border-radius-low);
+    background-color: var(--remember-blue);
+  }
+
+  &-logo {
+    height: 5.4rem;
+    position: absolute;
+    top: 39%;
+    right: 6%;
+
+    @include mixins.respond(phone-small) {
+      top: 42%;
+    }
+  }
 }

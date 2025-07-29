@@ -6,7 +6,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: var(--wp--preset--shadow--minimal);
   z-index: 12;
   height: 82vh;
 }
@@ -21,6 +20,7 @@
     position: relative;
     background-color: #24242472;
     border-radius: 0 10px 10px 0;
+    box-shadow: var(--wp--preset--shadow--minimal);
 
     &:not(:last-child) {
       margin-bottom: 0.5rem;
@@ -79,15 +79,14 @@
   }
   &__logo {
     height: 10rem;
-    margin-left: 1.2rem;
+    margin-left: 0.6rem;
     margin-top: 1rem;
     margin-bottom: 3rem;
+    margin-right: 0.6rem;
   }
   &__logo_btn {
     height: 15rem;
-    margin-left: 8.4rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin: 18% 20%;
   }
 }
 

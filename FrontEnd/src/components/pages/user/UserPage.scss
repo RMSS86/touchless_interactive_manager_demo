@@ -1,12 +1,21 @@
+@use "../../../sass/libs/mixins";
+
 .user_page {
   display: flex;
   flex-wrap: wrap;
   padding: 1rem;
+
+  @include mixins.respond(tab-land) {
+    flex-direction: column-reverse;
+  }
+
   &-wrapper {
-    width: 33vw;
+    display: flex;
+    width: fit-content;
+    min-width: 30vw;
     z-index: 9;
     margin-right: -1.2rem;
-    background-color: #323232;
+    background-color: #323232e5;
     border-radius: var(--border-radius-default);
     box-shadow: var(--wp--preset--shadow--minimal);
   }

@@ -19,29 +19,28 @@ const HOMEPAGE_DATA: _heading_text[] = [
   {id: 1, tag: 'Landing_title', text: 'Interactive Touchless Manager' },
   {id: 2, tag: 'Landing_paragraph', text: 'This product is designed for a new era where the conditions about entering in contact with the incorrect person could be critical, this system integrates Computer vision and Machine Learning models for assistance porpuses.' },
 
-
 ]
 
 const BRAND_NAME: string = 'TIM'
 
-  var ASSETS_LOCATIONS: location[] = [
-    { id: 1, name: "HeadQuarters ", position: [14.579503, -90.495271] },
-    { id: 2, name: "Store #1 ", position: [14.6262056, -90.5749618] },
-    { id: 3, name: "Store #2 ", position: [14.5727815,-90.5384374] },
-  ];
+var ASSETS_LOCATIONS: location[] = [
+  { id: 1, name: "HeadQuarters ", position: [14.579503, -90.495271] },
+  { id: 2, name: "Store #1 ", position: [14.6262056, -90.5749618] },
+  { id: 3, name: "Store #2 ", position: [14.5727815,-90.5384374] },
+];
 
-  type location = {
-    id: number;
-    name: string;
-    position: PointTuple;
-    assets?: '';
+type location = {
+  id: number;
+  name: string;
+  position: PointTuple;
+  assets?: '';
+};
+  type _heading_text = {
+  id: number;
+  tag: string;
+  text: string;
+
   };
-   type _heading_text = {
-    id: number;
-    tag: string;
-    text: string;
-
-   };
 export { HEADER_DATA, FOOTER_DATA ,ASSETS_LOCATIONS ,BRAND_NAME, HOMEPAGE_DATA};  
 // export { LOCAIION_TILE_ITEMS,SUB_HEADER_ITEMS }; 
 

@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 export default function User_interactive_content({
   _componentProps,
   children,
-  _className = "user_interactive",
+  _className = "display",
   _style,
   _onClick,
   ...rest
@@ -55,31 +55,29 @@ export default function User_interactive_content({
       >
         {/* {children} */}
 
-        <div className="display">
-          <figure className="display__item">
-            <img
-              src={Touchless_Interactive_Manager_Logo_Base_TRNSP_C}
-              className="brand_logo"
-              alt="brandlogo"
-            />
-            <img
-              src={_CMD_MOUSE_MODE_}
-              className="command__mode"
-              alt="brandlogo"
-            />
-            <img
-              //src={_CMD_TAG_ZERO_}
-              src={logoIndex}
-              className="command__tag"
-              alt="brandlogo"
-            />
-            <img
-              src={BROADCAST_ADDRESS}
-              alt="Web--Cam"
-              className="gallery__photo"
-            />
-          </figure>
-        </div>
+        <figure className="display__item">
+          <img
+            src={Touchless_Interactive_Manager_Logo_Base_TRNSP_C}
+            className="brand_logo"
+            alt="brandlogo"
+          />
+          <img
+            src={_CMD_MOUSE_MODE_}
+            className="command__mode"
+            alt="brandlogo"
+          />
+          <img
+            //src={_CMD_TAG_ZERO_}
+            src={logoIndex}
+            className="command__tag"
+            alt="brandlogo"
+          />
+          <img
+            src={Touchless_Interactive_Manager_BG_edit_A}
+            alt="Web--Cam"
+            className="gallery__photo "
+          />
+        </figure>
       </_contextType>
     </>
   );
@@ -123,6 +121,7 @@ import {
   _CMD_TAG_THREE_,
   _CMD_TAG_FOUR_,
   _CMD_TAG_FIVE_,
+  Touchless_Interactive_Manager_BG_edit_A,
   Touchless_Interactive_Manager_Logo_Base_A,
   Touchless_Interactive_Manager_Logo_Base_TRNSP_C,
   Touchless_Interactive_Manager_Logo_Icon_w_Letters_SM_ICon, //@ts-ignore

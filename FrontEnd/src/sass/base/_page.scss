@@ -45,14 +45,14 @@ html {
   }
   @include mixins.respond(lap-top-medium) {
     // width < 900?
-    font-size: 48.5%; //1 rem = 8px, 8/16 = 50%
+    font-size: 46.25%; //1 rem = 8px, 8/16 = 50%
   }
   @include mixins.respond(lap-top-large) {
     // width < 900?
-    font-size: 48.5%; //1 rem = 8px, 8/16 = 50%
+    font-size: 47%; //1 rem = 8px, 8/16 = 50%
   }
   @include mixins.respond(big-desktop) {
-    font-size: 48.25%; //1rem = 12, 12/16
+    font-size: 47.25%; //1rem = 12, 12/16
   }
 }
 

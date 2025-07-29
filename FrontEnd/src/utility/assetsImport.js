@@ -6,10 +6,13 @@ import userLogo from "../assets/avatars/user.png";
 
 
 // BRANDING ASSETS
+
+import Touchless_Interactive_Manager_BG_edit_A from '../assets/branding/logo/Touchless_Interactive_Manager_BG_edit_A.png';
 import Touchless_Interactive_Manager_Logo_Base_A from '../assets/branding/logo/Touchless_Interactive_Manager_Logo_Base_A.png';
 import Touchless_Interactive_Manager_Logo_Block_NL_White from '../assets/branding/logo/Touchless_Interactive_Manager_Logo_Block_NL_White.png'
 import Touchless_Interactive_Manager_Logo_Icon_w_Letters_SM_ICon from '../assets/branding/logo/Touchless_Interactive_Manager_Logo_Icon_w_Letters_SM_ICon.png';
 import Touchless_Interactive_Manager_Logo_Base_TRNSP_C from '../assets/branding/logo/Touchless_Interactive_Manager_Logo_Base_TRNSP_C.png';
+
 
 
 /// COMMAND ASSETS
@@ -84,6 +87,7 @@ export {
     Touchless_Interactive_Manager_Logo_Block_NL_White,
     Touchless_Interactive_Manager_Logo_Icon_w_Letters_SM_ICon,
     Touchless_Interactive_Manager_Logo_Base_TRNSP_C,
+    Touchless_Interactive_Manager_BG_edit_A,
     // Branding_big_one,
     // Branding_big_two,
     // MotherTechLogo,

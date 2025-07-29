@@ -24,6 +24,31 @@ export default function User_info({
         style={{}}
       >
         {/* {children} */}
+        <div
+          className="user_info-avatar"
+          style={{
+            background: `url(${User}) no-repeat`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          <h1 className="user_info-title_top ">{DUMMY_USER_INFO[0]._name}</h1>
+          <img
+            alt="logo"
+            src={Touchless_Interactive_Manager_Logo_Base_A}
+            className="user_info-logo"
+          />
+          <div className="user_info-resume">
+            {/* // SCHEDULE MODULE // */}
+            <User_scheduleTile _className="user_info-schedule" />
+
+            {/* // EMPLOYEE INFO MODULE // */}
+            <User_infoTile
+              _className="user_info-info"
+              _user_data={DUMMY_USER_INFO[0]}
+            />
+          </div>
+        </div>
       </_contextType>
     </>
   );
@@ -60,6 +85,7 @@ type _altProps = {
 //@ts-ignore
 import "./User_info.scss";
 import {
+  User,
   _CMD_MOUSE_MODE_,
   _CMD_TAG_ZERO_,
   _CMD_TAG_ONE_,
@@ -71,3 +97,6 @@ import {
   Touchless_Interactive_Manager_Logo_Base_TRNSP_C,
   Touchless_Interactive_Manager_Logo_Icon_w_Letters_SM_ICon, //@ts-ignore
 } from "../../../../utility/assetsImport";
+import User_infoTile from "./User_infoTile";
+import { DUMMY_USER_INFO } from "../../../../utility/data/UI-Data/DUMMY_USER_DATA";
+import User_scheduleTile from "./User_scheduleTile";

@@ -65,8 +65,8 @@ export default function User_side_menu({
         </ul>
 
         <div className="legal">
-          &copy; 21TIGERS product, designed by Robbie Trevor, All rights
-          reserved 2023.
+          <p>Designed by Robbie Solis-Stevenson </p>
+          <p>&copy;TigerIX Technologies 2023.</p>
         </div>
       </_contextType>
     </>
