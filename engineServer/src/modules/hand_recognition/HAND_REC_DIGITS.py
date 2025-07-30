@@ -1,14 +1,12 @@
-# Face Recognition / Video Processing
-
+from src.drawers.DRAWER import DRAWER
+from src.phaser.PHASER import PHASER
 import mediapipe as mp
-from collections import Counter
-
-
 
 #####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####
 #####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####
 #####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####
 #####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####
+
 class HAND_REC_DIGITS():
     def __init__(self):
         self.lmList = None
@@ -27,7 +25,9 @@ class HAND_REC_DIGITS():
         self.tag_hand_command_ = []
 
     def HandCounter(self, _vid, __cv):
-        while __cv.active():  # //> CYCLES BEGIN ON _CAM_ isOPEN VALIDATOR
+        self.__cv = __cv
+        _DW_ = DRAWER(self.__cv)
+        while self.__cv.active():  # //> CYCLES BEGIN ON _CAM_ isOPEN VALIDATOR
             self._img = _vid
 
             self.upcount = 0
@@ -42,9 +42,10 @@ class HAND_REC_DIGITS():
                     cx, cy = int(lm.x * w), int(lm.y * h)
                     self.lmList.append((cx, cy))
 
-                # TODO: MAKE IT A GENERIC CLASS
-                for point in self.lmList:
-                    __cv.driver_().circle(self._img, point, 1, (230, 226, 109) , __cv.driver_().FILLED)
+                _DW_.DGT_point_drawer(self._img, self.lmList)
+                # # TODO: MAKE IT A GENERIC CLASS
+                # for point in self.lmList:
+                #     __cv.driver_().circle(self._img, point, 1, (230, 226, 109) , __cv.driver_().FILLED)
 
                 for coordinate in self.fingersCoordinate:
                     if self.lmList[coordinate[0]][1] < self.lmList[coordinate[1]][1]:
@@ -53,25 +54,14 @@ class HAND_REC_DIGITS():
                 if self.lmList[self.thumbCoordinate[0]][0] > self.lmList[self.thumbCoordinate[1]][0]:
                     self.upcount += 1
 
-                self.Hand_CMD_Counter(self.upcount)
+                _PHASER_.Hand_CMD_Counter(self.upcount) # //> COUNTS COMMAND RECEIVED AND PHASES IT
 
             return self._img
         return None
 
-    # TODO: MAKE IT A GENERIC CLASS
-    def Hand_CMD_Counter(self,_count):
-        self.tag_hand_command_.append(_count)
-        if len(self.tag_hand_command_) == 12:
-            self.count_ = Counter(self.tag_hand_command_)
-            self.value_, self.count_of = self.count_.most_common()[0]
-            # TODO: SEND COMMAND FROM HERE USING COMMAND BUILDER TO [ FE ]
-            # _SW_._universal_COMM_Receiver_(self.tag_hand_command_[0])
-            print(self.value_)
-            self.counter_reset()
 
-    def counter_reset(self):
-        self.tag_hand_command_ = []
-
+_PHASER_ = PHASER() # //> COUNTS ENTRIES AND PHASES RESULT
+ # //>
 
 
 

@@ -1,74 +1,91 @@
-# Face Recognition / Video Processing
-import cv2
-
-import mediapipe as mp
-from collections import Counter
-from src.camera.CAMERA_ import Camera
 
 
 
-#####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####
-#####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####
-#####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####
-#####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####
-class HandRecongnition():
-    def __init__(self):
-        self.mpHands = mp.solutions.hands
-        self.Hands = self.mpHands.Hands()
-        self.mpDraw = mp.solutions.drawing_utils
-        self.fingersCoordinate = [(8, 6), (12, 10), (16, 14), (20, 18)]
-        self.thumbCoordinate = (4, 3)
-        self._anti_counter = 0
-        self.tag_hand_command_ = []
-
-    def HandCounter(self, _vid):
-        while _CAM_.active():  # //> CYCLES BEGIN ON _CAM_ isOPEN VALIDATOR
-            self.key_frame = _CAM_.keyframe()  # //> SETTING GLOBAL KEY FRAMERS
-            self._success, self._img = _CAM_.stream_()
-            self.upcount = 0
-            self.results = self.Hands.process(self._img)  # Processing Image for Tracking
-
-            self.handNo = 0
-            self.lmList = []
-
-            if self.results.multi_hand_landmarks:  # Getting Landmark(location) of Hands if Exists
-                for id, lm in enumerate(self.results.multi_hand_landmarks[self.handNo].landmark):
-                    h, w, c = self._img.shape
-                    cx, cy = int(lm.x * w), int(lm.y * h)
-                    self.lmList.append((cx, cy))
-
-                for point in self.lmList:
-                    cv2.circle(self._img, point, 3, (230, 226, 109) , cv2.FILLED)
-
-                for coordinate in self.fingersCoordinate:
-                    if self.lmList[coordinate[0]][1] < self.lmList[coordinate[1]][1]:
-                        self.upcount += 1
-
-                if self.lmList[self.thumbCoordinate[0]][0] > self.lmList[self.thumbCoordinate[1]][0]:
-                    self.upcount += 1
-
-                self.Hand_CMD_Counter(self.upcount)
-
-            cv2.imshow('Hander', self._img)
-
-    def Hand_CMD_Counter(self,_count):
-        self.tag_hand_command_.append(_count)
-        if len(self.tag_hand_command_) == 12:
-            self.count_ = Counter(self.tag_hand_command_)
-            self.value_, self.count_of = self.count_.most_common()[0]
-            # TODO: SEND COMMAND FROM HERE USING COMMAND BUILDER TO [ FE ]
-            # _SW_._universal_COMM_Receiver_(self.tag_hand_command_[0])
-            print(self.value_)
-            self.counter_reset()
-
-    def counter_reset(self):
-        self.tag_hand_command_ = []
-
-####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####
-_HR_= HandRecongnition()
-_CAM_ = Camera(0)  # //> PROMPTED CAMERA OBJECT WITH DEFAULT DEVICE
-####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####
-
-_HR_.HandCounter(_CAM_)
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# import mediapipe as mp
+# import cv2
+# from pymongo import MongoClient
+# # Assuming you have a face embedding model/function, e.g., from 'face_recognition' library
+# # from face_recognition import face_encodings, load_image_file
+#
+# # MongoDB Connection
+# client = MongoClient("mongodb://localhost:27017/") # Replace with your MongoDB connection string
+# db = client["face_recognition_db"]
+# face_collection = db["face_embeddings"]
+#
+# # MediaPipe Face Mesh setup
+# mp_face_mesh = mp.solutions.face_mesh
+# face_mesh = mp_face_mesh.FaceMesh(static_image_mode=True, max_num_faces=1, min_detection_confidence=0.5)
+#
+# def get_face_embedding(image_path):
+#     # Load image and process with MediaPipe
+#     image = cv2.imread(image_path)
+#     results = face_mesh.process(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+#
+#     if results.multi_face_landmarks:
+#         # Extract landmarks and generate embedding (requires a separate face embedding model)
+#         # For demonstration, let's assume a dummy embedding
+#         dummy_embedding = [0.1, 0.2, 0.3, ...] # Replace with actual embedding generation
+#         return dummy_embedding
+#     return None
+#
+# def store_face_data(person_id, embedding, name):
+#     face_collection.insert_one({"person_id": person_id, "embedding": embedding, "name": name})
+#
+# def recognize_face(new_face_embedding):
+#     min_distance = float('inf')
+#     recognized_person = None
+#
+#     for stored_face in face_collection.find():
+#         stored_embedding = stored_face["embedding"]
+#         # Calculate distance (e.g., Euclidean distance) between embeddings
+#         distance = sum([(a - b)**2 for a, b in zip(new_face_embedding, stored_embedding)])**0.5
+#         if distance < min_distance:
+#             min_distance = distance
+#             recognized_person = stored_face["name"]
+#
+#     # Set a threshold for recognition
+#     if min_distance < 0.6: # Adjust threshold based on your embedding model and data
+#         return recognized_person
+#     return "Unknown"
+#
+# # Example Usage:
+# # embedding = get_face_embedding("path/to/image.jpg")
+# # if embedding:
+# #     store_face_data("user123", embedding, "John Doe")
+# #
+# # # Later, for recognition:
+# # new_embedding = get_face_embedding("path/to/new_image.jpg")
+# # if new_embedding:
+# #     recognized_name = recognize_face(new_embedding)
+# #     print(f"Recognized: {recognized_name}")

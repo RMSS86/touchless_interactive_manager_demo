@@ -17,6 +17,9 @@ app = Flask(__name__) # //> FLASK APP CREATION
 def video_feed():
     return Response(_engine._framer(), mimetype='multipart/x-mixed-replace; boundary=frame', status=200)
 
+# //< END POINTS DECLARATION FOR SELF NON-STATIC SERVER
+# //< END POINTS DECLARATION FOR SELF NON-STATIC SERVER
+
 
 class Engine:
     # //> CLASS VARIABLES DECLARATION
@@ -53,11 +56,11 @@ class Engine:
             self.key_frame = _CAM_.keyframe()  # //> SETTING GLOBAL KEY FRAMERS
             self._success, self._img = _CAM_.stream_()  # //< RAW  FEED FROM CAMERA CLASS self.debug_image
 
-            if not self._success:
+            if not self._success: # //> IF ENGINE RUNS SUCCESSFULLY THEN >>>
                 break  # //> IF SOMETHING HAPPENS WITH WEBCAM LOOP WILL BREAK
             else:  # //< DYNAMIC MULTI MODULE STAGE WITH SAME VIDEO SIGNAL FLIP / RAW
-                # TODO: [ MODES MIDDLEWARE AREA ]
-                self._img = _SW_.router(self._img, _CAM_)
+                self._img = _SW_.router(self._img) # //< [ MODES MIDDLEWARE AREA ]
+                
                 # //> BROADCASTING SIGNAL MODULE STAGE(CANVAS ONLY) ################################################## # //> SPLITSCREEN DYNAMIC MODULE EQUAL SIZE MODE
                 yield _BROADCAST_._broadcaster(_CAM_.driver_(), self._img)  ####### //> PRE-BROADCASTING SIGNAL STAGE
                 # //> BROADCASTING SIGNAL MODULE STAGE(CANVAS ONLY) ################################################# # //> SPLITSCREEN DYNAMIC MODULE EQUAL SIZE MODE
@@ -67,8 +70,7 @@ class Engine:
 _CAM_ = Camera(0)  # //> PROMPTED CAMERA OBJECT WITH DEFAULT DEVICE TODO: MAKE IN DOCKER
 _engine = Engine(1,False,True)  # //> MAIN APP BUILDER ENGINE
 _BROADCAST_ = _BROADCASTER_()  # //> BROADCASTING TO SELF SERVER ENGINE
-_SW_ = SWITCHER() # //> GLOBAL ROUTER ENGINE FOR PROCESSED IMAGE FUNCTIONS BACK TO BROADCASTER
-
+_SW_ = SWITCHER(_CAM_) # //> GLOBAL ROUTER ENGINE FOR PROCESSED IMAGE FUNCTIONS BACK TO BROADCASTER
 # //< MODULES AND CLASSES IMPORT AND SCOPE DECLARATION
 # //< MODULES AND CLASSES IMPORT AND SCOPE DECLARATION
 
