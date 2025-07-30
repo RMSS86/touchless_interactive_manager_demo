@@ -6,6 +6,7 @@
   border-radius: 0 var(--border-radius-default) var(--border-radius-default) 0;
   position: relative;
   z-index: 10;
+  min-height: 90rem;
 
   @include mixins.respond(phone-small) {
     min-width: 25.2rem;

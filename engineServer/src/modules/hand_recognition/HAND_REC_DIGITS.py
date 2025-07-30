@@ -17,7 +17,7 @@ class HAND_REC_DIGITS():
         self.count_ = None
 
         self.mpHands = mp.solutions.hands
-        self.Hands = self.mpHands.Hands()
+        self.Hands = self.mpHands.Hands(max_num_hands=1)
         self.mpDraw = mp.solutions.drawing_utils
         self.fingersCoordinate = [(8, 6), (12, 10), (16, 14), (20, 18)]
         self.thumbCoordinate = (4, 3)
@@ -27,25 +27,23 @@ class HAND_REC_DIGITS():
     def HandCounter(self, _vid, __cv):
         self.__cv = __cv
         _DW_ = DRAWER(self.__cv)
+
         while self.__cv.active():  # //> CYCLES BEGIN ON _CAM_ isOPEN VALIDATOR
             self._img = _vid
-
             self.upcount = 0
             self.handNo = 0
             self.lmList = []
 
             self.results = self.Hands.process(self._img)  # Processing Image for Tracking
 
-            if self.results.multi_hand_landmarks:  # Getting Landmark(location) of Hands if Exists
+            if self.results.multi_hand_landmarks:  # //> GETS LANDMARK ON LH IF EXIST
                 for id, lm in enumerate(self.results.multi_hand_landmarks[self.handNo].landmark):
                     h, w, c = self._img.shape
                     cx, cy = int(lm.x * w), int(lm.y * h)
+
                     self.lmList.append((cx, cy))
 
                 _DW_.DGT_point_drawer(self._img, self.lmList)
-                # # TODO: MAKE IT A GENERIC CLASS
-                # for point in self.lmList:
-                #     __cv.driver_().circle(self._img, point, 1, (230, 226, 109) , __cv.driver_().FILLED)
 
                 for coordinate in self.fingersCoordinate:
                     if self.lmList[coordinate[0]][1] < self.lmList[coordinate[1]][1]:

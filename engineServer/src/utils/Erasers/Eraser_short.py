@@ -1,4 +1,27 @@
 
+routes = [{'R1': 'DIGITS', 'R2': 'CMDS', 'R3': 'FACEREC', 'R4': 'AUTOMOUSE', 'R5': 'SLEEP','R6': 'OFFLINE'}]
+
+route = routes[0]['R1']
+# //>  MATCH CASE
+def route_selector(__RX):
+    route = routes[0][__RX]
+    print(route)
+
+    return route
+
+while True:
+    match route:
+        case 'DIGITS':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
+            print(routes[0]['R1'])
+            route_selector('R2')
+        case 'CMDS':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
+            print(routes[0]['R2'])
+        case 'FACEREC':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
+            print(routes[0]['R3'])
+        case 'AUTOMOUSE':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
+            print(routes[0]['R4'])
+        case _:
+            print("Invalid ENTRY")
 
 
 
