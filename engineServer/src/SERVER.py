@@ -60,7 +60,7 @@ class Engine:
                 break  # //> IF SOMETHING HAPPENS WITH WEBCAM LOOP WILL BREAK
             else:  # //< DYNAMIC MULTI MODULE STAGE WITH SAME VIDEO SIGNAL FLIP / RAW
                 self._img = _SW_.router(self._img) # //< [ MODES MIDDLEWARE AREA ]
-                
+
                 # //> BROADCASTING SIGNAL MODULE STAGE(CANVAS ONLY) ################################################## # //> SPLITSCREEN DYNAMIC MODULE EQUAL SIZE MODE
                 yield _BROADCAST_._broadcaster(_CAM_.driver_(), self._img)  ####### //> PRE-BROADCASTING SIGNAL STAGE
                 # //> BROADCASTING SIGNAL MODULE STAGE(CANVAS ONLY) ################################################# # //> SPLITSCREEN DYNAMIC MODULE EQUAL SIZE MODE
