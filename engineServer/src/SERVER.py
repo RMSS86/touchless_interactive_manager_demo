@@ -1,7 +1,7 @@
-
+from src.broadcaster.BROADCASTER import _BROADCASTER_
+from src.switcher.SWITCHER import SWITCHER
 
 from flask import Flask, Response
-from src.broadcaster.BROADCASTER import _BROADCASTER_
 from src.camera.CAMERA_ import Camera
 from src.camera.FPS import FPS
 
@@ -57,16 +57,18 @@ class Engine:
                 break  # //> IF SOMETHING HAPPENS WITH WEBCAM LOOP WILL BREAK
             else:  # //< DYNAMIC MULTI MODULE STAGE WITH SAME VIDEO SIGNAL FLIP / RAW
                 # TODO: [ MODES MIDDLEWARE AREA ]
+                self._img = _SW_.router(self._img, _CAM_)
                 # //> BROADCASTING SIGNAL MODULE STAGE(CANVAS ONLY) ################################################## # //> SPLITSCREEN DYNAMIC MODULE EQUAL SIZE MODE
                 yield _BROADCAST_._broadcaster(_CAM_.driver_(), self._img)  ####### //> PRE-BROADCASTING SIGNAL STAGE
                 # //> BROADCASTING SIGNAL MODULE STAGE(CANVAS ONLY) ################################################# # //> SPLITSCREEN DYNAMIC MODULE EQUAL SIZE MODE
-
 
 # //< MODULES AND CLASSES IMPORT AND SCOPE DECLARATION
 # //< MODULES AND CLASSES IMPORT AND SCOPE DECLARATION
 _CAM_ = Camera(0)  # //> PROMPTED CAMERA OBJECT WITH DEFAULT DEVICE TODO: MAKE IN DOCKER
 _engine = Engine(1,False,True)  # //> MAIN APP BUILDER ENGINE
 _BROADCAST_ = _BROADCASTER_()  # //> BROADCASTING TO SELF SERVER ENGINE
+_SW_ = SWITCHER() # //> GLOBAL ROUTER ENGINE FOR PROCESSED IMAGE FUNCTIONS BACK TO BROADCASTER
+
 # //< MODULES AND CLASSES IMPORT AND SCOPE DECLARATION
 # //< MODULES AND CLASSES IMPORT AND SCOPE DECLARATION
 

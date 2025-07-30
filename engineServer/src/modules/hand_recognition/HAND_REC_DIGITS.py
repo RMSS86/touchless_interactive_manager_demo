@@ -1,9 +1,7 @@
 # Face Recognition / Video Processing
-import cv2
 
 import mediapipe as mp
 from collections import Counter
-from src.camera.CAMERA_ import Camera
 
 
 
@@ -11,8 +9,15 @@ from src.camera.CAMERA_ import Camera
 #####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####
 #####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####
 #####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####HAND RECOGNITION####
-class HandRecongnition():
+class HAND_REC_DIGITS():
     def __init__(self):
+        self.lmList = None
+        self.handNo = None
+        self.results = None
+        self._img = None
+        self.upcount = None
+        self.count_ = None
+
         self.mpHands = mp.solutions.hands
         self.Hands = self.mpHands.Hands()
         self.mpDraw = mp.solutions.drawing_utils
@@ -21,15 +26,15 @@ class HandRecongnition():
         self._anti_counter = 0
         self.tag_hand_command_ = []
 
-    def HandCounter(self, _vid):
-        while _CAM_.active():  # //> CYCLES BEGIN ON _CAM_ isOPEN VALIDATOR
-            self.key_frame = _CAM_.keyframe()  # //> SETTING GLOBAL KEY FRAMERS
-            self._success, self._img = _CAM_.stream_()
-            self.upcount = 0
-            self.results = self.Hands.process(self._img)  # Processing Image for Tracking
+    def HandCounter(self, _vid, __cv):
+        while __cv.active():  # //> CYCLES BEGIN ON _CAM_ isOPEN VALIDATOR
+            self._img = _vid
 
+            self.upcount = 0
             self.handNo = 0
             self.lmList = []
+
+            self.results = self.Hands.process(self._img)  # Processing Image for Tracking
 
             if self.results.multi_hand_landmarks:  # Getting Landmark(location) of Hands if Exists
                 for id, lm in enumerate(self.results.multi_hand_landmarks[self.handNo].landmark):
@@ -37,8 +42,9 @@ class HandRecongnition():
                     cx, cy = int(lm.x * w), int(lm.y * h)
                     self.lmList.append((cx, cy))
 
+                # TODO: MAKE IT A GENERIC CLASS
                 for point in self.lmList:
-                    cv2.circle(self._img, point, 3, (230, 226, 109) , cv2.FILLED)
+                    __cv.driver_().circle(self._img, point, 1, (230, 226, 109) , __cv.driver_().FILLED)
 
                 for coordinate in self.fingersCoordinate:
                     if self.lmList[coordinate[0]][1] < self.lmList[coordinate[1]][1]:
@@ -49,8 +55,10 @@ class HandRecongnition():
 
                 self.Hand_CMD_Counter(self.upcount)
 
-            cv2.imshow('Hander', self._img)
+            return self._img
+        return None
 
+    # TODO: MAKE IT A GENERIC CLASS
     def Hand_CMD_Counter(self,_count):
         self.tag_hand_command_.append(_count)
         if len(self.tag_hand_command_) == 12:
@@ -64,11 +72,6 @@ class HandRecongnition():
     def counter_reset(self):
         self.tag_hand_command_ = []
 
-####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####
-_HR_= HandRecongnition()
-_CAM_ = Camera(0)  # //> PROMPTED CAMERA OBJECT WITH DEFAULT DEVICE
-####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####COMMAND_SWITCH####
 
-_HR_.HandCounter(_CAM_)
 
 
