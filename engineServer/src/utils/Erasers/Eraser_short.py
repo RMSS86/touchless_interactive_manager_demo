@@ -1,28 +1,44 @@
 
-routes = [{'R1': 'DIGITS', 'R2': 'CMDS', 'R3': 'FACEREC', 'R4': 'AUTOMOUSE', 'R5': 'SLEEP','R6': 'OFFLINE'}]
 
-route = routes[0]['R1']
-# //>  MATCH CASE
-def route_selector(__RX):
-    route = routes[0][__RX]
-    print(route)
 
-    return route
+# with open('../../modules/hand_recognition/keypoint_classifier/keypoint_classifier_label.csv',
+#           encoding='utf-8-sig') as f:
+#     keypoint_classifier_labels = csv.reader(f)
+#     keypoint_classifier_labels = [
+#         row[0] for row in keypoint_classifier_labels
+#     ]
 
-while True:
-    match route:
-        case 'DIGITS':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
-            print(routes[0]['R1'])
-            route_selector('R2')
-        case 'CMDS':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
-            print(routes[0]['R2'])
-        case 'FACEREC':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
-            print(routes[0]['R3'])
-        case 'AUTOMOUSE':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
-            print(routes[0]['R4'])
-        case _:
-            print("Invalid ENTRY")
+# print('FROM ERASER!',keypoint_classifier_labels)
+#
+#
 
+
+
+#
+# routes = [{'R1': 'DIGITS', 'R2': 'CMDS', 'R3': 'FACEREC', 'R4': 'AUTOMOUSE', 'R5': 'SLEEP','R6': 'OFFLINE'}]
+#
+# route = routes[0]['R1']
+# # //>  MATCH CASE
+# def route_selector(__RX):
+#     route = routes[0][__RX]
+#     print(route)
+#
+#     return route
+#
+# while True:
+#     match route:
+#         case 'DIGITS':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
+#             print(routes[0]['R1'])
+#             route_selector('R2')
+#         case 'CMDS':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
+#             print(routes[0]['R2'])
+#         case 'FACEREC':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
+#             print(routes[0]['R3'])
+#         case 'AUTOMOUSE':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
+#             print(routes[0]['R4'])
+#         case _:
+#             print("Invalid ENTRY")
+#
 
 
 

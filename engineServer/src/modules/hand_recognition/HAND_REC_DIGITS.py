@@ -25,6 +25,7 @@ class HAND_REC_DIGITS():
         self.tag_hand_command_ = []
 
     def HandCounter(self, _vid, __cv):
+
         self.__cv = __cv
         _DW_ = DRAWER(self.__cv)
 
