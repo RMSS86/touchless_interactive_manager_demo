@@ -100,6 +100,8 @@ export default function User_interactive_content({
             className="gallery__photo "
           />
         </figure>
+        <Hint_Side_Menu />
+        <CMD_Sub_Menu />
       </_contextType>
     </>
   );
@@ -149,3 +151,5 @@ import {
   Touchless_Interactive_Manager_Logo_Base_TRNSP_C,
   Touchless_Interactive_Manager_Logo_Icon_w_Letters_SM_ICon, //@ts-ignore
 } from "../../../../utility/assetsImport";
+import CMD_Sub_Menu from "./CMD_Sub_Menu";
+import Hint_Side_Menu from "./Hint_Side_Menu";

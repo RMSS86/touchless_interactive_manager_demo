@@ -1,0 +1,40 @@
+@use "../../../../sass/libs/mixins";
+
+$menu_dmis: 30rem;
+
+.CMD_submenu {
+  position: absolute;
+  height: $menu_dmis;
+  width: $menu_dmis;
+  border-radius: var(--border-radius-low);
+  background-color: #181717b5; //var(--color-surfaceDim-dark-tiles);
+  box-shadow: var(--wp--preset--shadow--minimal);
+  margin: 1.5rem;
+  bottom: 0%;
+  transition: all 0.3s ease-in-out;
+
+  @include mixins.respond(phone) {
+    height: 18rem;
+    width: 24rem;
+  }
+
+  &-title {
+    height: 3.6rem;
+    background-color: #494949;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1.8rem;
+    /*  */
+    text-align: center;
+    padding: 1rem;
+    & h1 {
+      font-weight: 300;
+    }
+  }
+}
+
+//> styles for making it appear or disppear on demand
+//   opacity: 0;
+//   left: 0;
+//   position: fixed;
+//   transform: translateX(-72%);
