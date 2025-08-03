@@ -1,6 +1,7 @@
 from collections import Counter
 from collections import deque
 
+from src.phaser.PHASER import PHASER
 
 class GST_MANAGER_:
     def __init__(self):
@@ -23,32 +24,14 @@ class GST_MANAGER_:
 
         # //> _CHANNEL_ LISTENING TO THE LEFT HAND [ HIDARI-TE ]
         if __hander.classification[0].index == self.L_index:
-
             # //> TODO: IMPLEMENT PHASER
-            self.command_history_L.appendleft(__CMD_I)
-            if len(self.command_history_L) == self.history_length:
-                self.mostCMMN_L = Counter(self.command_history_L).most_common()
-                if __log:
-                    print('右手が聞いた [ 索引 ]{}'.format(self.mostCMMN_L))
-                # //> TODO: IMPLEMENT BROADCASTER CMD
-                self.send_L = True
-                self.command_history_L.clear()
-
+            _PHASER_.Hand_CMD_Counter(__CMD_I)  # //> COUNTS COMMAND RECEIVED AND PHASES IT
 
 
         # //> _CHANNEL_ LISTENING TO THE RIGHT HAND [ MIGI-TE ]
         if __hander.classification[0].index == self.R_index:
-
-            # //> TODO: IMPLEMENT PHASER
-            self.command_history_R.appendleft(__CMD_I)
-            if len(self.command_history_R) == self.history_length:
-                self.mostCMMN_R = Counter(self.command_history_R).most_common()
-                if __log:
-                    print('右手が聞いた [ 索引 ]{}'.format(self.mostCMMN_R))
-                # //> TODO: IMPLEMENT BROADCASTER CMD
-                self.send_R = True
-                self.command_history_R.clear()
-
+            _PHASER_.Hand_CMD_Counter(__CMD_I)  # //> COUNTS COMMAND RECEIVED AND PHASES IT
+            # //> TODO: IMPLEMENT BROADCASTER CMD
 
 
         # //> EVALUATION MODE
@@ -59,3 +42,4 @@ class GST_MANAGER_:
         self.send_L = False
 
 # TODO: IMPORT PHASRR AND BRADCASTER, CREATE A COMMAND COMPOUSER MODEL AND THE APPS LIFECYCLE(HARDWRITTEN)
+_PHASER_ = PHASER() # //> COUNTS ENTRIES AND PHASES RESULT

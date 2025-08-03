@@ -9,6 +9,7 @@ import mediapipe as mp
 
 class HAND_REC_DIGITS():
     def __init__(self):
+        # self._results = None
         self.lmList = None
         self.handNo = None
         self.results = None
@@ -56,11 +57,10 @@ class HAND_REC_DIGITS():
                 if self.lmList[self.thumbCoordinate[0]][0] > self.lmList[self.thumbCoordinate[1]][0]:
                     self.upcount += 1
 
-                _PHASER_.Hand_CMD_Counter(self.upcount) # //> COUNTS COMMAND RECEIVED AND PHASES IT
+                _PHASER_.Hand_CMD_Counter(self.upcount) # , self._results.multi_handedness //> COUNTS COMMAND RECEIVED AND PHASES IT
 
             return self._img
         return None
-
 
 _PHASER_ = PHASER() # //> COUNTS ENTRIES AND PHASES RESULT
  # //>

@@ -1,31 +1,47 @@
+from src.modules.auto_mouse.AUTO_MOUSE import AUTO_MOUSE
 from src.modules.hand_recognition.HANDS_REC_CMD import HR_CMD_Engine_
 from src.modules.hand_recognition.HAND_REC_DIGITS import HAND_REC_DIGITS
 
 
 class SWITCHER:
     def __init__(self, __cv):
+
+        # //> FETCHING FRESH CV SIGNAL
         self.__cv = __cv
         self.signal_out = None
+        self.route = None
 
+        # //> COMMANDS BY NATURE ON THE APPS LIFE CYCLE
         self.routes =[{'R1': 'DIGITS', 'R2': 'CMDS',
                        'R3': 'FACE_REC', 'R4': 'AUTO-MOUSE',
                        'R5': 'SLEEP','R6': 'OFFLINE'}]
 
-        self.route = self.routes[0]['R2']
+        self.route_selector('R2') # //> ROUTE INIT STATE
 
     def router(self, __sig_in, __ret):
-        # //> LOGICAL DECISION TREE FOR APP LIFE CYCLE STATE
-        # TODO: SEND TO [ FE ] COMMANDS REAL TIME
-        # //>  MATCH CASE
-        match self.route:
+
+        match self.route: # //> LOGICAL DECISION TREE FOR APP LIFE CYCLE STATE // MATCH CASE
+
             case 'DIGITS': # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
                 self.signal_out = _HR_.HandCounter(__sig_in, self.__cv)
 
             case 'CMDS': # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
-                self.signal_out = HR_CMD_.HandCounter(__ret, __sig_in, self.__cv) # __ret, __source, __debugImg, __cv
+                self.signal_out = HR_CMD_.HandCounter(__ret, __sig_in, self.__cv)
 
-            case _: # //> UN IMPLEMENTED CASE
-                print("Invalid ENTRY")
+            case 'AUTO-MOUSE': # //> CONTROLS GUI DIRECTLY THROUGH CV EMULATING A PHYSICAL MOUSE
+                self.signal_out = _ATM_.AUTO_mouse_(__ret, __sig_in, self.__cv)
+
+            case 'FACE_REC': # //> COORDINATES THE ACTIVE API FACE RECOGNITION MODULE
+                pass
+
+            case 'SLEEP': # //> GETS [ SE ] INTO SLEEP MODE(ON RASPBERRYPI)
+                pass
+
+            case 'OFFLINE': # //> SENDS COMMAND TO FRONT END TO CHANGE UI TO OFFLINE /  STOPS CV
+                pass
+
+            case _: # //> UN-IMPLEMENTED CASE
+                print('NOT IMPLEMENTED ENTRY')
 
         return self.signal_out
 
@@ -35,5 +51,7 @@ class SWITCHER:
         return self.route
 
 _HR_= HAND_REC_DIGITS() # //> BROADCASTING TO SELF SERVER ENGINE
+_ATM_ = AUTO_MOUSE() # //> CONTROLLING GUI ON A CV EMULATED MOUSE
+HR_CMD_ = HR_CMD_Engine_() # //> DECODES HANDS 4WAY LR-RH COMMANDS
 
-HR_CMD_ = HR_CMD_Engine_()
+# TODO: SEND TO [ FE ] COMMANDS REAL TIME

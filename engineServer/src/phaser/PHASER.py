@@ -12,7 +12,7 @@ class PHASER:
         if __speed == 'fast':
             self.slot_capacity = 12
 
-    def Hand_CMD_Counter(self, _count):
+    def Hand_CMD_Counter(self, _count): # _handness
         self.tag_hand_command_.append(_count)
 
         if len(self.tag_hand_command_) == self.slot_capacity:
@@ -20,7 +20,7 @@ class PHASER:
             self.value_, self.count_of = self.count_.most_common()[0]
             # TODO: SEND COMMAND FROM HERE USING COMMAND BUILDER TO [ FE ]
             # _SW_._universal_COMM_Receiver_(self.tag_hand_command_[0])
-            print(self.value_)
+            print('INCOMING COMMAND RECEIVED: [ {} ]'.format(self.value_))
             self.counter_reset()
 
     def counter_reset(self):
