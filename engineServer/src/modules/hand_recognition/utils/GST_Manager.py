@@ -23,35 +23,39 @@ class GST_MANAGER_:
 
         # //> _CHANNEL_ LISTENING TO THE LEFT HAND [ HIDARI-TE ]
         if __hander.classification[0].index == self.L_index:
+
+            # //> TODO: IMPLEMENT PHASER
             self.command_history_L.appendleft(__CMD_I)
             if len(self.command_history_L) == self.history_length:
                 self.mostCMMN_L = Counter(self.command_history_L).most_common()
+                if __log:
+                    print('右手が聞いた [ 索引 ]{}'.format(self.mostCMMN_L))
+                # //> TODO: IMPLEMENT BROADCASTER CMD
                 self.send_L = True
                 self.command_history_L.clear()
 
-            if __log:
-                print('左手が聞いた [ 索引 ]{ ', __hander.classification[0].index, ' }')
+
 
         # //> _CHANNEL_ LISTENING TO THE RIGHT HAND [ MIGI-TE ]
         if __hander.classification[0].index == self.R_index:
+
+            # //> TODO: IMPLEMENT PHASER
             self.command_history_R.appendleft(__CMD_I)
             if len(self.command_history_R) == self.history_length:
                 self.mostCMMN_R = Counter(self.command_history_R).most_common()
+                if __log:
+                    print('右手が聞いた [ 索引 ]{}'.format(self.mostCMMN_R))
+                # //> TODO: IMPLEMENT BROADCASTER CMD
                 self.send_R = True
                 self.command_history_R.clear()
 
-            if __log:
-                print('右手が聞いた [ 索引 ]{ ', __hander.classification[0].index, ' }')
+
 
         # //> EVALUATION MODE
-        if self.send_L and self.send_R:
-            print(f'Command Combo [L-R] {self.mostCMMN_L} : {self.mostCMMN_R}')
-            # self.Vocoder(_INTRP_.interpreter_(self.mostCMMN_L[0][0], self.mostCMMN_R[0][0]))
-            self.Reset_Count()
-
 
 
     def Reset_Count(self):
         self.send_R = False
         self.send_L = False
 
+# TODO: IMPORT PHASRR AND BRADCASTER, CREATE A COMMAND COMPOUSER MODEL AND THE APPS LIFECYCLE(HARDWRITTEN)

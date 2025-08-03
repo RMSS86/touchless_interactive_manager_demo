@@ -1,10 +1,8 @@
+from src.modules.hand_recognition.keypoint_classifier.keypoint_classifier import KeyPointClassifier
 from collections import deque
 import itertools
 import copy
 import csv
-
-from src.modules.hand_recognition.keypoint_classifier.keypoint_classifier import KeyPointClassifier
-
 
 class RYOTE():
 
@@ -22,7 +20,6 @@ class RYOTE():
             self.keypoint_classifier_labels = [
                 row[0] for row in self.keypoint_classifier_labels
             ]
-
 
         self.history_length = 16
         self.point_history = deque(maxlen=self.history_length) # //> DUQUE FOR POINT HISTORY
@@ -78,8 +75,6 @@ class RYOTE():
         # //> SIGN CLASSIFICATION
         self.hand_sign_id = _KP_CLASSIFIER_(self.pre_processed_landmark_list)
         return self.keypoint_classifier_labels[self.hand_sign_id]
-
-
 
 
 _KP_CLASSIFIER_ = KeyPointClassifier()

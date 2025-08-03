@@ -1,6 +1,6 @@
 from collections import deque
 import mediapipe as mp
-
+import numpy as np
 from src.camera.CAMERA_ import Args
 from src.drawers.DRAWER import DRAWER
 from src.modules.hand_recognition.utils.GST_Manager import GST_MANAGER_
@@ -8,8 +8,7 @@ from src.modules.hand_recognition.utils.Ryote import RYOTE
 
 
 class HR_CMD_Engine_():
-    def __init__(self, __handsCount=1):
-        self.handNo = 1
+    def __init__(self, __handsCount=2):
         self.lmList = None
         self.hand_sign_id = None
         self.pre_processed_landmark_list = None
@@ -22,6 +21,8 @@ class HR_CMD_Engine_():
         self.history_length = 16
         self.debug_image = None
         self._img = None
+        self.LH = 0
+        self.RH = 1
 
         # //> BRECT DRAWING CONST
         self._padding = 21
@@ -57,6 +58,9 @@ class HR_CMD_Engine_():
 
             #  //> MULTI-HAND PROCESSING MODULE STAGE
             if self._results.multi_hand_landmarks is not None:
+
+                # //> [1] UI HELPER FOR PRINTING THE DOTS TO USERS HANDS
+                _DW_.CMD_BH_points_drawer(__source, self._results)
 
                 # //> ENGINE RUNNING FOR MODULAR HAND RECOGNITION
                 for self.hand_landmarks, self.handedness in zip(self._results.multi_hand_landmarks,

@@ -26,15 +26,18 @@ class HAND_REC_DIGITS():
 
     def HandCounter(self, _vid, __cv):
 
+        # //> INITIALIZING DRAWING FMO RAW SIGNAL
         self.__cv = __cv
         _DW_ = DRAWER(self.__cv)
 
-        while self.__cv.active():  # //> CYCLES BEGIN ON _CAM_ isOPEN VALIDATOR
+        # //> CYCLES BEGIN ON _CAM_ isOPEN VALIDATOR
+        while self.__cv.active():
             self._img = _vid
             self.upcount = 0
             self.handNo = 0
             self.lmList = []
 
+            # //> PASSING IMG TO MAIN PROCESSOR FOR
             self.results = self.Hands.process(self._img)  # Processing Image for Tracking
 
             if self.results.multi_hand_landmarks:  # //> GETS LANDMARK ON LH IF EXIST

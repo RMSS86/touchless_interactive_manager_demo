@@ -15,7 +15,7 @@ class SWITCHER:
 
     def router(self, __sig_in, __ret):
         # //> LOGICAL DECISION TREE FOR APP LIFE CYCLE STATE
-
+        # TODO: SEND TO [ FE ] COMMANDS REAL TIME
         # //>  MATCH CASE
         match self.route:
             case 'DIGITS': # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
@@ -23,7 +23,8 @@ class SWITCHER:
 
             case 'CMDS': # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
                 self.signal_out = HR_CMD_.HandCounter(__ret, __sig_in, self.__cv) # __ret, __source, __debugImg, __cv
-            case _:
+
+            case _: # //> UN IMPLEMENTED CASE
                 print("Invalid ENTRY")
 
         return self.signal_out
