@@ -11,16 +11,23 @@
   transition: all 1s ease;
 
   &:hover {
-    background-color: var(--remember-blue);
+    background-color: #1976d2c1; // var(--remember-blue);
   }
 
   &-hand {
+    height: 9rem;
+    transition: all 1s ease;
+
+    &:hover {
+      filter: invert(1);
+    }
   }
 
   &-tag {
     font-size: 1.5rem;
     color: #fff;
     margin-top: 0.3rem;
+    align-self: center;
 
     & h1 {
       font-weight: 400;

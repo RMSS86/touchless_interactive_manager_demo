@@ -25,9 +25,11 @@ export default function Hint_Side_Menu({
         <div className="hint_side-title">
           <h1>Hand</h1>
         </div>
+        {/* ONE TILE FOR HAND TO BE USED OTHER TILE FOR HINT */}
+        {/* USE THE GENERAL TILES WHEN RECEIVED AND CLOSED OPEN POINTER */}
         <div className="hint_side-wrapper">
-          <Hint_Side_Tile _tag="Left" />
-          <Hint_Side_Tile _tag="Right" />
+          <Hint_Side_Tile _src={_SIDE_LH_} _tag="Left" _id="left" />
+          <Hint_Side_Tile _src={_SIDE_RH_} _tag="Right" _id="right" />
         </div>
       </_contextType>
     </>
@@ -65,6 +67,10 @@ type _altProps = {
 //@ts-ignore
 import "./Hint_Side_Menu.scss";
 import {
+  _SIDE_LH_,
+  _SIDE_RH_,
+  _CMD_TAG_CLICK_,
+  _CMD_TAG_ONE_,
   HOME_LOGO,
   LOGIN_LOGO,
   LOGOUT_LOGO,

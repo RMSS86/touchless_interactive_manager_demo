@@ -1,16 +1,16 @@
 // import React, { useEffect, useRef, useState } from "react";
 
-const ContextType = "div";
+const ContextType = "li";
 const ContextId = "";
 /////COMPONENET/////COMPONENET/////COMPONENET/////COMPONENET/////
 /////COMPONENET/////COMPONENET/////COMPONENET/////COMPONENET/////
-export default function Hint_Side_Tile({
+export default function SideMenu_Tile({
   children,
-  _className = "hint_tile",
+  _className = "side-menu__item",
   _id = ContextId,
-  _tag = "hand",
-  _src,
   _style,
+  _tag = "enter",
+  _src,
   _onClick,
   _onCompClick,
   ...rest
@@ -28,11 +28,12 @@ export default function Hint_Side_Tile({
       onClick={_onClick}
       style={_style}
     >
-      {children}
-      <img alt="hand" className="hint_tile-hand" src={_src} />
-      <div className="hint_tile-tag">
-        <h1>{_tag}</h1>
-      </div>
+      {/* {children} */}
+      <a href="#" className="side-menu__link">
+        <img src={_src} className="side-menu__icon" />
+
+        <span>{_tag}</span>
+      </a>
     </ContextType>
   );
 }
@@ -43,8 +44,8 @@ type _defaultProps = {
   children?: React.ReactNode;
   _id?: string;
   _className?: string;
-  _tag?: string;
   _src: string;
+  _tag?: string;
   _style?: React.CSSProperties;
   _onClick?: () => void;
   _onCompClick?: () => void;
@@ -53,4 +54,4 @@ type _defaultProps = {
 //////////IMPORTS//////IMPORTS//////IMPORTS//////IMPORTS//////IMPORTS/////////
 //////////IMPORTS//////IMPORTS//////IMPORTS//////IMPORTS//////IMPORTS/////////
 //@ts-ignore
-import "./Hint_Side_Tile.scss";
+import "./SideMenu_Tile.scss";

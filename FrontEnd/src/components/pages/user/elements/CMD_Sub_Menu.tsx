@@ -25,6 +25,11 @@ export default function CMD_Sub_Menu({
         <div className="CMD_submenu-title">
           <h1>Select</h1>
         </div>
+        <div className="CMD_submenu-wrapper">
+          <SideMenu_Tile _src={OPTIONS_LOGO} />
+          <SideMenu_Tile _src={OPTIONS_LOGO} />
+          <SideMenu_Tile _src={OPTIONS_LOGO} />
+        </div>
       </_contextType>
     </>
   );
@@ -73,3 +78,4 @@ import {
   Touchless_Interactive_Manager_Logo_Icon_w_Letters_SM_ICon, //@ts-ignore
 } from "../../../../utility/assetsImport";
 import User_interactive_content from "./User_interaction_content";
+import SideMenu_Tile from "../../../UI/components/menu/buttons/SideMenu_Tile";
