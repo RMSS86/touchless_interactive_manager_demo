@@ -11,8 +11,10 @@ class _BROADCASTER_:
 
     # //> BROADCAST VIDEO SIGNAL ON DEMAND VIA IMG/SRC
     def _broadcaster(self, __driver, __signal):
-        # ADDABLE ELEMENTS STAGE SUCH AS ON IMAGE QR CODE
+        # //> ADDABLE ELEMENTS STAGE SUCH AS ON IMAGE QR CODE
         self.BRDCST_image = _CONVERT._get_frame_(__driver, __signal)
+
+        # //> DECODES AND RETURN BROADCASTABLE SIGNAL
         return (b'--frame\r\n'
                    b'Content-Type: image/jpeg\r\n\r\n' + self.BRDCST_image + b'\r\n\r\n')
 
@@ -20,7 +22,7 @@ class _BROADCASTER_:
     # //> SENDING COMMAND TO [ FE ] ON SOCKET.IO MODULE
     def _sendCOMMAND_(self, _comm, __log=False):
 
-        try:
+        try: # //> STATES TO SEND REQUEST TO SOCKET.IO SERVER
             _req = requests.post(self.urlCOMM, data=_comm)
             req_ = _req.json()
 
@@ -49,6 +51,7 @@ class _BROADCASTER_:
     # //> SEND MESSAGE TO IO AND RETURNS STATUS CODE
     def _CMD_SEND_(self,__MSG, __log=False):
          return self._sendCOMMAND_(__MSG, __log)
+
 
     # //> CONSOLE LOG RESULT OF FETCH /  SEND COMMAND
     def logger(self, _com, _status, __cmd):
