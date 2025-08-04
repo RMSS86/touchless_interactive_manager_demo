@@ -46,6 +46,7 @@ class HAND_REC_DIGITS():
 
             # //> ASSERT IF HAND IS RIGHT OR LEFT AND FILTERS ACTIONS
             if self.results.multi_hand_landmarks:  # //> GETS LANDMARK ON LH IF EXIST
+
                 # //> ASSERTS IF HAND NNUMBER CONDITION IS MET AND RESOLVES
                 if self.results.multi_handedness[0].classification[0].index == self.LH:
 
@@ -72,8 +73,8 @@ class HAND_REC_DIGITS():
                     # //> [ 3 ]COUNTS COMMAND RECEIVED AND PHASES IT
                     _PHASER_.Hand_CMD_Counter(self.incorrect_H)
 
-            return self._img
-        return None
+            return self._img  # //< ACTIVE RETURN OF PROCESSED SIGNAL BACK TO MAIN STREAMER->BROADCASTER TO [ BE ]
+        return None # //< ACTIVE RETURN OF PROCESSED SIGNAL BACK TO MAIN STREAMER-> BLOC UNREACHABLE
 
     def Local_UI_drawer(self, __img, __results, __dw, _color='COR'):
         # //> CLEANING UP LANDMARKS FROM RESULTS ARRAY
@@ -85,7 +86,7 @@ class HAND_REC_DIGITS():
             self.lmList.append((cx, cy))
 
         # //> PASSES THE ARRAY TO EMBEDDED DRAWER W/ CONDITION
-        __dw.DGT_point_drawer(__img, self.lmList,_color=_color)
+        __dw.DGT_point_drawer(__img, self.lmList, _color=_color)
 
 _PHASER_ = PHASER() # //> COUNTS ENTRIES AND PHASES RESULT
 

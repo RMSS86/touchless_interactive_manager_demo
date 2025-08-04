@@ -23,17 +23,20 @@ class HR_CMD_Engine_():
         self.debug_image = None
         self._img = None
 
-        self.LH_hand_sign_id = None
-        self.RH_hand_sign_id = None
-
-        self.no_hands_in_frame_CMD = 'NO_HANDS_IN_FRAME'
-        self.no_hands_in_frame_message = '[ NO HANDS DETECTED ]'
-
+        # //> INDEXING
         self.LH = 0
         self.RH = 1
 
         # //> BRECT DRAWING CONST
         self._padding = 21
+
+        # //> SIGN ID BY SIDE
+        self.LH_hand_sign_id = None
+        self.RH_hand_sign_id = None
+
+        # //> COMMAND VALUES TO FOR BROADCASTING
+        self.no_hands_in_frame_CMD = 'NO_HANDS_IN_FRAME'
+        self.no_hands_in_frame_message = '[ NO HANDS DETECTED ]'
 
         # //> SCOPE ARGUMENTS UNPACKING
         self._args = Args.get_args_mp()
@@ -50,39 +53,35 @@ class HR_CMD_Engine_():
             min_detection_confidence=self._min_detection_confidence,
             min_tracking_confidence=self._min_tracking_confidence,)
 
+        # //> TO BE IMPLEMENTED ON FUTURE VERSIONS [ HISTORY QUEUE ENGINE ]
         self.finger_gesture_history = deque(maxlen=self.history_length)
 
     def HandCounter(self, __ret, __source, __cv, __log=False):
-        # //> FETCHING FRESH SIGNAL
-        self.__cv = __cv
-        _DW_ = DRAWER(self.__cv)
+
+        self.__cv = __cv # //> FETCHING FRESH SIGNAL
+        _DW_ = DRAWER(self.__cv) # //> NEW DRAWER CLASS
 
         if __ret: # //> IF SIGNAL WAS FETCHED
             # //> HANDS MODULE GREEN FLAG TO ACTION
-            __source.flags.writeable = False
+            __source.flags.writeable = False # //> OPENING
             self._results = self._hands.process(__source)
-            __source.flags.writeable = True
+            __source.flags.writeable = True  # //> CLOSING
 
             #  //> MULTI-HAND PROCESSING MODULE STAGE [ ACTIVE ]
             if self._results.multi_hand_landmarks is not None:
 
-                # # //> [1] UI HELPER FOR PRINTING THE DOTS OF USERS' HANDS
-                # _DW_.CMD_BH_points_drawer(__source, self._results, self._results.multi_handedness[0].classification[0].index)
-
-                # //> ENGINE RUNNING FOR MODULAR HAND RECOGNITION
+                # //> [1] ENGINE RUNNING FOR MODULAR HAND RECOGNITION
                 for self.hand_landmarks, self.handedness in zip(self._results.multi_hand_landmarks,
                                                                 self._results.multi_handedness):
 
                     # //> [5] SIGN COMBINATION INTERPRETER
                     _GSTM_._handedness_(__source, self.hand_landmarks, self.handedness, _DW_, True)
 
-
-            else: # [local]TODO: #1
-                _PHASER_.Hand_CMD_Counter(self.no_hands_in_frame_CMD)
+            else:  # //> WHEN NO HANDS IN FRAME
+                _PHASER_.Hand_CMD_Counter(self.no_hands_in_frame_CMD) # [local]TODO: #1
 
             return __source # //< ACTIVE RETURN OF PROCESSED SIGNAL BACK TO MAIN STREAMER->BROADCASTER TO [ BE ]
-        return None
-
+        return None # //< ACTIVE RETURN OF PROCESSED SIGNAL BACK TO MAIN STREAMER-> BLOC UNREACHABLE
 
 _GSTM_ = GST_MANAGER_() # //> COMMAND BY HANDEDNESS MODULE
 _PHASER_ = PHASER() # //> COUNTS ENTRIES AND PHASES RESULT
