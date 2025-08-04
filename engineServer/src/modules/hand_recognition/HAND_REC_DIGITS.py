@@ -33,37 +33,58 @@ class HAND_REC_DIGITS():
 
         # //> CYCLES BEGIN ON _CAM_ isOPEN VALIDATOR
         while self.__cv.active():
+
             self._img = _vid
             self.upcount = 0
             self.handNo = 0
+            self.LH = 0
+            self.RH = 1
             self.lmList = []
+            self.incorrect_H = 'INCORRECT_HAND'
 
             # //> PASSING IMG TO MAIN PROCESSOR FOR
             self.results = self.Hands.process(self._img)  # Processing Image for Tracking
+            # //> ASSEST IF HAND IS RIGHT OR LEFT AND FILTERS ACTIONS
 
+            # //> TODO: MAKE A FUNTCITON AND SELECT RED DOTS WHEN RIGHT HAND IS ON SCREEN
             if self.results.multi_hand_landmarks:  # //> GETS LANDMARK ON LH IF EXIST
-                for id, lm in enumerate(self.results.multi_hand_landmarks[self.handNo].landmark):
-                    h, w, c = self._img.shape
-                    cx, cy = int(lm.x * w), int(lm.y * h)
+                if self.results.multi_handedness[0].classification[0].index == self.LH:
 
-                    self.lmList.append((cx, cy))
+                    # //> GETS RESULT FILTERED AND DRAWS TO UI WITH COLOUR CONDITION
+                    self.UI_drawer(self._img, self.results, _DW_)
 
-                _DW_.DGT_point_drawer(self._img, self.lmList)
+                    for coordinate in self.fingersCoordinate:
+                        if self.lmList[coordinate[0]][1] < self.lmList[coordinate[1]][1]:
+                            self.upcount += 1
 
-                for coordinate in self.fingersCoordinate:
-                    if self.lmList[coordinate[0]][1] < self.lmList[coordinate[1]][1]:
+                    if self.lmList[self.thumbCoordinate[0]][0] > self.lmList[self.thumbCoordinate[1]][0]:
                         self.upcount += 1
 
-                if self.lmList[self.thumbCoordinate[0]][0] > self.lmList[self.thumbCoordinate[1]][0]:
-                    self.upcount += 1
+                    _PHASER_.Hand_CMD_Counter(self.upcount) # //> COUNTS COMMAND RECEIVED AND PHASES IT
 
-                _PHASER_.Hand_CMD_Counter(self.upcount) # , self._results.multi_handedness //> COUNTS COMMAND RECEIVED AND PHASES IT
+                if self.results.multi_handedness[0].classification[0].index == self.RH:
+
+                    # //> GETS RESULT FILTERED AND DRAWS TO UI WITH COLOUR CONDITION
+                    self.UI_drawer(self._img, self.results, _DW_, _color='INC') # //> TODO: MAKE AN INPUT SELECT RED DOTS WHEN RIGHT HAND IS ON SCREEN
+
+                    _PHASER_.Hand_CMD_Counter(self.incorrect_H)
 
             return self._img
         return None
 
+    def UI_drawer(self, __img, __results, __dw, _color='COR'):
+        for id, lm in enumerate(__results.multi_hand_landmarks[0].landmark):
+            h, w, c = __img.shape
+            cx, cy = int(lm.x * w), int(lm.y * h)
+
+            self.lmList.append((cx, cy))
+        __dw.DGT_point_drawer(__img, self.lmList,_color=_color)
+
 _PHASER_ = PHASER() # //> COUNTS ENTRIES AND PHASES RESULT
  # //>
+
+
+
 
 
 

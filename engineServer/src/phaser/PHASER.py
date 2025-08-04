@@ -1,7 +1,7 @@
 from collections import Counter
 
 class PHASER:
-    def __init__(self, __speed='normal',_log=False):
+    def __init__(self, __speed='normal',_log=True):
         self.count_of = None
         self.value_ = None
         self.count_ = None

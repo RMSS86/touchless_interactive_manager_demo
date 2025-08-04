@@ -4,16 +4,23 @@ class DRAWER:
         self.lmList = []
         self.__cv = __cv
         self.dot_radio = 2 # //> DEFINES DE UI DOT RADIO
+        self.selected_color = None
         self.LH_hand_counter_point_color = (230, 226, 109) # //> DEFINES DOT COLOR
         self.RH_hand_counter_point_color = (0, 226, 109) # //> DEFINES DOT COLOR
         self.BH_hands_counter_point_color = (0, 226, 0) # //> DEFINES DOT COLOR
+        self.INC_hand_point_color = (39,73,245) # //> DEFINES DOT COLOR
+
 
 
     # //> THIS PAINT THE POINT FOR THE LEFT HAND DIGIT COMMAND RECEIVER
-    def DGT_point_drawer(self, __img, __points):
-        # TODO: MAKE IT A GENERIC CLASS
+    def DGT_point_drawer(self, __img, __points, _color='COR'):
+        if _color == 'COR':
+            self.selected_color = self.LH_hand_counter_point_color
+        if _color == 'INC':
+            self.selected_color = self.INC_hand_point_color
+
         for point in __points:
-            self.__cv.driver_().circle(__img, point, self.dot_radio, self.LH_hand_counter_point_color , self.__cv.driver_().FILLED)
+            self.__cv.driver_().circle(__img, point, self.dot_radio, self.selected_color , self.__cv.driver_().FILLED)
 
     # //>
     def CMD_point_drawer(self, __img, __points, ):

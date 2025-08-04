@@ -51,7 +51,7 @@ class AUTO_MOUSE():
                             if __log:
                                 print('outside', abs(self.index_y - self.thumb_y))
 
-                            if abs(self.index_y - self.thumb_y) < 50:
+                            if abs(self.index_y - self.thumb_y) < 60:
                                 # //> MAKES CLICK TO UI AND SENDS NOTIFICATION TO UI
                                 _PHASER_.Auto_Mouse_Manager(self.AUTOMOUSE_CMDS[0])
                                 pyautogui.click()
