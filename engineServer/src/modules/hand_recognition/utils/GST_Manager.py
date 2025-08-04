@@ -35,7 +35,7 @@ class GST_MANAGER_:
             # //> [ 2 ]PREDICTS THE RESULT OF A HAND CLASSIFICATION PROCESS
             self.hand_sign_id = _RYOTE_.processor_(__source, __results)
             # //> [ 3 ]COUNTS COMMAND RECEIVED AND PHASES IT
-            _PHASER_.BH_CMD_Counter(self.hand_sign_id,__hander)
+            _PHASER_.BH_CMD_Counter(self.hand_sign_id,__hander) # //> TO -> BROADCAST
 
         # //> _CHANNEL_ LISTENING TO THE RIGHT HAND [ MIGI-TE ]
         if __hander.classification[0].index == self.R_index:
@@ -44,7 +44,7 @@ class GST_MANAGER_:
             # //> [ 2 ]PREDICTS THE RESULT OF A HAND CLASSIFICATION PROCESS
             self.hand_sign_id = _RYOTE_.processor_(__source, __results)
             # //> [ 3 ]COUNTS COMMAND RECEIVED AND PHASES IT
-            _PHASER_.BH_CMD_Counter(self.hand_sign_id,__hander)
+            _PHASER_.BH_CMD_Counter(self.hand_sign_id,__hander) # //> TO -> BROADCAST
 
         # //> EVALUATION MODE TODO: [ PENDING ]
 
