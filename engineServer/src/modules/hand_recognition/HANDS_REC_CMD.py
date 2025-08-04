@@ -66,15 +66,15 @@ class HR_CMD_Engine_():
             #  //> MULTI-HAND PROCESSING MODULE STAGE [ ACTIVE ]
             if self._results.multi_hand_landmarks is not None:
 
-                # //> [1] UI HELPER FOR PRINTING THE DOTS OF USERS' HANDS
-                _DW_.CMD_BH_points_drawer(__source, self._results, self._results.multi_handedness[0].classification[0].index)
+                # # //> [1] UI HELPER FOR PRINTING THE DOTS OF USERS' HANDS
+                # _DW_.CMD_BH_points_drawer(__source, self._results, self._results.multi_handedness[0].classification[0].index)
 
                 # //> ENGINE RUNNING FOR MODULAR HAND RECOGNITION
                 for self.hand_landmarks, self.handedness in zip(self._results.multi_hand_landmarks,
                                                                 self._results.multi_handedness):
 
                     # //> [5] SIGN COMBINATION INTERPRETER
-                    _GSTM_._handedness_(__source, self.hand_landmarks, self.handedness, True)
+                    _GSTM_._handedness_(__source, self.hand_landmarks, self.handedness, _DW_, True)
 
 
             else: # [local]TODO: #1

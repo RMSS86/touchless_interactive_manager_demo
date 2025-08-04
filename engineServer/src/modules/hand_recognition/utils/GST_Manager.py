@@ -23,24 +23,27 @@ class GST_MANAGER_:
         self.command_history_L = deque(maxlen=self.history_length)
         self.command_history_R = deque(maxlen=self.history_length)
 
-    def _handedness_(self, __source, __results, __hander, __log=False):
+    def _handedness_(self, __source, __results, __hander, __dw, __log=False):
 
         # //> _CHANNEL_ LISTENING TO THE LEFT HAND [ HIDARI-TE ]
         if __hander.classification[0].index == self.L_index:
+            # //> [1] UI HELPER FOR PRINTING THE DOTS OF USERS' HANDS
+            __dw.CMD_BH_points_drawer(__source, __results, __hander.classification[0].index)
             # //> [2] PREDICTS THE RESULT OF A HAND CLASSIFICATION PROCESS
             self.hand_sign_id = _RYOTE_.processor_(__source, __results)
-            _PHASER_.BH_CMD_Counter(self.hand_sign_id,__hander)  # //> COUNTS COMMAND RECEIVED AND PHASES IT
-
+            # //> COUNTS COMMAND RECEIVED AND PHASES IT
+            _PHASER_.BH_CMD_Counter(self.hand_sign_id,__hander)
 
         # //> _CHANNEL_ LISTENING TO THE RIGHT HAND [ MIGI-TE ]
         if __hander.classification[0].index == self.R_index:
+            # //> [1] UI HELPER FOR PRINTING THE DOTS OF USERS' HANDS
+            __dw.CMD_BH_points_drawer(__source, __results, __hander.classification[0].index)
             # //> [2] PREDICTS THE RESULT OF A HAND CLASSIFICATION PROCESS
             self.hand_sign_id = _RYOTE_.processor_(__source, __results)
-            _PHASER_.BH_CMD_Counter(self.hand_sign_id,__hander)  # //> COUNTS COMMAND RECEIVED AND PHASES IT
-            # //> TODO: IMPLEMENT BROADCASTER CMD
+            # //> COUNTS COMMAND RECEIVED AND PHASES IT
+            _PHASER_.BH_CMD_Counter(self.hand_sign_id,__hander)
 
-
-        # //> EVALUATION MODE
+        # //> EVALUATION MODE TODO: [ PENDING ]
 
 
     def Reset_Count(self):
