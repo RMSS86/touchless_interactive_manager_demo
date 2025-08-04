@@ -25,6 +25,23 @@ class PHASER:
 
             if self._log:
                 print('INCOMING COMMAND RECEIVED: [ {} ]'.format(self.value_))
+
+            self.counter_reset()
+
+    def BH_CMD_Counter(self, _count, _handness):
+        self.handiness = _handness.classification[0].label.upper()
+        self.tag_hand_command_.append(_count)
+
+        if len(self.tag_hand_command_) == self.slot_capacity:
+            self.count_ = Counter(self.tag_hand_command_)
+            self.value_, self.count_of = self.count_.most_common()[0]
+
+            # TODO: SEND COMMAND FROM HERE USING COMMAND BUILDER TO [ FE ]
+            # _SW_._universal_COMM_Receiver_(self.tag_hand_command_[0])
+
+            if self._log:
+                print('FROM HAND [ {} ] INCOMING COMMAND RECEIVED: [ {} ]'.format(self.handiness,self.value_))
+
             self.counter_reset()
 
     def Auto_Mouse_Manager(self, __cmd):
@@ -35,6 +52,7 @@ class PHASER:
             pass
 
         if __cmd == 'OK_MENU':
+            # //> SEND OK COMMAND DOWN TO [ FE ]
             self.Hand_CMD_Counter(__cmd)
             pass
 

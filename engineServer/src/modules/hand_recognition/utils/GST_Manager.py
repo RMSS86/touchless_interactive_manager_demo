@@ -1,6 +1,7 @@
 from collections import Counter
 from collections import deque
 
+from src.modules.hand_recognition.utils.Ryote import RYOTE
 from src.phaser.PHASER import PHASER
 
 class GST_MANAGER_:
@@ -16,21 +17,26 @@ class GST_MANAGER_:
         self.mostCMMN_R = None
         self.current_CMD_ = None
 
+        self.hand_sign_id = None
+
         self.point_history = deque(maxlen=self.history_length)
         self.command_history_L = deque(maxlen=self.history_length)
         self.command_history_R = deque(maxlen=self.history_length)
 
-    def _handedness_(self, __hander, __CMD_I, __log=False):
+    def _handedness_(self, __source, __results, __hander, __log=False):
 
         # //> _CHANNEL_ LISTENING TO THE LEFT HAND [ HIDARI-TE ]
         if __hander.classification[0].index == self.L_index:
-            # //> TODO: IMPLEMENT PHASER
-            _PHASER_.Hand_CMD_Counter(__CMD_I)  # //> COUNTS COMMAND RECEIVED AND PHASES IT
+            # //> [2] PREDICTS THE RESULT OF A HAND CLASSIFICATION PROCESS
+            self.hand_sign_id = _RYOTE_.processor_(__source, __results)
+            _PHASER_.BH_CMD_Counter(self.hand_sign_id,__hander)  # //> COUNTS COMMAND RECEIVED AND PHASES IT
 
 
         # //> _CHANNEL_ LISTENING TO THE RIGHT HAND [ MIGI-TE ]
         if __hander.classification[0].index == self.R_index:
-            _PHASER_.Hand_CMD_Counter(__CMD_I)  # //> COUNTS COMMAND RECEIVED AND PHASES IT
+            # //> [2] PREDICTS THE RESULT OF A HAND CLASSIFICATION PROCESS
+            self.hand_sign_id = _RYOTE_.processor_(__source, __results)
+            _PHASER_.BH_CMD_Counter(self.hand_sign_id,__hander)  # //> COUNTS COMMAND RECEIVED AND PHASES IT
             # //> TODO: IMPLEMENT BROADCASTER CMD
 
 
@@ -43,3 +49,7 @@ class GST_MANAGER_:
 
 # TODO: IMPORT PHASRR AND BRADCASTER, CREATE A COMMAND COMPOUSER MODEL AND THE APPS LIFECYCLE(HARDWRITTEN)
 _PHASER_ = PHASER() # //> COUNTS ENTRIES AND PHASES RESULT
+_RYOTE_ = RYOTE() # //> HANDS RECOGNITION MODULE
+
+# if __log:  # //> LOGGING TO CONSOLE
+#     print('FROM THE CMD_MANAGER HAND {} COMMAND {}'.format(self.handedness.classification[0].index, self.hand_sign_id))

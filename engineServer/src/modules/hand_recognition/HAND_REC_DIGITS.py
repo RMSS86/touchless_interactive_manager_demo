@@ -26,14 +26,13 @@ class HAND_REC_DIGITS():
         self.tag_hand_command_ = []
 
     def HandCounter(self, _vid, __cv):
-
-        # //> INITIALIZING DRAWING FMO RAW SIGNAL
+        # //> INITIALIZING DRAWING FMO LOCAL RAW SIGNAL
         self.__cv = __cv
         _DW_ = DRAWER(self.__cv)
 
         # //> CYCLES BEGIN ON _CAM_ isOPEN VALIDATOR
         while self.__cv.active():
-
+            # //> DYNAMIC VARS
             self._img = _vid
             self.upcount = 0
             self.handNo = 0
@@ -42,17 +41,18 @@ class HAND_REC_DIGITS():
             self.lmList = []
             self.incorrect_H = 'INCORRECT_HAND'
 
-            # //> PASSING IMG TO MAIN PROCESSOR FOR
-            self.results = self.Hands.process(self._img)  # Processing Image for Tracking
-            # //> ASSEST IF HAND IS RIGHT OR LEFT AND FILTERS ACTIONS
+            # //> PASSING IMG TO MAIN PROCESSOR FOR TRACKING
+            self.results = self.Hands.process(self._img)
 
-            # //> TODO: MAKE A FUNTCITON AND SELECT RED DOTS WHEN RIGHT HAND IS ON SCREEN
+            # //> ASSERT IF HAND IS RIGHT OR LEFT AND FILTERS ACTIONS
             if self.results.multi_hand_landmarks:  # //> GETS LANDMARK ON LH IF EXIST
+                # //> ASSERTS IF HAND NNUMBER CONDITION IS MET AND RESOLVES
                 if self.results.multi_handedness[0].classification[0].index == self.LH:
 
-                    # //> GETS RESULT FILTERED AND DRAWS TO UI WITH COLOUR CONDITION
-                    self.UI_drawer(self._img, self.results, _DW_)
+                    # //> [ 1 ]GETS RESULT FILTERED AND DRAWS TO UI WITH COLOUR CONDITION
+                    self.Local_UI_drawer(self._img, self.results, _DW_)
 
+                    # //> [ 2 ]MAKES PROXIMITY CALCULATION FOR COMMAND RESPONSE
                     for coordinate in self.fingersCoordinate:
                         if self.lmList[coordinate[0]][1] < self.lmList[coordinate[1]][1]:
                             self.upcount += 1
@@ -60,28 +60,35 @@ class HAND_REC_DIGITS():
                     if self.lmList[self.thumbCoordinate[0]][0] > self.lmList[self.thumbCoordinate[1]][0]:
                         self.upcount += 1
 
-                    _PHASER_.Hand_CMD_Counter(self.upcount) # //> COUNTS COMMAND RECEIVED AND PHASES IT
+                    # //> [ 3 ]COUNTS COMMAND RECEIVED AND PHASES IT
+                    _PHASER_.Hand_CMD_Counter(self.upcount)
 
+                # //> ASSERTS IF HAND NNUMBER CONDITION IS MET AND RESOLVES
                 if self.results.multi_handedness[0].classification[0].index == self.RH:
 
-                    # //> GETS RESULT FILTERED AND DRAWS TO UI WITH COLOUR CONDITION
-                    self.UI_drawer(self._img, self.results, _DW_, _color='INC') # //> TODO: MAKE AN INPUT SELECT RED DOTS WHEN RIGHT HAND IS ON SCREEN
+                    # //> [ 1 ]GETS RESULT FILTERED AND DRAWS TO UI WITH COLOUR CONDITION
+                    self.Local_UI_drawer(self._img, self.results, _DW_, _color='INC')
 
+                    # //> [ 3 ]COUNTS COMMAND RECEIVED AND PHASES IT
                     _PHASER_.Hand_CMD_Counter(self.incorrect_H)
 
             return self._img
         return None
 
-    def UI_drawer(self, __img, __results, __dw, _color='COR'):
+    def Local_UI_drawer(self, __img, __results, __dw, _color='COR'):
+        # //> CLEANING UP LANDMARKS FROM RESULTS ARRAY
         for id, lm in enumerate(__results.multi_hand_landmarks[0].landmark):
             h, w, c = __img.shape
             cx, cy = int(lm.x * w), int(lm.y * h)
 
+            # //> ADD CLEAN LANDMARKS TO ARRAY
             self.lmList.append((cx, cy))
+
+        # //> PASSES THE ARRAY TO EMBEDDED DRAWER W/ CONDITION
         __dw.DGT_point_drawer(__img, self.lmList,_color=_color)
 
 _PHASER_ = PHASER() # //> COUNTS ENTRIES AND PHASES RESULT
- # //>
+
 
 
 

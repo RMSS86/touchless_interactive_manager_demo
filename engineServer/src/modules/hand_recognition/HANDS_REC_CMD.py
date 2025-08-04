@@ -23,6 +23,9 @@ class HR_CMD_Engine_():
         self.debug_image = None
         self._img = None
 
+        self.LH_hand_sign_id = None
+        self.RH_hand_sign_id = None
+
         self.no_hands_in_frame_CMD = 'NO_HANDS_IN_FRAME'
         self.no_hands_in_frame_message = '[ NO HANDS DETECTED ]'
 
@@ -60,37 +63,28 @@ class HR_CMD_Engine_():
             self._results = self._hands.process(__source)
             __source.flags.writeable = True
 
-            #  //> MULTI-HAND PROCESSING MODULE STAGE
+            #  //> MULTI-HAND PROCESSING MODULE STAGE [ ACTIVE ]
             if self._results.multi_hand_landmarks is not None:
 
-                # //> [1] UI HELPER FOR PRINTING THE DOTS TO USERS HANDS
-                _DW_.CMD_BH_points_drawer(__source, self._results)
+                # //> [1] UI HELPER FOR PRINTING THE DOTS OF USERS' HANDS
+                _DW_.CMD_BH_points_drawer(__source, self._results, self._results.multi_handedness[0].classification[0].index)
 
                 # //> ENGINE RUNNING FOR MODULAR HAND RECOGNITION
                 for self.hand_landmarks, self.handedness in zip(self._results.multi_hand_landmarks,
                                                                 self._results.multi_handedness):
 
-                    # //> [2] PREDICTS THE RESULT OF A HAND CLASSIFICATION PROCESS
-                    self.hand_sign_id = _RYOTE_.processor_(__source, self.hand_landmarks)
-
-                    if __log: # //> LOGGING TO CONSOLE
-                        print('FROM THE CMD_MANAGER HAND {} COMMAND {}'.format(self.handedness.classification[0].index, self.hand_sign_id))
-
                     # //> [5] SIGN COMBINATION INTERPRETER
-                    _GSTM_._handedness_(self.handedness, self.hand_sign_id,True)
+                    _GSTM_._handedness_(__source, self.hand_landmarks, self.handedness, True)
 
-            else:
-                # [local]TODO: #1
+
+            else: # [local]TODO: #1
                 _PHASER_.Hand_CMD_Counter(self.no_hands_in_frame_CMD)
-                if __log: # //> LOGGING TO CONSOLE
-                    print(' [ NO HANDS DETECTED ] ')
 
             return __source # //< ACTIVE RETURN OF PROCESSED SIGNAL BACK TO MAIN STREAMER->BROADCASTER TO [ BE ]
         return None
 
 
-_RYOTE_ = RYOTE() # //> HANDS RECOGNITION MODULE
 _GSTM_ = GST_MANAGER_() # //> COMMAND BY HANDEDNESS MODULE
 _PHASER_ = PHASER() # //> COUNTS ENTRIES AND PHASES RESULT
 
-# [local]TODO: #1 # point_history.append([0, 0]) TODO: GET POINT HISTORY MODULE ON (FOR TZIJONEL)
+# [local]TODO: #1 #FUTURE NOTE TO MYSELF: barrel_history.append([0, 0]) TODO: GET POINT HISTORY MODULE ON (FOR TZIJONEL)

@@ -1,89 +1,196 @@
-
-# Face Recognition / Video Processing
-import cv2
-# import face_recognition
-# Tensor FLow Lite-MediaPipe
+from collections import deque
 import mediapipe as mp
-import pyautogui
+import numpy as np
+from src.camera.CAMERA_ import Args
+from src.drawers.DRAWER import DRAWER
+from src.modules.hand_recognition.utils.GST_Manager import GST_MANAGER_
+from src.modules.hand_recognition.utils.Ryote import RYOTE
+from src.phaser.PHASER import PHASER
 
-from src.utils.old_version.modules.functional_modules._TIM_SWITCHER_ import _SWITCHER_
-######AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE######
-######AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE######
-######AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE######
-######AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE######
-class AutoMouse():
-    def __init__(self):
-        self.hand_detector = mp.solutions.hands.Hands()
-        #self.drawing_utils = mp.solutions.drawing_utils
-        self.screen_width, self.screen_height = pyautogui.size()
-        self.index_y = 0
-        self.AUTOMOUSE_COMMS = ['6' , '7']
-        self.tag_mouse_command_ = []
 
-    def _auto_mouse_(self, _vid):
-        self.frame_ = _vid
+class HR_CMD_Engine_():
+    def __init__(self, __handsCount=2):
+        self.lmList = None
+        self.hand_sign_id = None
+        self.pre_processed_landmark_list = None
+        self.landmark_list = None
+        self._brect = None
+        self._results = None
+        self.key = None
+        self.active = True
+        self.handsNumber = __handsCount
+        self.history_length = 16
+        self.debug_image = None
+        self._img = None
 
-        while True:
-            self.frame_ = cv2.flip(self.frame_, 1)
-            self.frame_height, self.frame_width, _ = self.frame_.shape
-            self.rgb_frame = cv2.cvtColor(self.frame_, cv2.COLOR_BGR2RGB)
-            self.output = self.hand_detector.process(self.rgb_frame)
-            self.hands = self.output.multi_hand_landmarks
+        self.no_hands_in_frame_CMD = 'NO_HANDS_IN_FRAME'
+        self.no_hands_in_frame_message = '[ NO HANDS DETECTED ]'
 
-            if self.hands:
-                for hand in self.hands:
-                    #self.drawing_utils.draw_landmarks(self.frame_, hand)
-                    self.landmarks = hand.landmark
+        self.LH = 0
+        self.RH = 1
 
-                    for id, landmark in enumerate(self.landmarks):
-                        x = int(landmark.x * self.frame_width)
-                        y = int(landmark.y * self.frame_height)
+        # //> BRECT DRAWING CONST
+        self._padding = 21
 
-                        if id == 8:
-                            cv2.circle(img=self.frame_, center=(x, y), radius=10, color=(0, 255, 255))
-                            self.index_x = self.screen_width / self.frame_width * x
-                            self.index_y = self.screen_height / self.frame_height * y
-                            pyautogui.moveTo(self.index_x, self.index_y)
+        # //> SCOPE ARGUMENTS UNPACKING
+        self._args = Args.get_args_mp()
+        self._use_static_image_mode = self._args.use_static_image_mode
+        self._min_detection_confidence = self._args.min_detection_confidence
+        self._min_tracking_confidence = self._args.min_tracking_confidence
+        self._use_brect = True
 
-                        if id == 12:
-                            cv2.circle(img=self.frame_, center=(x, y), radius=10, color=(0, 255, 255))
-                            self.thumb_x = self.screen_width / self.frame_width * x
-                            self.thumb_y = self.screen_height / self.frame_height * y
-                            #print('outside', abs(self.index_y - self.thumb_y))
-                            if abs(self.index_y - self.thumb_y) < 50:
-                                print('Click')#NORMAL CLICK FUNCTION
-                                pyautogui.click()
-                                pyautogui.sleep(0.3)
-                            elif abs(self.index_y - self.thumb_y) < 100:
-                                pass#TODO:create command #7 from anular finger or any other fingar in conjunction(if needed)
+        # //> HANDS MODULE INITIALIZATION
+        self._mp_hands = mp.solutions.hands
+        self._hands = self._mp_hands.Hands(
+            static_image_mode=self._use_static_image_mode,
+            max_num_hands=self.handsNumber,
+            min_detection_confidence=self._min_detection_confidence,
+            min_tracking_confidence=self._min_tracking_confidence,)
 
-                        if id == 4:
-                            cv2.circle(img=self.frame_, center=(x, y), radius=10, color=(0, 255, 255))
-                            self.thumb_x = self.screen_width / self.frame_width * x
-                            self.thumb_y = self.screen_height / self.frame_height * y
-                            #print('outside', abs(self.index_y - self.thumb_y))
-                            if abs(self.index_y - self.thumb_y) < 50:
-                                print('Okay Gesture')
-                                self.Hand_CMD_Counter(self.AUTOMOUSE_COMMS[0])
-                                # pyautogui.click()
-                                # pyautogui.sleep(0.3)
+        self.finger_gesture_history = deque(maxlen=self.history_length)
 
-            return self.frame_
+    def HandCounter(self, __ret, __source, __cv, __log=False):
+        # //> FETCHING FRESH SIGNAL
+        self.__cv = __cv
+        _DW_ = DRAWER(self.__cv)
 
-    def Hand_CMD_Counter(self,_count):
-        self.tag_mouse_command_.append(_count)
-        if len(self.tag_mouse_command_) == 4:
-            _SW_._universal_COMM_Receiver_(self.tag_mouse_command_[0])
-            self.counter_reset()
+        if __ret: # //> IF SIGNAL WAS FETCHED
+            # //> HANDS MODULE GREEN FLAG TO ACTION
+            __source.flags.writeable = False
+            self._results = self._hands.process(__source)
+            __source.flags.writeable = True
 
-    def counter_reset(self):
-        self.tag_mouse_command_ = []
-######AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE######
-######AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE######
-######AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE####AUTO MOUSE######
-#####
-_SW_= _SWITCHER_()
+            #  //> MULTI-HAND PROCESSING MODULE STAGE [ ACTIVE ]
+            if self._results.multi_hand_landmarks is not None:
 
+                # //> [1] UI HELPER FOR PRINTING THE DOTS TO USERS HANDS
+                _DW_.CMD_BH_points_drawer(__source, self._results, self._results.multi_handedness[0].classification[0].index)
+
+                # //> ENGINE RUNNING FOR MODULAR HAND RECOGNITION
+                for self.hand_landmarks, self.handedness in zip(self._results.multi_hand_landmarks,
+                                                                self._results.multi_handedness):
+
+                    # //> [2] PREDICTS THE RESULT OF A HAND CLASSIFICATION PROCESS
+                    self.hand_sign_id = _RYOTE_.processor_(__source, self.hand_landmarks)
+
+                    if __log: # //> LOGGING TO CONSOLE
+                        print('FROM THE CMD_MANAGER HAND {} COMMAND {}'.format(self.handedness.classification[0].index, self.hand_sign_id))
+
+                    # //> [5] SIGN COMBINATION INTERPRETER
+                    _GSTM_._handedness_(self.handedness, self.hand_sign_id,True)
+
+            else:
+                # [local]TODO: #1
+                _PHASER_.Hand_CMD_Counter(self.no_hands_in_frame_CMD)
+                if __log: # //> LOGGING TO CONSOLE
+                    print(' [ NO HANDS DETECTED ] ')
+
+            return __source # //< ACTIVE RETURN OF PROCESSED SIGNAL BACK TO MAIN STREAMER->BROADCASTER TO [ BE ]
+        return None
+
+
+_RYOTE_ = RYOTE() # //> HANDS RECOGNITION MODULE
+_GSTM_ = GST_MANAGER_() # //> COMMAND BY HANDEDNESS MODULE
+_PHASER_ = PHASER() # //> COUNTS ENTRIES AND PHASES RESULT
+
+# [local]TODO: #1 # point_history.append([0, 0]) TODO: GET POINT HISTORY MODULE ON (FOR TZIJONEL)
+
+# from collections import deque
+# import mediapipe as mp
+# import numpy as np
+# from src.camera.CAMERA_ import Args
+# from src.drawers.DRAWER import DRAWER
+# from src.modules.hand_recognition.utils.GST_Manager import GST_MANAGER_
+# from src.modules.hand_recognition.utils.Ryote import RYOTE
+# from src.phaser.PHASER import PHASER
+#
+#
+# class HR_CMD_Engine_():
+#     def __init__(self, __handsCount=2):
+#         self.lmList = None
+#         self.hand_sign_id = None
+#         self.pre_processed_landmark_list = None
+#         self.landmark_list = None
+#         self._brect = None
+#         self._results = None
+#         self.key = None
+#         self.active = True
+#         self.handsNumber = __handsCount
+#         self.history_length = 16
+#         self.debug_image = None
+#         self._img = None
+#
+#         self.no_hands_in_frame_CMD = 'NO_HANDS_IN_FRAME'
+#         self.no_hands_in_frame_message = '[ NO HANDS DETECTED ]'
+#
+#         self.LH = 0
+#         self.RH = 1
+#
+#         # //> BRECT DRAWING CONST
+#         self._padding = 21
+#
+#         # //> SCOPE ARGUMENTS UNPACKING
+#         self._args = Args.get_args_mp()
+#         self._use_static_image_mode = self._args.use_static_image_mode
+#         self._min_detection_confidence = self._args.min_detection_confidence
+#         self._min_tracking_confidence = self._args.min_tracking_confidence
+#         self._use_brect = True
+#
+#         # //> HANDS MODULE INITIALIZATION
+#         self._mp_hands = mp.solutions.hands
+#         self._hands = self._mp_hands.Hands(
+#             static_image_mode=self._use_static_image_mode,
+#             max_num_hands=self.handsNumber,
+#             min_detection_confidence=self._min_detection_confidence,
+#             min_tracking_confidence=self._min_tracking_confidence,)
+#
+#         self.finger_gesture_history = deque(maxlen=self.history_length)
+#
+#     def HandCounter(self, __ret, __source, __cv, __log=False):
+#         # //> FETCHING FRESH SIGNAL
+#         self.__cv = __cv
+#         _DW_ = DRAWER(self.__cv)
+#
+#         if __ret: # //> IF SIGNAL WAS FETCHED
+#             # //> HANDS MODULE GREEN FLAG TO ACTION
+#             __source.flags.writeable = False
+#             self._results = self._hands.process(__source)
+#             __source.flags.writeable = True
+#
+#             #  //> MULTI-HAND PROCESSING MODULE STAGE [ ACTIVE ]
+#             if self._results.multi_hand_landmarks is not None:
+#
+#                 # //> [1] UI HELPER FOR PRINTING THE DOTS TO USERS HANDS
+#                 _DW_.CMD_BH_points_drawer(__source, self._results)
+#
+#                 # //> ENGINE RUNNING FOR MODULAR HAND RECOGNITION
+#                 for self.hand_landmarks, self.handedness in zip(self._results.multi_hand_landmarks,
+#                                                                 self._results.multi_handedness):
+#
+#                     # //> [2] PREDICTS THE RESULT OF A HAND CLASSIFICATION PROCESS
+#                     self.hand_sign_id = _RYOTE_.processor_(__source, self.hand_landmarks)
+#
+#                     if __log: # //> LOGGING TO CONSOLE
+#                         print('FROM THE CMD_MANAGER HAND {} COMMAND {}'.format(self.handedness.classification[0].index, self.hand_sign_id))
+#
+#                     # //> [5] SIGN COMBINATION INTERPRETER
+#                     _GSTM_._handedness_(self.handedness, self.hand_sign_id,True)
+#
+#             else:
+#                 # [local]TODO: #1
+#                 _PHASER_.Hand_CMD_Counter(self.no_hands_in_frame_CMD)
+#                 if __log: # //> LOGGING TO CONSOLE
+#                     print(' [ NO HANDS DETECTED ] ')
+#
+#             return __source # //< ACTIVE RETURN OF PROCESSED SIGNAL BACK TO MAIN STREAMER->BROADCASTER TO [ BE ]
+#         return None
+#
+#
+# _RYOTE_ = RYOTE() # //> HANDS RECOGNITION MODULE
+# _GSTM_ = GST_MANAGER_() # //> COMMAND BY HANDEDNESS MODULE
+# _PHASER_ = PHASER() # //> COUNTS ENTRIES AND PHASES RESULT
+
+# [local]TODO: #1 # point_history.append([0, 0]) TODO: GET POINT HISTORY MODULE ON (FOR TZIJONEL)
 # with open('../../modules/hand_recognition/keypoint_classifier/keypoint_classifier_label.csv',
 #           encoding='utf-8-sig') as f:
 #     keypoint_classifier_labels = csv.reader(f)

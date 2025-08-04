@@ -22,28 +22,38 @@ class DRAWER:
         for point in __points:
             self.__cv.driver_().circle(__img, point, self.dot_radio, self.selected_color , self.__cv.driver_().FILLED)
 
-    # //>
-    def CMD_point_drawer(self, __img, __points, ):
+    # //> THIS PAINT THE POINT FOR THE LEFT HAND DIGIT COMMAND RECEIVER
+    def BH_point_drawer(self, __img, __points, _color=0):
+        if _color == 0:
+            self.selected_color = self.LH_hand_counter_point_color # //> COLOR ?
+        if _color == 1:
+            self.selected_color = self.RH_hand_counter_point_color # //> COLOR ?
+
+        for point in __points: # //> DRIVER UI PAINTER
+            self.__cv.driver_().circle(__img, point, self.dot_radio, self.selected_color , self.__cv.driver_().FILLED)
+
+
+    # //> SINGLE HAND POINTER DRAWER PROTOTYPE
+    def CMD_point_drawer(self, __img, __points):
         for point in __points:
             self.__cv.driver_().circle(__img, point, self.dot_radio, self.RH_hand_counter_point_color,
                                        self.__cv.driver_().FILLED)
 
 
-    def CMD_BH_points_drawer(self, __img, __results ):
+    def CMD_BH_points_drawer(self, __img, __results, __hander=0):
         if __results.multi_hand_landmarks:  # //> GETS LANDMARK ON LH IF EXIST
-            # print('__results _hand FROM CMD DRAWER {}'.format(__results.multi_hand_landmarks[0].landmark))
-            # print('__handiness _hand FROM CMD DRAWER {}'.format(__handiness.classification[0].label))  #
             for id, lm in enumerate(__results.multi_hand_landmarks[0].landmark):
-                # print('__results.multi_hand_landmarks[0].landmark _hand FROM CMD DRAWER {} {}'.format(id, lm ))
-                # print('__img.shape _hand FROM CMD DRAWER {}'.format(__img.shape ))
 
                 h, w, c = __img.shape
                 cx, cy = int(lm.x * w), int(lm.y * h)
                 self.lmList.append((cx, cy))
 
-            for point in self.lmList:
-                self.__cv.driver_().circle(__img, point, self.dot_radio, self.BH_hands_counter_point_color,
-                                           self.__cv.driver_().FILLED)
+            self.BH_point_drawer(__img, self.lmList, __hander)
+
+            # for point in self.lmList:
+            #     self.__cv.driver_().circle(__img, point, self.dot_radio, self.BH_hands_counter_point_color,
+            #                                self.__cv.driver_().FILLED)
+
             # for _hand in __handiness:
             #     # //>  MAKE A FOR HLOOP USING HANDINESS __handiness
             #

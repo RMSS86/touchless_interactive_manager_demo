@@ -17,7 +17,7 @@ class SWITCHER:
                        'R3': 'FACE_REC', 'R4': 'AUTO-MOUSE',
                        'R5': 'SLEEP','R6': 'OFFLINE'}]
 
-        self.route_selector('R1') # //> ROUTE INIT STATE
+        self.route_selector('R2') # //> ROUTE INIT STATE
 
     def router(self, __sig_in, __ret):
 
