@@ -11,12 +11,13 @@ class SWITCHER:
         self.signal_out = None
         self.route = None
 
+        # //> [Global]TODO: #1> MAKE NAVIGATOR
         # //> COMMANDS BY NATURE ON THE APPS LIFE CYCLE
         self.routes =[{'R1': 'DIGITS', 'R2': 'CMDS',
                        'R3': 'FACE_REC', 'R4': 'AUTO-MOUSE',
                        'R5': 'SLEEP','R6': 'OFFLINE'}]
 
-        self.route_selector('R2') # //> ROUTE INIT STATE
+        self.route_selector('R4') # //> ROUTE INIT STATE
 
     def router(self, __sig_in, __ret):
 
@@ -28,16 +29,19 @@ class SWITCHER:
             case 'CMDS': # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
                 self.signal_out = HR_CMD_.HandCounter(__ret, __sig_in, self.__cv)
 
+            case 'FACE_REC': # //> COORDINATES THE ACTIVE API FACE RECOGNITION MODULE
+                # //> [local]TODO: #1
+                pass
+
             case 'AUTO-MOUSE': # //> CONTROLS GUI DIRECTLY THROUGH CV EMULATING A PHYSICAL MOUSE
                 self.signal_out = _ATM_.AUTO_mouse_(__ret, __sig_in, self.__cv)
 
-            case 'FACE_REC': # //> COORDINATES THE ACTIVE API FACE RECOGNITION MODULE
-                pass
-
             case 'SLEEP': # //> GETS [ SE ] INTO SLEEP MODE(ON RASPBERRYPI)
+                # //> [local]TODO: #2
                 pass
 
             case 'OFFLINE': # //> SENDS COMMAND TO FRONT END TO CHANGE UI TO OFFLINE /  STOPS CV
+                # //> [local]TODO: #3
                 pass
 
             case _: # //> UN-IMPLEMENTED CASE

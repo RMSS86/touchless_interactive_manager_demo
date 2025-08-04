@@ -1,10 +1,11 @@
 from collections import Counter
 
 class PHASER:
-    def __init__(self, __speed='normal'):
+    def __init__(self, __speed='normal',_log=False):
         self.count_of = None
         self.value_ = None
         self.count_ = None
+        self._log = _log
         self.tag_hand_command_ = []
 
         if __speed == 'normal':
@@ -18,10 +19,25 @@ class PHASER:
         if len(self.tag_hand_command_) == self.slot_capacity:
             self.count_ = Counter(self.tag_hand_command_)
             self.value_, self.count_of = self.count_.most_common()[0]
+
             # TODO: SEND COMMAND FROM HERE USING COMMAND BUILDER TO [ FE ]
             # _SW_._universal_COMM_Receiver_(self.tag_hand_command_[0])
-            print('INCOMING COMMAND RECEIVED: [ {} ]'.format(self.value_))
+
+            if self._log:
+                print('INCOMING COMMAND RECEIVED: [ {} ]'.format(self.value_))
             self.counter_reset()
+
+    def Auto_Mouse_Manager(self, __cmd):
+
+        if __cmd == 'CLICK':
+            # TODO: MAKE COMMAND SEND TO [ FE ] ANNOUNCING CLICK ACTION
+            print('CLICKED!')  # NORMAL CLICK FUNCTION
+            pass
+
+        if __cmd == 'OK_MENU':
+            self.Hand_CMD_Counter(__cmd)
+            pass
+
 
     def counter_reset(self):
         self.tag_hand_command_ = []

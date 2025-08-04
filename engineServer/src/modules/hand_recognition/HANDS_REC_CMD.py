@@ -80,7 +80,7 @@ class HR_CMD_Engine_():
                     _GSTM_._handedness_(self.handedness, self.hand_sign_id,True)
 
             else:
-                # point_history.append([0, 0]) TODO: GET POINT HISTORY MODULE ON (FOR TZIJONEL)
+                # [local]TODO: #1
                 _PHASER_.Hand_CMD_Counter(self.no_hands_in_frame_CMD)
                 if __log: # //> LOGGING TO CONSOLE
                     print(' [ NO HANDS DETECTED ] ')
@@ -93,3 +93,4 @@ _RYOTE_ = RYOTE() # //> HANDS RECOGNITION MODULE
 _GSTM_ = GST_MANAGER_() # //> COMMAND BY HANDEDNESS MODULE
 _PHASER_ = PHASER() # //> COUNTS ENTRIES AND PHASES RESULT
 
+# [local]TODO: #1 # point_history.append([0, 0]) TODO: GET POINT HISTORY MODULE ON (FOR TZIJONEL)
