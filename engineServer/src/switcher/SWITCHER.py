@@ -11,11 +11,11 @@ class SWITCHER:
         self.__cv = __cv
         self.signal_out = None
 
-
-        _NAV_.route_selector('R1') # //> ROUTE INIT STATE
+        # //> ROUTE INIT STATE[ DEFAULT ON FACE_RECOGNITION ]
+        _NAV_.route_selector('R1')
 
     def router(self, __sig_in, __ret):
-
+        # //> SELECTION FROM NAVIGATOR CLASS
         match _NAV_.route: # //> LOGICAL DECISION TREE FOR APP LIFE CYCLE STATE // MATCH CASE
 
             case 'DIGITS': # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND

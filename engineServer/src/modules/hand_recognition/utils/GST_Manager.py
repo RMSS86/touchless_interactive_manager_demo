@@ -1,4 +1,3 @@
-from collections import Counter
 from collections import deque
 from src.modules.hand_recognition.utils.Ryote import RYOTE
 from src.phaser.PHASER import PHASER
@@ -26,25 +25,25 @@ class GST_MANAGER_:
         self.command_history_L = deque(maxlen=self.history_length)
         self.command_history_R = deque(maxlen=self.history_length)
 
-    def _handedness_(self, __source, __results, __hander, __dw, __log=False):
+    def _handedness_(self, __source, __results, __handness, __dw, __log=False):
 
         # //> _CHANNEL_ LISTENING TO THE LEFT HAND [ HIDARI-TE ]
-        if __hander.classification[0].index == self.L_index:
+        if __handness.classification[0].index == self.L_index:
             # //> [ 1 ]UI HELPER FOR PRINTING THE DOTS OF USERS' HANDS
-            __dw.CMD_BH_points_drawer(__source, __results, __hander.classification[0].index)
+            __dw.CMD_BH_points_drawer(__source, __results, __handness.classification[0].index)
             # //> [ 2 ]PREDICTS THE RESULT OF A HAND CLASSIFICATION PROCESS
             self.hand_sign_id = _RYOTE_.processor_(__source, __results)
             # //> [ 3 ]COUNTS COMMAND RECEIVED AND PHASES IT
-            _PHASER_.BH_CMD_Counter(self.hand_sign_id,__hander) # //> TO -> BROADCAST
+            _PHASER_.BH_CMD_Counter(self.hand_sign_id, __handness) # //> TO -> BROADCAST
 
         # //> _CHANNEL_ LISTENING TO THE RIGHT HAND [ MIGI-TE ]
-        if __hander.classification[0].index == self.R_index:
+        if __handness.classification[0].index == self.R_index:
             # //> [ 1 ]UI HELPER FOR PRINTING THE DOTS OF USERS' HANDS
-            __dw.CMD_BH_points_drawer(__source, __results, __hander.classification[0].index)
+            __dw.CMD_BH_points_drawer(__source, __results, __handness.classification[0].index)
             # //> [ 2 ]PREDICTS THE RESULT OF A HAND CLASSIFICATION PROCESS
             self.hand_sign_id = _RYOTE_.processor_(__source, __results)
             # //> [ 3 ]COUNTS COMMAND RECEIVED AND PHASES IT
-            _PHASER_.BH_CMD_Counter(self.hand_sign_id,__hander) # //> TO -> BROADCAST
+            _PHASER_.BH_CMD_Counter(self.hand_sign_id, __handness) # //> TO -> BROADCAST
 
         # //> EVALUATION MODE TODO: [ PENDING ]
 

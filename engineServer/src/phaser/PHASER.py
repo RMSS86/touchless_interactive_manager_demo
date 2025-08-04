@@ -1,7 +1,11 @@
+from src.broadcaster.COM_IO import COMM_IO
 from collections import Counter
 
 class PHASER:
     def __init__(self, __speed='normal',_log=True):
+        self.count_of_ = None
+        self.value__ = None
+        self.count__ = None
         self.count_of = None
         self.value_ = None
         self.count_ = None
@@ -22,7 +26,7 @@ class PHASER:
             self.count_ = Counter(self.tag_hand_command_)
             self.value_, self.count_of = self.count_.most_common()[0]
 
-            # TODO: SEND COMMAND FROM HERE USING COMMAND BUILDER TO [ FE ]
+            # TODO: SEND COMMAND FROM HERE USING COMMAND BUILDER TO [ FE ] UNIFY AND NORMALIZE / ADD COMM_IO LOGIC
             # _SW_._universal_COMM_Receiver_(self.tag_hand_command_[0])
 
             if self._log:
@@ -34,17 +38,37 @@ class PHASER:
         self.handiness_BH = _handness.classification[0].label.upper()
         self.tag_hand_command_BH.append(_count)
 
+
         if len(self.tag_hand_command_BH) == self.slot_capacity:
             self.count_BH = Counter(self.tag_hand_command_BH)
             self.value_BH, self.count_of_BH = self.count_BH.most_common()[0]
 
             # TODO: SEND COMMAND FROM HERE USING COMMAND BUILDER TO [ FE ]
-            # _SW_._universal_COMM_Receiver_(self.tag_hand_command_[0])
+            # _COMM_.universal_COMM_Receiver_(self.value_BH, self.handiness_BH)
 
             if self._log:
                 print('FROM HAND [ {} ] INCOMING COMMAND RECEIVED: [ {} ]'.format(self.handiness_BH, self.value_BH))
 
             self.counter_reset_BH()
+
+    def CMD_normalizer(self, __command, __handiness, __slot_len, _log):
+        if len(__command) == __slot_len:
+            self.count__ = Counter(__command)
+            _value__, __count_of_ = self.count__.most_common()[0]
+
+            if _log:
+                print('FROM HAND [ {} ] INCOMING COMMAND RECEIVED: [ {} ]'.format(__handiness, _value__))
+
+            self.CMD_listener(_value__, __handiness)
+
+    def CMD_listener(self,value__, __handiness):
+        # TODO: SEND COMMAND FROM HERE USING COMMAND BUILDER TO [ FE ]
+        # TODO: ACTIVE LISTEN TO COMBO / LONG COMMANDS ACTIONS AND CHANGE MODE WITH NAVIGATOR
+
+
+        _COMM_.universal_COMM_Receiver_(value__, __handiness)
+
+        self.counter_reset()
 
     def Auto_Mouse_Manager(self, __cmd):
 
@@ -59,6 +83,7 @@ class PHASER:
             pass
 
 
+
     def counter_reset(self):
         self.tag_hand_command_ = []
 
@@ -66,4 +91,4 @@ class PHASER:
         self.tag_hand_command_BH = []
 
 
-
+_COMM_ = COMM_IO()

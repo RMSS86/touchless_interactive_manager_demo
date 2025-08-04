@@ -14,7 +14,8 @@ from exceptiongroup import catch
 #
 #
 routes = [{'R1': 'DIGITS', 'R2': 'CMDS', 'R3': 'FACEREC', 'R4': 'AUTOMOUSE', 'R5': 'SLEEP','R6': 'OFFLINE'}]
-caths = [{'':'',}]
+
+CATEGORIES = [{'':'',}]
 
 CMD_TYPE = [ 'ACTIONS', 'CMD', 'RESET', 'TOGGLE' ]
 

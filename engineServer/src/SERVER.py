@@ -20,7 +20,7 @@ def video_feed():
 # //< END POINTS DECLARATION FOR SELF NON-STATIC SERVER
 # //< END POINTS DECLARATION FOR SELF NON-STATIC SERVER
 
-
+# //> ENGINE INIT
 class Engine:
     # //> CLASS VARIABLES DECLARATION
     def __init__(self, __mode=0, __squares=False, __rec=False, __hc=True):
@@ -50,30 +50,32 @@ class Engine:
 
     # //> FRAME GENERATOR / DATA INGESTION / PROCESSING
     def _framer(self):
-        # //> MAIN LOOP INITIALIZER ### MAIN LOOP INITIALIZER ### MAIN LOOP INITIALIZER
-        while _CAM_.active():  # //> CYCLES BEGIN ON _CAM_ isOPEN VALIDATOR
-            self._fps = self.fps_.get()  # //> GETTING VAL FOR DRAWING INFO RATE
-            self.key_frame = _CAM_.keyframe()  # //> SETTING GLOBAL KEY FRAMERS
-            self._success, self._img = _CAM_.stream_()  # //< RAW  FEED FROM CAMERA CLASS self.debug_image
+
+        # //> MAIN LOOP INITIALIZER
+        while _CAM_.active(): # //> CYCLES BEGIN ON _CAM_ isOPEN VALIDATOR
+
+            self._fps = self.fps_.get() # //> GETTING VAL FOR DRAWING INFO RATE
+            self.key_frame = _CAM_.keyframe() # //> SETTING GLOBAL KEY FRAMERS
+            self._success, self._img = _CAM_.stream_() # //< RAW  FEED FROM CAMERA CLASS self.debug_image
 
             if not self._success: # //> IF ENGINE RUNS SUCCESSFULLY THEN >>>
                 break  # //> IF SOMETHING HAPPENS WITH WEBCAM LOOP WILL BREAK
-            else:  # //< DYNAMIC MULTI MODULE STAGE WITH SAME VIDEO SIGNAL FLIP / RAW
-                self._img = _SW_.router(self._img,self._success) # //< [ MODES MIDDLEWARE AREA ]
 
-                # //> BROADCASTING SIGNAL MODULE STAGE(CANVAS ONLY) ################################################## # //> SPLITSCREEN DYNAMIC MODULE EQUAL SIZE MODE
-                yield _BROADCAST_._broadcaster(_CAM_.driver_(), self._img)  ####### //> PRE-BROADCASTING SIGNAL STAGE
-                # //> BROADCASTING SIGNAL MODULE STAGE(CANVAS ONLY) ################################################# # //> SPLITSCREEN DYNAMIC MODULE EQUAL SIZE MODE
+            else: # //< DYNAMIC MULTI MODULE STAGE WITH SAME VIDEO SIGNAL FLIPPED / RAW / IN-SERIES
+                self._img = _SW_.router(self._img,self._success) # //< [ MODES MIDDLEWARE ROUTER AREA ]
+
+                # //> BROADCASTING SIGNAL MODULE STAGE(CANVAS ONLY) //> SPLITSCREEN DYNAMIC MODULE EQUAL SIZE MODE
+                yield _BROADCAST_._broadcaster(_CAM_.driver_(), self._img) # //> PRE-BROADCASTING SIGNAL STAGE
+                # //> BROADCASTING SIGNAL MODULE STAGE(CANVAS ONLY)  //> SPLITSCREEN DYNAMIC MODULE EQUAL SIZE MODE
 
 # //< MODULES AND CLASSES IMPORT AND SCOPE DECLARATION
 # //< MODULES AND CLASSES IMPORT AND SCOPE DECLARATION
-_CAM_ = Camera(0)  # //> PROMPTED CAMERA OBJECT WITH DEFAULT DEVICE TODO: MAKE IN DOCKER
-_engine = Engine(1,False,True)  # //> MAIN APP BUILDER ENGINE
 _BROADCAST_ = _BROADCASTER_()  # //> BROADCASTING TO SELF SERVER ENGINE
+_CAM_ = Camera(0)  # //> PROMPTED CAMERA OBJECT WITH DEFAULT DEVICE
+_engine = Engine(1,False,True)  # //> MAIN APP BUILDER ENGINE
 _SW_ = SWITCHER(_CAM_) # //> GLOBAL ROUTER ENGINE FOR PROCESSED IMAGE FUNCTIONS BACK TO BROADCASTER
 # //< MODULES AND CLASSES IMPORT AND SCOPE DECLARATION
 # //< MODULES AND CLASSES IMPORT AND SCOPE DECLARATION
-
 
 # //> MAIN APPLICATION STARTER ## MAIN APPLICATION STARTER
 if __name__ == '__main__': # //> MAIN APPLICATION STARTER
