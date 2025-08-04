@@ -19,6 +19,17 @@ class _BROADCASTER_:
                    b'Content-Type: image/jpeg\r\n\r\n' + self.BRDCST_image + b'\r\n\r\n')
 
 
+
+
+    # //> RECEIVES STRING FROM _COMPOSER_ AND MAKES IT A JSON FORMAT
+    def CMD_PRE_OUT_(self, __composed):
+        return { self.cmd_ : __composed }
+
+
+    # //> [ ! ]SEND MESSAGE TO IO AND RETURNS STATUS CODE
+    def _CMD_SEND_(self,__MSG, __log=False):
+         return self._sendCOMMAND_(__MSG, __log)
+
     # //> SENDING COMMAND TO [ FE ] ON SOCKET.IO MODULE
     def _sendCOMMAND_(self, _comm, __log=False):
 
@@ -35,24 +46,6 @@ class _BROADCASTER_:
             print('ERROR SENDING MESSAGE: ', e)
             return -1
 
-
-    # //> RECEIVES STRING FROM _COMPOSER_ AND MAKES IT A JSON SIMPLE FORMAT
-    def CMD_PRE_OUT_(self, __composed):
-        return { self.cmd_ : __composed }
-
-
-    # //> GET THE SENTENCE FROM _COMPOSER_ AND SENDS [ CD ] REQUEST
-    def _CMD_COMP_(self, __liner, __log=False):
-        if __log:
-            print(' NORMAL STRING FROM BROADCASTER {}'.format(self.CMD_PRE_OUT_(__liner)))
-        return self.CMD_PRE_OUT_(__liner)
-
-
-    # //> SEND MESSAGE TO IO AND RETURNS STATUS CODE
-    def _CMD_SEND_(self,__MSG, __log=False):
-         return self._sendCOMMAND_(__MSG, __log)
-
-
     # //> CONSOLE LOG RESULT OF FETCH /  SEND COMMAND
     def logger(self, _com, _status, __cmd):
         print('DATA SENT TO [ CD ] {}'
@@ -60,3 +53,6 @@ class _BROADCASTER_:
               .format(_com, _status, __cmd))
 
 _CONVERT = _CONVERT_()
+
+
+
