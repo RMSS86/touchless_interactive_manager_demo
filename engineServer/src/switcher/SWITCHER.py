@@ -15,6 +15,7 @@ class SWITCHER:
         _NAV_.route_selector('R1')
 
     def router(self, __sig_in, __ret):
+
         # //> SELECTION FROM NAVIGATOR CLASS
         match _NAV_.route: # //> LOGICAL DECISION TREE FOR APP LIFE CYCLE STATE // MATCH CASE
 
@@ -43,7 +44,6 @@ class SWITCHER:
                 print('NOT IMPLEMENTED ENTRY')
 
         return self.signal_out
-
 
 
 _HR_= HAND_REC_DIGITS() # //> BROADCASTING TO SELF SERVER ENGINE

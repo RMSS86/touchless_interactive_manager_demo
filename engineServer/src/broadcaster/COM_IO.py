@@ -17,8 +17,9 @@ class COMM_IO:
 
 
     # //> [ ! ]SEND MESSAGE TO IO AND RETURNS STATUS CODE
-    def _CMD_SEND_(self,__MSG, __log=False):
+    def _CMD_SEND_(self, __MSG, __log=False):
          return self._sendCOMMAND_(__MSG, __log)
+
 
     # //> SENDING COMMAND TO [ FE ] ON SOCKET.IO MODULE
     def _sendCOMMAND_(self, _comm, __log=False):
@@ -35,6 +36,7 @@ class COMM_IO:
         except requests.exceptions.RequestException as e:
             print('ERROR SENDING MESSAGE: ', e)
             return -1
+
 
     # //> CONSOLE LOG RESULT OF FETCH /  SEND COMMAND
     def logger(self, _com, _status, __cmd):

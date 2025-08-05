@@ -45,7 +45,7 @@ class GST_MANAGER_:
             # //> [ 3 ]COUNTS COMMAND RECEIVED AND PHASES IT
             _PHASER_.BH_CMD_Counter(self.hand_sign_id, __handness) # //> TO -> BROADCAST
 
-        # //> EVALUATION MODE TODO: [ PENDING ]
+        # //> EVALUATION MODE [ PENDING ]
 
     # //> [ ! ]FOR EVALUATION MODE ONLY
     def Reset_Count(self):
