@@ -61,8 +61,8 @@ class HAND_REC_DIGITS():
                     if self.lmList[self.thumbCoordinate[0]][0] > self.lmList[self.thumbCoordinate[1]][0]:
                         self.upcount += 1
 
-                    # //> [ 3 ]COUNTS COMMAND RECEIVED AND PHASES IT
-                    _PHASER_.Hand_CMD_Counter(self.upcount)
+                    # //> [ 3 ]COUNTS COMMAND RECEIVED AND PHASES IT, DETERMINES HAND NATURE BY LABEL NOT INDEX
+                    _PHASER_.Hand_CMD_Counter(self.upcount, self.results.multi_handedness[0].classification[0].label.upper())
 
                 # //> ASSERTS IF HAND NNUMBER CONDITION IS MET AND RESOLVES
                 if self.results.multi_handedness[0].classification[0].index == self.RH:
@@ -70,8 +70,8 @@ class HAND_REC_DIGITS():
                     # //> [ 1 ]GETS RESULT FILTERED AND DRAWS TO UI WITH COLOUR CONDITION
                     self.Local_UI_drawer(self._img, self.results, _DW_, _color='INC')
 
-                    # //> [ 3 ]COUNTS COMMAND RECEIVED AND PHASES IT
-                    _PHASER_.Hand_CMD_Counter(self.incorrect_H)
+                    # //> [ 3 ]COUNTS COMMAND RECEIVED AND PHASES IT, DETERMINES HAND NATURE BY LABEL NOT INDEX /W DEFAULT HAND ERROR
+                    _PHASER_.Hand_CMD_Counter(self.incorrect_H, self.results.multi_handedness[0].classification[0].label.upper())
 
             return self._img  # //< ACTIVE RETURN OF PROCESSED SIGNAL BACK TO MAIN STREAMER->BROADCASTER TO [ BE ]
         return None # //< ACTIVE RETURN OF PROCESSED SIGNAL BACK TO MAIN STREAMER-> BLOC UNREACHABLE

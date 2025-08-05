@@ -24,9 +24,9 @@ class PHASER:
         if __speed == 'fast':
             self.slot_capacity = 12
 
-    def Hand_CMD_Counter(self, _count): # _handness
+    def Hand_CMD_Counter(self, _count,__handiness): # _handness
         self.tag_hand_command_.append(_count)
-        self.CMD_normalizer(self.tag_hand_command_,'LEFT', self.slot_capacity, False)
+        self.CMD_normalizer(self.tag_hand_command_, __handiness, self.slot_capacity, False)
 
     def BH_CMD_Counter(self, _count, _handness):
         self.handiness_BH = _handness.classification[0].label.upper()
