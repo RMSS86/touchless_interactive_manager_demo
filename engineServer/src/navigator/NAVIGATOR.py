@@ -8,11 +8,10 @@ class NAVIGATOR:
                        'R3': 'FACE_REC', 'R4': 'AUTO_MOUSE',
                        'R5': 'SLEEP','R6': 'OFFLINE' }]
 
-
     # //> FUNCTION CHANGES VALUE OF ROUTE TO SWITCH DYNAMICALLY THE MODE
     def route_selector(self, __RX):
         self.route = self.routes[0][__RX]
-
+        return self.route
 
 # //> [ LOCAL ]TODO: #1 NAV STATE AND HELPERS
     #     self.state = {

@@ -1,4 +1,4 @@
-from src.broadcaster.BROADCASTER import _BROADCASTER_
+from src.broadcaster.BROADCASTER import BROADCASTER
 from src.switcher.SWITCHER import SWITCHER
 
 from flask import Flask, Response
@@ -15,7 +15,7 @@ app = Flask(__name__) # //> FLASK APP CREATION
 # //> VIDEO STREAMING ENDPOINT(DECODED)
 @app.route('/video_feed')
 def video_feed():
-    return Response(_engine._framer(), mimetype='multipart/x-mixed-replace; boundary=frame', status=200)
+    return Response(engine_.framer_(), mimetype='multipart/x-mixed-replace; boundary=frame', status=200)
 
 # //< END POINTS DECLARATION FOR SELF NON-STATIC SERVER
 # //< END POINTS DECLARATION FOR SELF NON-STATIC SERVER
@@ -25,6 +25,9 @@ class Engine:
     # //> CLASS VARIABLES DECLARATION
     def __init__(self, __mode=0, __squares=False, __rec=False, __hc=True):
         # //> GLOBAL CLASS VARIABLES
+        self._success = None
+        self.key_frame = None
+        self._fps = None
         self.fps_ = None
         self.handsNumber = 1
         self.keyframeLen = 10
@@ -49,7 +52,7 @@ class Engine:
         self.hand_command_active = __hc
 
     # //> FRAME GENERATOR / DATA INGESTION / PROCESSING
-    def _framer(self):
+    def framer_(self):
 
         # //> MAIN LOOP INITIALIZER
         while _CAM_.active(): # //> CYCLES BEGIN ON _CAM_ isOPEN VALIDATOR
@@ -65,15 +68,18 @@ class Engine:
                 self._img = _SW_.router(self._img, self._success) # //< [ MODES MIDDLEWARE ROUTER AREA ]
 
                 # //> BROADCASTING SIGNAL MODULE STAGE(CANVAS ONLY) //> SPLITSCREEN DYNAMIC MODULE EQUAL SIZE MODE
-                yield _BROADCAST_._broadcaster(_CAM_.driver_(), self._img) # //> PRE-BROADCASTING SIGNAL STAGE
+                yield _BROADCAST_.broadcaster_(_CAM_.driver_(), self._img) # //> PRE-BROADCASTING SIGNAL STAGE
                 # //> BROADCASTING SIGNAL MODULE STAGE(CANVAS ONLY)  //> SPLITSCREEN DYNAMIC MODULE EQUAL SIZE MODE
 
 # //< MODULES AND CLASSES IMPORT AND SCOPE DECLARATION
 # //< MODULES AND CLASSES IMPORT AND SCOPE DECLARATION
-_BROADCAST_ = _BROADCASTER_()  # //> BROADCASTING TO SELF SERVER ENGINE
+
+_BROADCAST_ = BROADCASTER()  # //> BROADCASTING TO SELF SERVER ENGINE
 _CAM_ = Camera(0)  # //> PROMPTED CAMERA OBJECT WITH DEFAULT DEVICE
-_engine = Engine(1,False,True)  # //> MAIN APP BUILDER ENGINE
-_SW_ = SWITCHER(_CAM_) # //> GLOBAL ROUTER ENGINE FOR PROCESSED IMAGE FUNCTIONS BACK TO BROADCASTER
+engine_ = Engine(1,False,True)  # //> MAIN APP BUILDER ENGINE
+_SW_ = SWITCHER(_CAM_, 'R4') # //> GLOBAL ROUTER OPERATES WITH NAVIGATOR
+# //> GLOBAL ROUTER ENGINE FOR PROCESSED IMAGE FUNCTIONS BACK TO BROADCASTER
+
 # //< MODULES AND CLASSES IMPORT AND SCOPE DECLARATION
 # //< MODULES AND CLASSES IMPORT AND SCOPE DECLARATION
 

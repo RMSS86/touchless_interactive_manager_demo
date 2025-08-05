@@ -3,21 +3,27 @@ from src.modules.hand_recognition.HANDS_REC_CMD import HR_CMD_Engine_
 from src.modules.hand_recognition.HAND_REC_DIGITS import HAND_REC_DIGITS
 from src.navigator.NAVIGATOR import NAVIGATOR
 
-
 class SWITCHER:
-    def __init__(self, __cv):
+    def __init__(self, __cv, __route='R1'):
+        # //> INITIAL ROUTE VARIABLE
+        self.route = None
 
         # //> FETCHING FRESH CV SIGNAL
         self.__cv = __cv
         self.signal_out = None
 
         # //> ROUTE INIT STATE[ DEFAULT ON FACE_RECOGNITION ]
-        _NAV_.route_selector('R4')
+        self.route = _NAV_.route_selector(__route)
+
+    # //> DYNAMICALLY SWITCHES THE SELECTED ROUTE
+    def route_switcher(self, __RX):
+        self.route = _NAV_.routes[0][__RX]
+
 
     def router(self, __sig_in, __ret):
 
         # //> SELECTION FROM NAVIGATOR CLASS
-        match _NAV_.route: # //> LOGICAL DECISION TREE FOR APP LIFE CYCLE STATE // MATCH CASE
+        match self.route: # //> LOGICAL DECISION TREE FOR APP LIFE CYCLE STATE // MATCH CASE
 
             case 'DIGITS': # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
                 self.signal_out = _HR_.HandCounter(__sig_in, self.__cv)

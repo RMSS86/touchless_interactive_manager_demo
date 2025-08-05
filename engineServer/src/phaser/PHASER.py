@@ -58,7 +58,7 @@ class PHASER:
                 print('FROM HAND [ {} ] INCOMING COMMAND RECEIVED: [ {} ]'.format(__handiness, _value__))
 
             # //< PRIVATE THREAD FOR SENDING SHORTED CMDS TO [_COMM_.universal_COMM_Receiver_]
-            _COMM_.universal_COMM_Receiver_(_value__, __handiness, __mode, 'SHORT')
+            _COMM_.universal_COMM_Receiver_(_value__, __handiness, __mode, 'SHORT', _log=self._log)
             # //< PRIVATE THREAD FOR SENDING LONG PRESSED CMDS TO  [self.CMD_listener]
             self.CMD_listener(_value__, __handiness, __mode)
 
@@ -76,7 +76,7 @@ class PHASER:
             self.long_count__ = Counter(self.long_count) # //> GET BUFFER ANALYSIS
             # //> THE Counter FUNCTION GETS ELEMENTS DISTRIBUTION BY NATURES / COUNT
             _value__, _count_of_ = self.long_count__.most_common()[0] # //< VALUES FOR LOGICAL USE
-            _COMM_.universal_COMM_Receiver_(value__, __handiness, __mode, 'LONG')
+            _COMM_.universal_COMM_Receiver_(value__, __handiness, __mode, 'LONG', _log=self._log)
             # //> LONG COUNT RESET TO START ANOTHER CYCLE
             self.long_counter_reset()
 

@@ -1,5 +1,5 @@
 
-class _CONVERT_(object):
+class CONVERT(object):
     def __init__(self):
         self.val = None
 

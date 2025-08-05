@@ -1,5 +1,8 @@
 import requests
 
+# from src.switcher.SWITCHER import SWITCHER
+
+
 class COMM_IO:
     def __init__(self):
         self.val = True
@@ -9,7 +12,18 @@ class COMM_IO:
 
     def universal_COMM_Receiver_(self, __value, __handiness, __mode, __cmd_type, _log=True):
         if _log:
-            print('VALUE [ {} ] HAND [ {} ] [ {} ] TYPE [ {} ] FROM COMM_IO.universal_COMM_Receiver_'.format(__value, __handiness, __mode, __cmd_type))
+            print('VALUE [ {} ] HAND [ {} ] MODE [ {} ] CMD_TYPE [ {} ] FROM COMM_IO.universal_COMM_Receiver_'.format(
+                __value, __handiness, __mode, __cmd_type))
+
+        # TODO: CREATE THE LOGICAL TREE TO SWIPE MESSAGE BY CMDDAND TYPE, MODE(AND IT'S ACTIONS) TO UI
+        #  USING match_CMD FUNCTION.
+
+        if __value == 'OK_MENU' and __cmd_type == 'LONG':
+            print('RECEIVED', __value, __cmd_type)
+
+            # _NAV_.route_switcher('R1')
+        # self.match_CMD(__value, __handiness, __mode, __cmd_type, _log=True)
+
 
 
 
@@ -46,6 +60,7 @@ class COMM_IO:
               ' \nSTATUS CODE [ {} ] \n:: RESPONSE {}'
               .format(_com, _status, __cmd))
 
+
     def match_CMD(self, __value, __handiness):
 
         match __value:
@@ -59,3 +74,6 @@ class COMM_IO:
 
     # TODO: SEND COMMAND FROM HERE USING COMMAND BUILDER TO [ FE ]
     # TODO: ACTIVE LISTEN TO LONG COMMANDS ACTIONS AND CHANGE MODE WITH NAVIGATOR
+
+# _SW_ = SWITCHER()
+
