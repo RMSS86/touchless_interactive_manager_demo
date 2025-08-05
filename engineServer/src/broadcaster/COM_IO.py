@@ -7,8 +7,10 @@ class COMM_IO:
         self.urlCOMM = 'http://127.0.0.1:3001/usercmd/'
 
 
-    def universal_COMM_Receiver_(self, __value, __handiness, __mode, __cmd_type):
-        print('VALUE [ {} ] HAND [ {} ] [ {} ] TYPE [ {} ] FROM COMM_IO.universal_COMM_Receiver_'.format(__value, __handiness, __mode, __cmd_type))
+    def universal_COMM_Receiver_(self, __value, __handiness, __mode, __cmd_type, _log=True):
+        if _log:
+            print('VALUE [ {} ] HAND [ {} ] [ {} ] TYPE [ {} ] FROM COMM_IO.universal_COMM_Receiver_'.format(__value, __handiness, __mode, __cmd_type))
+
 
 
     # //> RECEIVES STRING FROM _COMPOSER_ AND MAKES IT A JSON FORMAT

@@ -29,7 +29,7 @@ class SWITCHER:
                 # //> [local]TODO: #1
                 pass
 
-            case 'AUTO-MOUSE': # //> CONTROLS GUI DIRECTLY THROUGH CV EMULATING A PHYSICAL MOUSE
+            case 'AUTO_MOUSE': # //> CONTROLS GUI DIRECTLY THROUGH CV EMULATING A PHYSICAL MOUSE
                 self.signal_out = _ATM_.AUTO_mouse_(__ret, __sig_in, self.__cv)
 
             case 'SLEEP': # //> GETS [ SE ] INTO SLEEP MODE(ON RASPBERRYPI)

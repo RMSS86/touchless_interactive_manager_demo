@@ -5,7 +5,7 @@ class NAVIGATOR:
 
         # //> COMMANDS BY NATURE ON THE APPS LIFE CYCLE
         self.routes =[{ 'R1': 'DIGITS', 'R2': 'CMDS',
-                       'R3': 'FACE_REC', 'R4': 'AUTO-MOUSE',
+                       'R3': 'FACE_REC', 'R4': 'AUTO_MOUSE',
                        'R5': 'SLEEP','R6': 'OFFLINE' }]
 
 

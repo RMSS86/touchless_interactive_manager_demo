@@ -82,12 +82,13 @@ class HAND_REC_DIGITS():
             return self._img  # //< ACTIVE RETURN OF PROCESSED SIGNAL BACK TO MAIN STREAMER->BROADCASTER TO [ BE ]
         return None # //< ACTIVE RETURN OF PROCESSED SIGNAL BACK TO MAIN STREAMER-> BLOC UNREACHABLE
 
+    # //> LOCAL UI DRAWER ORIGINAL PROTOTYPED USED IN GENERIC VERSION
     def Local_UI_drawer(self, __img, __results, __dw, _color='COR'):
-        # //> CLEANING UP LANDMARKS FROM RESULTS ARRAY
+        # //> CLEANING UP LANDMARKS FROM RESULTS ARRAY [ SINGLE THREADED CYCLES ]
         for id, lm in enumerate(__results.multi_hand_landmarks[0].landmark):
-            h, w, c = __img.shape
-            cx, cy = int(lm.x * w), int(lm.y * h)
-
+            # //> MAKE A NORMALIZED ARRAY USING IMAGE SHAPE TO CALC POS
+            h, w, c = __img.shape # //> IMAGE SHAPE CONSTANT
+            cx, cy = int(lm.x * w), int(lm.y * h) # //> CALC POINT POS
             # //> ADD CLEAN LANDMARKS TO ARRAY
             self.lmList.append((cx, cy))
 
