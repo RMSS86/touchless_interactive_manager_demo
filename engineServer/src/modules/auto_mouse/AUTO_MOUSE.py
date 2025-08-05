@@ -51,15 +51,16 @@ class AUTO_MOUSE():
                             if __log:
                                 print('outside', abs(self.index_y - self.thumb_y))
 
-                            if abs(self.index_y - self.thumb_y) < 60:
+                            if abs(self.index_y - self.thumb_y) < 50:
                                 # //> MAKES CLICK TO UI AND SENDS NOTIFICATION TO UI
-                                _PHASER_.Auto_Mouse_Manager(self.AUTOMOUSE_CMDS[0])
+                                _PHASER_.Auto_Mouse_Manager(self.AUTOMOUSE_CMDS[0],
+                                                           self.output.multi_handedness[0].classification[0].label.upper())
                                 pyautogui.click()
                                 pyautogui.sleep(0.3)
 
-                            elif abs(self.index_y - self.thumb_y) < 100:
-                                # //> [local]TODO: #1
-                                pass
+                            # elif abs(self.index_y - self.thumb_y) < 100:
+                            #     # //> [local]TODO: #1
+                            #     pass
 
 
                         if id == 4:
@@ -71,10 +72,10 @@ class AUTO_MOUSE():
                             if __log:
                                 print('outside', abs(self.index_y - self.thumb_y))
 
-                            if abs(self.index_y - self.thumb_y) < 50:
-                                # TODO DISPLAYS MAIN MENU FROM WHEREVER THE FLOWS STATE IS
+                            if abs(self.index_y - self.thumb_y) < 42:
                                 # //> STATES THE OK TO MENU OPTION
-                                _PHASER_.Auto_Mouse_Manager(self.AUTOMOUSE_CMDS[1])
+                                _PHASER_.Auto_Mouse_Manager(self.AUTOMOUSE_CMDS[1],
+                                                           self.output.multi_handedness[0].classification[0].label.upper())
 
             return __source
 

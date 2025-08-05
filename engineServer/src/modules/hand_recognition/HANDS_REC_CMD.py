@@ -78,7 +78,7 @@ class HR_CMD_Engine_():
                     _GSTM_._handedness_(__source, self.hand_landmarks, self.handedness, _DW_, True)
 
             else:  # //> WHEN NO HANDS IN FRAME
-                _PHASER_.Hand_CMD_Counter(self.no_hands_in_frame_CMD) # [local]TODO: #1
+                _PHASER_.BH_CMD_Counter(self.no_hands_in_frame_CMD, 'NO_HANDS_DETECTED') # [local]TODO: #1
 
             return __source # //< ACTIVE RETURN OF PROCESSED SIGNAL BACK TO MAIN STREAMER->BROADCASTER TO [ BE ]
         return None # //< ACTIVE RETURN OF PROCESSED SIGNAL BACK TO MAIN STREAMER-> BLOC UNREACHABLE

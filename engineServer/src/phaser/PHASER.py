@@ -15,6 +15,7 @@ class PHASER:
 
         self.tag_hand_command_ = []
         self.tag_hand_command_BH = []
+        self.tag_mouse_command_ = []
         self.long_count = []
         self.long_count__ = []
 
@@ -24,66 +25,66 @@ class PHASER:
         if __speed == 'fast':
             self.slot_capacity = 12
 
-    def Hand_CMD_Counter(self, _count,__handiness): # _handness
+    def Hand_CMD_Counter(self, _count, __handiness, __mode):
         self.tag_hand_command_.append(_count)
-        self.CMD_normalizer(self.tag_hand_command_, __handiness, self.slot_capacity, False)
+        self.CMD_normalizer(self.tag_hand_command_, __handiness, self.slot_capacity, __mode, False)
 
-    def BH_CMD_Counter(self, _count, _handness):
-        self.handiness_BH = _handness.classification[0].label.upper()
+
+    def BH_CMD_Counter(self, _count, __handiness):
         self.tag_hand_command_BH.append(_count)
+        self.CMD_normalizer(self.tag_hand_command_BH, __handiness, self.slot_capacity, "CMDS", False)
 
 
-        if len(self.tag_hand_command_BH) == self.slot_capacity:
-            self.count_BH = Counter(self.tag_hand_command_BH)
-            self.value_BH, self.count_of_BH = self.count_BH.most_common()[0]
+    def Mause_CMD_counter(self, _count, __handiness, __mode, __speed=3):
+        self.tag_mouse_command_.append(_count)
+        self.CMD_normalizer(self.tag_mouse_command_, __handiness, __speed, __mode, False)
 
-            # TODO: SEND COMMAND FROM HERE USING COMMAND BUILDER TO [ FE ]
-            # _COMM_.universal_COMM_Receiver_(self.value_BH, self.handiness_BH)
 
-            if self._log:
-                print('FROM HAND [ {} ] INCOMING COMMAND RECEIVED: [ {} ]'.format(self.handiness_BH, self.value_BH))
-
-            self.counter_reset_BH()
-
-    def CMD_normalizer(self, __command, __handiness, __slot_len, _log):
+    def CMD_normalizer(self, __command, __handiness, __slot_len, __mode, _log):
         if len(__command) == __slot_len:
-            self.count__ = Counter(__command)
-            _value__, __count_of_ = self.count__.most_common()[0]
+            counter__ = Counter(__command)
+            _value__, __count_of_ = counter__.most_common()[0]
 
             if _log:
                 print('FROM HAND [ {} ] INCOMING COMMAND RECEIVED: [ {} ]'.format(__handiness, _value__))
 
-            _COMM_.universal_COMM_Receiver_(_value__, __handiness, 'SHORT')
-            self.CMD_listener(_value__, __handiness)
+            _COMM_.universal_COMM_Receiver_(_value__, __handiness, __mode, 'SHORT')
+            self.CMD_listener(_value__, __handiness, __mode)
 
-            self.counter_reset()
+            if __mode == 'DIGITS' or 'AUTO-MOUSE':
+                self.counter_reset()
+            if __mode == 'CMDS':
+                self.counter_reset_BH()
 
-    def CMD_listener(self, value__, __handiness):
+
+    def CMD_listener(self, value__, __handiness, __mode):
         self.long_count.append(value__)
         if len(self.long_count) == self.long_select_value:
             self.long_count__ = Counter(self.long_count)
-            _value__, _count_of_ = self.long_count__.most_common()[0]
 
-            _COMM_.universal_COMM_Receiver_(value__, __handiness, 'LONG')
+            _value__, _count_of_ = self.long_count__.most_common()[0]
+            _COMM_.universal_COMM_Receiver_(value__, __handiness, __mode, 'LONG')
+
             self.long_counter_reset()
 
 
-    def Auto_Mouse_Manager(self, __cmd):
+    def Auto_Mouse_Manager(self, __cmd, __handiness):
 
         if __cmd == 'CLICK':
             # TODO: MAKE COMMAND SEND TO [ FE ] ANNOUNCING CLICK ACTION
             print('CLICKED!')  # NORMAL CLICK FUNCTION
-            pass
+
 
         if __cmd == 'OK_MENU':
             # //> SEND OK COMMAND DOWN TO [ FE ]
-            self.Hand_CMD_Counter(__cmd)
-            pass
+            self.Mause_CMD_counter(__cmd, __handiness, "AUTO-MOUSE",4)
+
 
 
 
     def counter_reset(self):
         self.tag_hand_command_ = []
+        self.tag_mouse_command_ = []
 
     def long_counter_reset(self):
         self.long_count = []

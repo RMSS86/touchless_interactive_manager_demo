@@ -44,6 +44,7 @@ class HAND_REC_DIGITS():
             # //> PASSING IMG TO MAIN PROCESSOR FOR TRACKING
             self.results = self.Hands.process(self._img)
 
+
             # //> ASSERT IF HAND IS RIGHT OR LEFT AND FILTERS ACTIONS
             if self.results.multi_hand_landmarks:  # //> GETS LANDMARK ON LH IF EXIST
 
@@ -62,7 +63,10 @@ class HAND_REC_DIGITS():
                         self.upcount += 1
 
                     # //> [ 3 ]COUNTS COMMAND RECEIVED AND PHASES IT, DETERMINES HAND NATURE BY LABEL NOT INDEX
-                    _PHASER_.Hand_CMD_Counter(self.upcount, self.results.multi_handedness[0].classification[0].label.upper())
+                    _PHASER_.Hand_CMD_Counter(self.upcount,
+                                              self.results.multi_handedness[0].classification[0].label.upper(),"DIGITS")
+
+
 
                 # //> ASSERTS IF HAND NNUMBER CONDITION IS MET AND RESOLVES
                 if self.results.multi_handedness[0].classification[0].index == self.RH:
@@ -71,7 +75,9 @@ class HAND_REC_DIGITS():
                     self.Local_UI_drawer(self._img, self.results, _DW_, _color='INC')
 
                     # //> [ 3 ]COUNTS COMMAND RECEIVED AND PHASES IT, DETERMINES HAND NATURE BY LABEL NOT INDEX /W DEFAULT HAND ERROR
-                    _PHASER_.Hand_CMD_Counter(self.incorrect_H, self.results.multi_handedness[0].classification[0].label.upper())
+                    _PHASER_.Hand_CMD_Counter(self.incorrect_H,
+                                              self.results.multi_handedness[0].classification[0].label.upper(),"DIGITS")
+
 
             return self._img  # //< ACTIVE RETURN OF PROCESSED SIGNAL BACK TO MAIN STREAMER->BROADCASTER TO [ BE ]
         return None # //< ACTIVE RETURN OF PROCESSED SIGNAL BACK TO MAIN STREAMER-> BLOC UNREACHABLE

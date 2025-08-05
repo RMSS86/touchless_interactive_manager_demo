@@ -12,7 +12,7 @@ class SWITCHER:
         self.signal_out = None
 
         # //> ROUTE INIT STATE[ DEFAULT ON FACE_RECOGNITION ]
-        _NAV_.route_selector('R1')
+        _NAV_.route_selector('R4')
 
     def router(self, __sig_in, __ret):
 
