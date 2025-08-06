@@ -3,7 +3,7 @@ class DRAWER:
     def __init__(self,__cv):
         self.lmList = []
         self.__cv = __cv
-        self.dot_radio = 2 # //> DEFINES DE UI DOT RADIO
+        self.dot_radio = 1 # //> DEFINES DE UI DOT RADIO
         self.selected_color = None
 
         self.CRR_hands_counter_point_color = None

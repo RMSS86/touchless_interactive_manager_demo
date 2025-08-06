@@ -23,15 +23,24 @@ _server.listen(3001, () => {
 
 const sendCMD = (req, res, next) => {
   //CMD_ = req.params.cmd;
-  CMD_ = req.body;
-  console.log('RECEIVED FROM sendCMD', CMD_)
+  RECEIVED_message_ = req.body;
 
-  // //var message_ = JSON.parse(CMD_);
+  // var RECEIVED_message_ = JSON.parse(CMD_);
   // const _CMD = CMD_["_CMD"];
-  // _Nx.sendCMD_(_CMD);
+
+  // console.log('RECEIVED FROM sendCMD', RECEIVED_message_)
+
+  try{
+    //> GETS MESSAGE SENT TO FRONT END
+    _Nx.sendCMD_(RECEIVED_message_);
+  }
+   
+  catch(_){
+   console.log('UNABLE_TO_SEND_TO_FRONTENDT')
+  }
 
   res.status(200).json({
-    command: 'RECEIVED',
+    command: 'RECEIVED FROM COMM_DEVICE',
   });
 };
 

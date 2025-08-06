@@ -24,9 +24,9 @@ class PHASER:
 
         # //> DETERMINES SPEED BY INCREASING OR RECREASING SLOT SIZE
         if __speed == 'normal':
-            self.slot_capacity = 16
+            self.slot_capacity = 21
         if __speed == 'fast':
-            self.slot_capacity = 12
+            self.slot_capacity = 15
 
     # //> MAKES A COMMUNICATION DEVICE FOR COUNTING COMMANDS
     # //> MAKE FOR SINGLE HAND MODE DIGITS [ SINGLE-HAND ]AND DECODES COMMAND

@@ -78,6 +78,7 @@ class HAND_REC_DIGITS():
                     _PHASER_.Hand_CMD_Counter(self.incorrect_H,
                                               self.results.multi_handedness[0].classification[0].label.upper(),"DIGITS")
 
+            # TODO: MAKE ELSE FOR NO HANDS RECEIVED
 
             return self._img  # //< ACTIVE RETURN OF PROCESSED SIGNAL BACK TO MAIN STREAMER->BROADCASTER TO [ BE ]
         return None # //< ACTIVE RETURN OF PROCESSED SIGNAL BACK TO MAIN STREAMER-> BLOC UNREACHABLE

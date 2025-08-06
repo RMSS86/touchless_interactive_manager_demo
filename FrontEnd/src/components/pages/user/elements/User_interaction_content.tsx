@@ -37,34 +37,40 @@ export default function User_interactive_content({
   }, []);
 
   const [logoIndex, setLogoIndex] = useState(TIM_OFFLINE_);
+  //> TODO: MAKE STATES FOR MODE, CMD_TYPE, HANDNESS, VALUE
 
   // TODO: MAKE A CLASSS
   // import _socket from "../../remoteIO/remoteIU_cmd";
 
-  //   useEffect(() => {
-  //     _socket.on("userCMD_", (CMD_) => {
-  //       //console.log(typeof message);
-  //       //var _CMD = JSON.parse(CMD_);
-  //       cmdSelector(CMD_);
-  //       console.log(CMD_);
-  //     });
-  //   }, [_socket]);
+  useEffect(() => {
+    _socket.on("userCMD_", (INCOMING_CMD) => {
+      //console.log(typeof message);
+      // var PARSED_CMD = JSON.parse(CMD_);
+      console.log("CMD_TYPE_CMD FROM [ES]", INCOMING_CMD["CMD_TYPE"]);
+      console.log("MODE_CMD FROM [ES]", INCOMING_CMD["MODE"]);
+      console.log("HANDNESS_CMD FROM [ES]", INCOMING_CMD["HANDNESS"]);
+      console.log("VALUE_CMD FROM [ES]", INCOMING_CMD["VALUE"]);
+      cmdSelector(INCOMING_CMD["VALUE"]);
 
-  //   const cmdSelector = (_cmd) => {
-  //     if (_cmd === "ZERO_") {
-  //       setLogoIndex(_CMD_TAG_ZERO_);
-  //     } else if (_cmd === "ONE_") {
-  //       setLogoIndex(_CMD_TAG_ONE_);
-  //     } else if (_cmd === "TWO_") {
-  //       setLogoIndex(_CMD_TAG_TWO_);
-  //     } else if (_cmd === "THREE_") {
-  //       setLogoIndex(_CMD_TAG_THREE_);
-  //     } else if (_cmd === "FOUR_") {
-  //       setLogoIndex(_CMD_TAG_FOUR_);
-  //     } else if (_cmd === "FIVE_") {
-  //       setLogoIndex(_CMD_TAG_FIVE_);
-  //     }
-  //   };
+      // console.log(CMD_);
+    });
+  }, [_socket]);
+
+  const cmdSelector = (_cmd: any) => {
+    if (_cmd === "0") {
+      setLogoIndex(_CMD_TAG_ZERO_);
+    } else if (_cmd === "1") {
+      setLogoIndex(_CMD_TAG_ONE_);
+    } else if (_cmd === "2") {
+      setLogoIndex(_CMD_TAG_TWO_);
+    } else if (_cmd === "3") {
+      setLogoIndex(_CMD_TAG_THREE_);
+    } else if (_cmd === "4") {
+      setLogoIndex(_CMD_TAG_FOUR_);
+    } else if (_cmd === "5") {
+      setLogoIndex(_CMD_TAG_FIVE_);
+    }
+  };
   ////////RETURN/////RETURN/////RETURN/////RETURN/////RETURN/////
   ////////RETURN/////RETURN/////RETURN/////RETURN/////RETURN/////
   return (
@@ -153,3 +159,4 @@ import {
 } from "../../../../utility/assetsImport";
 import CMD_Sub_Menu from "./CMD_Sub_Menu";
 import Hint_Side_Menu from "./Hint_Side_Menu";
+import _socket from "../../../../remoteIO/remoteIU_cmd";

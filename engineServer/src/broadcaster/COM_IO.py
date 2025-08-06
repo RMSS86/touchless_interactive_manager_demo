@@ -71,8 +71,9 @@ class COMM_IO:
                                 'HANDNESS': __hand,
                                 'VALUE': __value,
                                 }
+            # TODO: COMPARE PREVIOUS COMMAND IGNORE, IF SAME SEND A LONG PROCESS SIGNAL AND OR DIFFERENT ENTRY
 
-            self._CMD_SEND_(self.CMD_PRE_OUT)
+            self._CMD_SEND_(self.CMD_PRE_OUT,True)
             # self.match_CMD(__value, __hand ) # TODO: TAKE ACTIONS BASED ON LOGICAL TREE
 
         # //> RECEIVES INPUTTED LONG COMMAND RECEIVED
@@ -80,6 +81,7 @@ class COMM_IO:
 
             if _log: #  __value, __hand, __mode, __cmd_type
                 print('[ {} ] FROM THE universal_COMM_Receiver_: MODE [ {} {} ]'.format(__value, __mode, 'LONG'))
+
 
             # //> RECEIVES STRING FROM _COMPOSER_ AND MAKES IT A JSON FORMAT
             self.CMD_PRE_OUT =  {   'CMD_TYPE': 'LONG',
@@ -89,7 +91,7 @@ class COMM_IO:
 
                                  }
 
-            self._CMD_SEND_(self.CMD_PRE_OUT)
+            self._CMD_SEND_(self.CMD_PRE_OUT, True)
             # NAVIGATOR().route_selector('R1')
 
     # //> [ ! ]SEND MESSAGE TO IO AND RETURNS STATUS CODE
@@ -101,15 +103,16 @@ class COMM_IO:
     def _sendCOMMAND_(self, _comm, __log=False):
 
         try: # //> STATES TO SEND REQUEST TO SOCKET.IO SERVER
-            print(_comm)
-            # _req = requests.post(self.urlCOMM, data=_comm)
-            # req_ = _req.json()
-            #
-            # if __log:
-            #     self.logger(_comm, _req.status_code, req_)
-            #
-            # return _req.status_code
-            pass
+
+            _req = requests.post(self.urlCOMM, data=_comm)
+            req_ = _req.json()
+
+            if __log:
+                #//> print('COMPOSED MESSAGE PREVIEW [ {} ]'.format(_comm))
+                self.logger(_comm, _req.status_code, req_)
+
+            return _req.status_code
+
 
         except requests.exceptions.RequestException as e:
             print('ERROR SENDING MESSAGE: ', e)
