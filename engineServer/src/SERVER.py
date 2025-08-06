@@ -59,6 +59,8 @@ class Engine:
         # //> MAIN LOOP INITIALIZER
         while _CAM_.active(): # //> CYCLES BEGIN ON _CAM_ isOPEN VALIDATOR
 
+        # //> TODO: ROUTER KEY FOR PASSING DOWN TO _SW_.router
+
             self._fps = self.fps_.get() # //> GETTING VAL FOR DRAWING INFO RATE
             self.key_frame = _CAM_.keyframe() # //> SETTING GLOBAL KEY FRAMERS
             self._success, self._img = _CAM_.stream_() # //< RAW  FEED FROM CAMERA CLASS self.debug_image

@@ -43,19 +43,84 @@ export default function User_interactive_content({
   // import _socket from "../../remoteIO/remoteIU_cmd";
 
   useEffect(() => {
-    _socket.on("userCMD_", (INCOMING_CMD) => {
-      //console.log(typeof message);
-      // var PARSED_CMD = JSON.parse(CMD_);
+    _socket.on("userCMD_", (INCOMING_CMD: API_CMD) => {
       console.log("CMD_TYPE_CMD FROM [ES]", INCOMING_CMD["CMD_TYPE"]);
       console.log("MODE_CMD FROM [ES]", INCOMING_CMD["MODE"]);
       console.log("HANDNESS_CMD FROM [ES]", INCOMING_CMD["HANDNESS"]);
       console.log("VALUE_CMD FROM [ES]", INCOMING_CMD["VALUE"]);
-      cmdSelector(INCOMING_CMD["VALUE"]);
 
-      // console.log(CMD_);
+      //> SELECT UI ACTION BY MODE FIRST
+      if (INCOMING_CMD["MODE"] === "DIGITS") {
+        if (INCOMING_CMD["VALUE"] === "INCORRECT_HAND") {
+          console.log("INCORRECT_AND_TO_UI!");
+        } else {
+          cmdSelector(INCOMING_CMD["VALUE"]);
+        }
+      }
+      //> FOR COMMANDS MODE
+      if (INCOMING_CMD["MODE"] === "CMDS") {
+        //> FOR LEFT HAND
+        if (INCOMING_CMD["HANDNESS"] === "LEFT") {
+          console.log("COMMAND RECEIVED LEFT");
+          switch (INCOMING_CMD["VALUE"]) {
+            //> CASE OPEN
+            case "OPEN":
+              if (INCOMING_CMD["CMD_TYPE"] === "LONG") {
+                console.log("[ OPEN ] RECEVED FROM RIGHT HAND LONG ENTRY");
+              } else {
+                console.log("[ OPEN ] RECEVED FROM RIGHT HAND SHORT ENTRY");
+              }
+            //> CASE CLOSE
+            case "CLOSE":
+              if (INCOMING_CMD["CMD_TYPE"] === "LONG") {
+                console.log("[ CLOSE ] RECEVED FROM RIGHT HAND LONG ENTRY");
+              } else {
+                console.log("[ CLOSE ] RECEVED FROM RIGHT HAND SHORT ENTRY");
+              }
+
+            //> CASE POINTER
+            case "POINTER":
+              if (INCOMING_CMD["CMD_TYPE"] === "LONG") {
+                console.log("[ POINTER ] RECEVED FROM RIGHT HAND LONG ENTRY");
+              } else {
+                console.log("[ POINTER ] RECEVED FROM RIGHT HAND SHORT ENTRY");
+              }
+          }
+        }
+        //> FOR RIGHT HAND
+        if (INCOMING_CMD["HANDNESS"] === "RIGHT") {
+          console.log("COMMAND RECEIVED RIGHT");
+          switch (INCOMING_CMD["VALUE"]) {
+            //> CASE OPEN
+            case "OK":
+              if (INCOMING_CMD["CMD_TYPE"] === "LONG") {
+                console.log("[ OK ] RECEVED FROM RIGHT HAND LONG ENTRY");
+              } else {
+                console.log("RECEVED FROM RIGHT HAND SHORT ENTRY");
+              }
+
+            //> CASE CLOSE
+            case "CLOSE":
+              if (INCOMING_CMD["CMD_TYPE"] === "LONG") {
+                console.log("[ CLOSE ] RECEVED FROM RIGHT HAND LONG ENTRY");
+              } else {
+                console.log("[ CLOSE ] RECEVED FROM RIGHT HAND SHORT ENTRY");
+              }
+
+            //> CASE POINTER
+            case "POINTER":
+              if (INCOMING_CMD["CMD_TYPE"] === "LONG") {
+                console.log("[ POINTER ] RECEVED FROM RIGHT HAND LONG ENTRY");
+              } else {
+                console.log("[ POINTER ] RECEVED FROM RIGHT HAND SHORT ENTRY");
+              }
+          }
+        }
+      }
     });
   }, [_socket]);
 
+  //> LISTENS TO INCOMING CMD DIGITS
   const cmdSelector = (_cmd: any) => {
     if (_cmd === "0") {
       setLogoIndex(_CMD_TAG_ZERO_);
@@ -160,3 +225,4 @@ import {
 import CMD_Sub_Menu from "./CMD_Sub_Menu";
 import Hint_Side_Menu from "./Hint_Side_Menu";
 import _socket from "../../../../remoteIO/remoteIU_cmd";
+import { API_CMD } from "../../../../models/types/CommandTypes";

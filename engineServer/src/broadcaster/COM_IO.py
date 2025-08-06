@@ -12,12 +12,9 @@ class COMM_IO:
 
 
     def universal_COMM_Receiver_(self, __value, __handiness, __mode, __cmd_type, _log=True):
-        # if _log:
-        #     print('VALUE [ {} ] HAND [ {} ] MODE [ {} ] CMD_TYPE [ {} ] FROM COMM_IO.universal_COMM_Receiver_'.format(
-        #         __value, __handiness, __mode, __cmd_type))
-# //> HAND > MODE
+
         match __handiness:
-            # TODO //> MAKE LOGICAL STATEMENTS ACCORDING TO ENTRIES
+            # TODO //> ADD ACTION VAR ON self.CMD_compouser TO SELECT THE INTERNAL ACTION FILTRED BY CASE!
 
             case 'LEFT':
                 match __mode:
@@ -49,14 +46,7 @@ class COMM_IO:
                         self.CMD_compouser(__value, 'RIGHT', 'FACE_REC', __cmd_type)
 
 
-
-        # TODO: CREATE THE LOGICAL TREE TO SWIPE MESSAGE BY CMDDAND TYPE, MODE(AND IT'S ACTIONS) TO UI
-        #  USING match_CMD FUNCTION.
-        #
-        # if __value == 'OK_MENU' and __cmd_type == 'LONG':
-        #     NAVIGATOR().route_selector('R1')
-        # # self.match_CMD(__value, __handiness, __mode, __cmd_type, _log=True)
-
+    # //> COMPOSES A JSON LIKE STRUCTURED MASSAGE
     def CMD_compouser(self, __value, __hand, __mode, __cmd_type, _log=False):
 
         # //> RECEIVES INPUTTED LONG COMMAND RECEIVED
@@ -71,10 +61,9 @@ class COMM_IO:
                                 'HANDNESS': __hand,
                                 'VALUE': __value,
                                 }
-            # TODO: COMPARE PREVIOUS COMMAND IGNORE, IF SAME SEND A LONG PROCESS SIGNAL AND OR DIFFERENT ENTRY
 
-            self._CMD_SEND_(self.CMD_PRE_OUT,True)
-            # self.match_CMD(__value, __hand ) # TODO: TAKE ACTIONS BASED ON LOGICAL TREE
+            self._CMD_SEND_(self.CMD_PRE_OUT, True ,False)
+            # self.match_CMD(__value, __hand, __action ) # TODO: TAKE ACTIONS BASED ON LOGICAL TREE __action
 
         # //> RECEIVES INPUTTED LONG COMMAND RECEIVED
         if __cmd_type == 'LONG':
@@ -91,33 +80,39 @@ class COMM_IO:
 
                                  }
 
-            self._CMD_SEND_(self.CMD_PRE_OUT, True)
-            # NAVIGATOR().route_selector('R1')
+            self._CMD_SEND_(self.CMD_PRE_OUT, True, False)
+            # self.match_CMD(__value, __hand, __action ) # TODO: TAKE ACTIONS BASED ON LOGICAL TREE __action
+
 
     # //> [ ! ]SEND MESSAGE TO IO AND RETURNS STATUS CODE
-    def _CMD_SEND_(self, __MSG, __log=False):
-         return self._sendCOMMAND_(__MSG, __log)
+    def _CMD_SEND_(self, __MSG, __send_cmd, __log=False):
+         return self._sendCOMMAND_(__MSG, __send_cmd, __log)
 
 
     # //> SENDING COMMAND TO [ FE ] ON SOCKET.IO MODULE
-    def _sendCOMMAND_(self, _comm, __log=False):
+    def _sendCOMMAND_(self, _comm, __send_cmd=True, __log=False):
 
-        try: # //> STATES TO SEND REQUEST TO SOCKET.IO SERVER
+        if __send_cmd:
+            try: # //> STATES TO SEND REQUEST TO SOCKET.IO SERVER
 
-            _req = requests.post(self.urlCOMM, data=_comm)
-            req_ = _req.json()
+                _req = requests.post(self.urlCOMM, data=_comm)
+                req_ = _req.json()
 
+                if __log:
+                    #//> print('COMPOSED MESSAGE PREVIEW [ {} ]'.format(_comm))
+                    self.logger(_comm, _req.status_code, req_)
+
+                return _req.status_code
+
+
+            except requests.exceptions.RequestException as e:
+                print('ERROR SENDING MESSAGE: ', e)
+                return -1
+        else:
             if __log:
-                #//> print('COMPOSED MESSAGE PREVIEW [ {} ]'.format(_comm))
-                self.logger(_comm, _req.status_code, req_)
-
-            return _req.status_code
-
-
-        except requests.exceptions.RequestException as e:
-            print('ERROR SENDING MESSAGE: ', e)
-            return -1
-
+                print('COMPOSED MESSAGE PREVIEW [ {} ]'.format(_comm))
+                return None
+            return None
 
     # //> CONSOLE LOG RESULT OF FETCH /  SEND COMMAND
     def logger(self, _com, _status, __cmd):
@@ -126,13 +121,35 @@ class COMM_IO:
               .format(_com, _status, __cmd))
 
 
-    def match_CMD(self, __value, __handiness):
+    def match_CMD(self, __value, __handiness, __action):
+        # //> TODO: FROM HERE DETERMINE THE TYPE OF ACCTION THE APP SHOULD DO LIKE MODE CHANGE, PAGE CHANGE ETC
+        # //> COMMANDS WILL COME ALSO FROM UI IN RESPONSE OF THE UI STATE LOGIC
+        # NAVIGATOR().route_selector('R1')
 
-        match __value:
-            case 'POINTER':
-                print('LONG SELECTION DETECTED! {} HAND [ {} ]'.format(__handiness, __value))
-            case 'OK_MENU':
-                print('LONG SELECTION DETECTED! {} HAND [ {} ]'.format(__handiness, __value))
+        match __action:
+
+            case 'GET_TO_DIGITS_MODE':
+                # NAVIGATOR().route_selector('R1')
+                print('GETTING TO [ {} ] MODE'.format(__action))
+
+            case 'GET_TO_CMDS_MODE':
+                # NAVIGATOR().route_selector('R2')
+                print('GETTING TO [ {} ] MODE'.format(__action))
+
+            case 'GET_TO_DIGITS_MODE':
+                # NAVIGATOR().route_selector('R3')
+                print('GETTING TO [ {} ] MODE'.format(__action))
+
+            case 'GET_AUTO_MOUSE_MODE':
+                # NAVIGATOR().route_selector('R4')
+                print('GETTING TO [ {} ] MODE'.format(__action))
+
+            case 'GET_FACE_RECOGNITION_MODE':
+                # NAVIGATOR().route_selector('R5')
+                print('GETTING TO [ {} ] MODE'.format(__action))
+
+            case 'OK_MENU_DISPLAY':
+                print('GETTING [ {} ] DISLAYES'.format(__action))
 
             case _:  # //> UN-IMPLEMENTED CASE
                 print('NOT IMPLEMENTED ENTRY')
