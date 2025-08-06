@@ -11,7 +11,10 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 import os
 
-# //> LOADS AN ENV FILE FROM REALTIVE PATH, >>> USE[--env-file ]IN DOCKER
+# //> IMPORTS LOGICAL ML COMPARISON MODULE [ cosine_similarity ]
+from sklearn.metrics.pairwise import cosine_similarity
+
+# //> [ 0 ]LOADS AN ENV FILE FROM REALTIVE PATH, >>> USE[--env-file ]IN DOCKER
 dotenv_path = Path('../../../../env/serverengine.env')
 load_dotenv(dotenv_path=dotenv_path)
 
@@ -20,7 +23,7 @@ ES_DATABASE_RAW_CONN_STRING = os.getenv("ES_DATABASE")
 ES_MONGODB_USERNAME = os.getenv("ES_MONGODB_USERNAME")
 ES_MONGODB_PASSWORD = os.getenv("ES_MONGODB_PASSWORD")
 
-# //> TARGET STRINGS IN ES_DATABASE_RAW_CONN_STRING TO REPLACE
+# //> [ 1 ]TARGET STRINGS IN ES_DATABASE_RAW_CONN_STRING TO REPLACE
 ES_TEMPLATE_USER = '<db_user>'
 ES_TEMPLATE_PWD = '<db_password>'
 
@@ -36,17 +39,14 @@ try: # //> SEND PING ON A SUCCESSFUL CONNECTION
 except Exception as e:
     print(e)
 
-# EXAMPLE OF FACE_EMBEDDING (REPLACE WITH DATA FROM face_recognition) AFTER TEST
+# //> [ XTRA ]EXAMPLE OF FACE_EMBEDDING (REPLACE WITH DATA FROM face_recognition) AFTER TEST
 SAMPLE_EMBEDDING = np.random.rand(128).tolist()
 
-# db = MONGO_CLIENT['face_recognition_db']
-# faces_collection = db['faces']
+# //> [ 2 ]POINTER FOR SERVER DB AND COLLECTION
+DB_ = MONGO_CLIENT['test'] # //> REPLACE WITH FINAL DB
+FACES_COLLECTION = DB_['users'] # //> REPLACE WITH FINAL COLLECTION
 
-# //> POINTER FOR SERVER DB AND COLLECTION
-DB_ = MONGO_CLIENT['test']
-FACES_COLLECTION = DB_['users']
-
-# //> DUMMY USER DATA FOR TESTING PORPUSES
+# //> [ 3 ]DUMMY USER DATA FOR TESTING PURPOSES
 FACE_DUMMY_DATA = {
     "user_id": "user123",
     "name": "John Doe",
@@ -54,33 +54,22 @@ FACE_DUMMY_DATA = {
     "position": "Supervisor",
     "embedding": SAMPLE_EMBEDDING
 }
+
 # //> INSERTS A RECORD FOR NEW OBJECT
 # FACES_COLLECTION.insert_one(FACE_DUMMY_DATA)
 
 # //> FETCHES ALL OBJECTS UNDER THE FACES_COLLECTION DB
 STORED_FACES_ALL = list(FACES_COLLECTION.find({}))
 
-print('SAMPLE_EMBEDDING {}'.format(STORED_FACES_ALL))
+# //> MAKES PARALLEL ARRAYS FOR STORED_EMBEDDINGS, STORED_NAMES
+STORED_EMBEDDINGS = [doc['embedding'] for doc in STORED_FACES_ALL]
+STORED_NAMES = [doc['name'] for doc in STORED_FACES_ALL]
 
+print('STORED_EMBEDDINGS {} \nSTORED_NAMES {}'.format(STORED_EMBEDDINGS, STORED_NAMES))
 
-#
-# faces_collection.insert_one(face_data)
-# print("Face embedding stored successfully.")
-#
-# # ... (previous code for MongoDB connection) ...
-#
-# # Example target embedding for identification
-# target_embedding = np.random.rand(128).tolist()
-#
-# # Retrieve all stored embeddings
-# stored_faces = list(faces_collection.find({}))
-# stored_embeddings = [doc['embedding'] for doc in stored_faces]
-# stored_names = [doc['name'] for doc in stored_faces]
-#
-# # Perform similarity comparison (e.g., using scikit-learn's cosine_similarity)
-# from sklearn.metrics.pairwise import cosine_similarity
-#
-# if stored_embeddings:
+# //> PERFORM SIMILARITY COMPARISON USING [ scikit-learn's cosine_similarity ]
+
+# if STORED_EMBEDDINGS:
 #     similarities = cosine_similarity([target_embedding], stored_embeddings)[0]
 #
 #     # Find the most similar face
