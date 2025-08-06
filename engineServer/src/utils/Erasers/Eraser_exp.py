@@ -50,14 +50,17 @@ FACES_COLLECTION = DB_['users']
 FACE_DUMMY_DATA = {
     "user_id": "user123",
     "name": "John Doe",
+    "account": "Tigers_IX",
+    "position": "Supervisor",
     "embedding": SAMPLE_EMBEDDING
 }
-print('SAMPLE_EMBEDDING {}'.format(FACE_DUMMY_DATA))
-#
+# //> INSERTS A RECORD FOR NEW OBJECT
 # FACES_COLLECTION.insert_one(FACE_DUMMY_DATA)
-#
-# STORED_FACES_ALL = list(FACES_COLLECTION.find({}))
 
+# //> FETCHES ALL OBJECTS UNDER THE FACES_COLLECTION DB
+STORED_FACES_ALL = list(FACES_COLLECTION.find({}))
+
+print('SAMPLE_EMBEDDING {}'.format(STORED_FACES_ALL))
 
 
 #
