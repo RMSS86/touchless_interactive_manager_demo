@@ -20,16 +20,18 @@ _app.post("/", function (req, res) {
 _server.listen(3001, () => {
   console.log("server runnning port: [ 3001 ] ");
 });
-s;
+
 const sendCMD = (req, res, next) => {
   //CMD_ = req.params.cmd;
   CMD_ = req.body;
-  //var message_ = JSON.parse(CMD_);
-  const _CMD = CMD_["_CMD"];
-  _Nx.sendCMD_(_CMD);
+  console.log('RECEIVED FROM sendCMD', CMD_)
+
+  // //var message_ = JSON.parse(CMD_);
+  // const _CMD = CMD_["_CMD"];
+  // _Nx.sendCMD_(_CMD);
 
   res.status(200).json({
-    command: _CMD,
+    command: 'RECEIVED',
   });
 };
 

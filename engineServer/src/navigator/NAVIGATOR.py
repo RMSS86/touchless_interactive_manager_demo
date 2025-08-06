@@ -1,17 +1,20 @@
 
 class NAVIGATOR:
-    def __init__(self):
-        self.route = None # //> INITIAL ROUTE VARIABLE
+    def __init__(self, __route='R1'):
 
         # //> COMMANDS BY NATURE ON THE APPS LIFE CYCLE
         self.routes =[{ 'R1': 'DIGITS', 'R2': 'CMDS',
                        'R3': 'FACE_REC', 'R4': 'AUTO_MOUSE',
                        'R5': 'SLEEP','R6': 'OFFLINE' }]
 
+        # //> INITIAL ROUTE VARIABLE
+        self.route = self.routes[0][__route]
+
+
     # //> FUNCTION CHANGES VALUE OF ROUTE TO SWITCH DYNAMICALLY THE MODE
     def route_selector(self, __RX):
         self.route = self.routes[0][__RX]
-        return self.route
+        # print('RECEIVED FROM route_selector', self.route)
 
 # //> [ LOCAL ]TODO: #1 NAV STATE AND HELPERS
     #     self.state = {

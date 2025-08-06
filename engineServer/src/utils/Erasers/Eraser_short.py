@@ -57,7 +57,6 @@ route = routes[0]['R1']
 # //>  MATCH CASE
 def route_selector(__RX):
     route = routes[0][__RX]
-
     return route
 
 while True:

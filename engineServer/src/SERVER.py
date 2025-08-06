@@ -1,4 +1,5 @@
 from src.broadcaster.BROADCASTER import BROADCASTER
+from src.navigator.NAVIGATOR import NAVIGATOR
 from src.switcher.SWITCHER import SWITCHER
 
 from flask import Flask, Response
@@ -19,6 +20,7 @@ def video_feed():
 
 # //< END POINTS DECLARATION FOR SELF NON-STATIC SERVER
 # //< END POINTS DECLARATION FOR SELF NON-STATIC SERVER
+ROUTE = 'R4'
 
 # //> ENGINE INIT
 class Engine:
@@ -65,7 +67,7 @@ class Engine:
                 break  # //> IF SOMETHING HAPPENS WITH WEBCAM LOOP WILL BREAK
 
             else: # //< DYNAMIC MULTI MODULE STAGE WITH SAME VIDEO SIGNAL FLIPPED / RAW / IN-SERIES
-                self._img = _SW_.router(self._img, self._success) # //< [ MODES MIDDLEWARE ROUTER AREA ]
+                self._img = _SW_.router(_CAM_, self._img, self._success) # //< [ MODES MIDDLEWARE ROUTER AREA ]
 
                 # //> BROADCASTING SIGNAL MODULE STAGE(CANVAS ONLY) //> SPLITSCREEN DYNAMIC MODULE EQUAL SIZE MODE
                 yield _BROADCAST_.broadcaster_(_CAM_.driver_(), self._img) # //> PRE-BROADCASTING SIGNAL STAGE
@@ -76,8 +78,9 @@ class Engine:
 
 _BROADCAST_ = BROADCASTER()  # //> BROADCASTING TO SELF SERVER ENGINE
 _CAM_ = Camera(0)  # //> PROMPTED CAMERA OBJECT WITH DEFAULT DEVICE
-engine_ = Engine(1,False,True)  # //> MAIN APP BUILDER ENGINE
-_SW_ = SWITCHER(_CAM_, 'R4') # //> GLOBAL ROUTER OPERATES WITH NAVIGATOR
+engine_ = Engine(1,False,True,True)  # //> MAIN APP BUILDER ENGINE
+_SW_ = SWITCHER('R2') # //> GLOBAL ROUTER OPERATES WITH NAVIGATOR
+# _NAV_ = NAVIGATOR('R4') # //> GLOBAL ROUTER OPERATES WITH SWITCHER
 # //> GLOBAL ROUTER ENGINE FOR PROCESSED IMAGE FUNCTIONS BACK TO BROADCASTER
 
 # //< MODULES AND CLASSES IMPORT AND SCOPE DECLARATION
@@ -90,3 +93,4 @@ if __name__ == '__main__': # //> MAIN APPLICATION STARTER
 
 
 
+# TODO: NAVIGATOR MUST GO ON THIS TOP LEVEL AND PASS DOWN THE ROUTE VALUE

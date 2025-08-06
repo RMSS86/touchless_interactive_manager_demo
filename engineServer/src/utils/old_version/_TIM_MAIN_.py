@@ -1,6 +1,6 @@
 # Face Recognition / Video Processing
-import cv2
-import face_recognition
+# import cv2
+# import face_recognition
 # # Tensor FLow Lite-MediaPipe
 # import mediapipe as mp
 # import pyautogui
