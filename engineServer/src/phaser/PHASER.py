@@ -72,14 +72,17 @@ class PHASER:
     # //> PARALLEL PROCESS FOR DETECTING LONG PRESSED CMS[WHEN RECEIVED BY self.long_select_value TIMES]
     def CMD_listener(self, value__, __handiness, __mode):
         self.long_count.append(value__)
-        print('FROM CMD_listener [ {} ]'.format(Counter(self.long_count)))
+        if len(Counter(self.long_count)) == 1:
 
-        if len(self.long_count) == self.long_select_value: #//> BUFFER SIZE MET?
-            self.long_count__ = Counter(self.long_count) # //> GET BUFFER ANALYSIS
-            # //> THE Counter FUNCTION GETS ELEMENTS DISTRIBUTION BY NATURES / COUNT
-            _value__, _count_of_ = self.long_count__.most_common()[0] # //< VALUES FOR LOGICAL USE
-            _COMM_.universal_COMM_Receiver_(value__, __handiness, __mode, 'LONG', _log=self._log)
-            # //> LONG COUNT RESET TO START ANOTHER CYCLE
+            if len(self.long_count) == self.long_select_value: #//> BUFFER SIZE MET?
+                self.long_count__ = Counter(self.long_count) # //> GET BUFFER ANALYSIS
+                # //> THE Counter FUNCTION GETS ELEMENTS DISTRIBUTION BY NATURES / COUNT
+                _value__, _count_of_ = self.long_count__.most_common()[0] # //< VALUES FOR LOGICAL USE
+                _COMM_.universal_COMM_Receiver_(value__, __handiness, __mode, 'LONG', _log=self._log)
+                # //> LONG COUNT RESET TO START ANOTHER CYCLE
+                self.long_counter_reset()
+
+        else:
             self.long_counter_reset()
 
 

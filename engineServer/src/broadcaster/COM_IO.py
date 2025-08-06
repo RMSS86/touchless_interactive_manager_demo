@@ -57,7 +57,7 @@ class COMM_IO:
         #     NAVIGATOR().route_selector('R1')
         # # self.match_CMD(__value, __handiness, __mode, __cmd_type, _log=True)
 
-    def CMD_compouser(self, __value, __hand, __mode, __cmd_type, _log=True):
+    def CMD_compouser(self, __value, __hand, __mode, __cmd_type, _log=False):
 
         # //> RECEIVES INPUTTED LONG COMMAND RECEIVED
         if __cmd_type == 'SHORT':
@@ -101,13 +101,15 @@ class COMM_IO:
     def _sendCOMMAND_(self, _comm, __log=False):
 
         try: # //> STATES TO SEND REQUEST TO SOCKET.IO SERVER
-            _req = requests.post(self.urlCOMM, data=_comm)
-            req_ = _req.json()
-
-            if __log:
-                self.logger(_comm, _req.status_code, req_)
-
-            return _req.status_code
+            print(_comm)
+            # _req = requests.post(self.urlCOMM, data=_comm)
+            # req_ = _req.json()
+            #
+            # if __log:
+            #     self.logger(_comm, _req.status_code, req_)
+            #
+            # return _req.status_code
+            pass
 
         except requests.exceptions.RequestException as e:
             print('ERROR SENDING MESSAGE: ', e)
