@@ -1,5 +1,24 @@
 from exceptiongroup import catch
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # [local]TODO: #1
 
 # with open('../../modules/hand_recognition/keypoint_classifier/keypoint_classifier_label.csv',

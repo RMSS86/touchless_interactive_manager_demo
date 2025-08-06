@@ -67,8 +67,8 @@ $--local-tag-height: 24rem;
 .brand_logo {
   position: absolute;
   height: 15rem;
-  top: 81%;
-  right: 1.5%;
+  bottom: 1%;
+  left: 3.5%;
 
   @include mixins.respond(phone) {
     height: 6rem;

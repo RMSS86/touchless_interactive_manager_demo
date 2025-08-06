@@ -1,7 +1,7 @@
 # Face Recognition / Video Processing
 import cv2
 import numpy as np
-import face_recognition
+# import face_recognition
 # Tensor FLow Lite-MediaPipe
 import pyautogui
 
@@ -11,8 +11,8 @@ import os
 
 ###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
 ###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
-from src.utils.old_version.modules.functional_modules.TIM_API_Module import UD_API
-from src.utils.old_version.modules.functional_modules._TIM_SWITCHER_ import _SWITCHER_
+# from src.utils.old_version.modules.functional_modules.TIM_API_Module import UD_API
+# from src.utils.old_version.modules.functional_modules._TIM_SWITCHER_ import _SWITCHER_
 ###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
 ###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER###IMPORTING SWTICHER
 
