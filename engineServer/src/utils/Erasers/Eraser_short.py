@@ -1,21 +1,51 @@
+import os
+import cv2
+import numpy as np
+import face_recognition
 from exceptiongroup import catch
 
+# //> [ PRE ]TAKE REAL BIOMETRICS FROM PICTURED RESOURCES
+self_path = '../data/faces/raw_images'
+self_SourceImages = []
+self_ClassNames = []
+self_myList = os.listdir(self_path)
+
+# //> GETS PICTURES IN RAW FOLDER, MUST BE JUST ONE AT TIME FOR NOW, THEN
+# //> CREATE A MECHANISM THAT COMPARES NAMES AND SELECTS THOSE NOT REGISTERED...
+for cl in self_myList:
+    self_RawImg = cv2.imread(f'{self_path}/{cl}')
+    # //> ENCODED IMAGES TO BE ENCODED BY BULK OR SINGLE SHOTS(THIS CASE)
+    self_SourceImages.append(self_RawImg)
+    # //> CLEARS THE IMAGE NAME TO THE NAME NEED TO BE CHANGED IN EMP_ID
+    self_ClassNames.append(os.path.splitext(cl)[0])
+# print(self_ClassNames)
+# print(self_SourceImages)
+
+def self_findEncondings(Images):
+    self_encondeList = []
+
+    for img in Images:
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+        self_encode = face_recognition.face_encodings(img)[0]
+        self_encondeList.append(self_encode)
+    #
+    # print(f'Printed from findEncondings {self_encondeList}')
+
+    return self_encondeList
+
+self_findEncondings(self_SourceImages)
+
+def self_Coordinates():
+    ###############Buider intergration from camera on Module faceRecognition
+    # This used to be in Face_rotors!
+    self_encodeListKnown = self_findEncondings(self_SourceImages)
+    print(f'Printed from _Coordinates {self_encodeListKnown}')
+    return self_encodeListKnown
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+self_encodeListKnown_ = self_Coordinates()
+print(f'Printed from random  {np.random.rand(128).tolist()}')
 
 
 
@@ -32,31 +62,31 @@ from exceptiongroup import catch
 #
 #
 #
-routes = [{'R1': 'DIGITS', 'R2': 'CMDS', 'R3': 'FACEREC', 'R4': 'AUTOMOUSE', 'R5': 'SLEEP','R6': 'OFFLINE'}]
-
-CATEGORIES = [{'':'',}]
-
-CMD_TYPE = [ 'ACTIONS', 'CMD', 'RESET', 'TOGGLE' ]
-
-MODES = ['LOGIN','AUTO_MOUSE','CMD_OPTS', 'CMD_STEPPER']
-
-LOGIN = {}
-
-AUTO_MOUSE= {}
-
-CMD_OPTS = {}
-
-CMD_STEPPER = {}
-
-
-_CMD = {
-    'CMD_TYPE': 'CMD',
-    'MODE': 'CMD_OPTS',
-    'CMD_BODY':
-        {
-           '_CMD': '',
-        }
-}
+# routes = [{'R1': 'DIGITS', 'R2': 'CMDS', 'R3': 'FACEREC', 'R4': 'AUTOMOUSE', 'R5': 'SLEEP','R6': 'OFFLINE'}]
+#
+# CATEGORIES = [{'':'',}]
+#
+# CMD_TYPE = [ 'ACTIONS', 'CMD', 'RESET', 'TOGGLE' ]
+#
+# MODES = ['LOGIN','AUTO_MOUSE','CMD_OPTS', 'CMD_STEPPER']
+#
+# LOGIN = {}
+#
+# AUTO_MOUSE= {}
+#
+# CMD_OPTS = {}
+#
+# CMD_STEPPER = {}
+#
+#
+# _CMD = {
+#     'CMD_TYPE': 'CMD',
+#     'MODE': 'CMD_OPTS',
+#     'CMD_BODY':
+#         {
+#            '_CMD': '',
+#         }
+# }
 
 # //> COMMAND DICTIONARY GUIDE
 
@@ -72,32 +102,32 @@ _CMD = {
 # //> ** [ 8 ] RIGHT HAND ] AUTO_MOSE MODE OK 5 LONG(3 ROUNDS ON PHASE) GETS [GENERAL_MENU] MODE(LEFT HAND DIGITS OR CMDS?)
 # //> ** [ 9 ]  ]
 
-route = routes[0]['R1']
-# //>  MATCH CASE
-def route_selector(__RX):
-    route = routes[0][__RX]
-    return route
-
-while True:
-    __RX = input("Press enter a route from to quit {'R1': 'DIGITS', 'R2': 'CMDS', 'R3': 'FACEREC', 'R4': 'AUTOMOUSE', 'R5': 'SLEEP','R6': 'OFFLINE'}\n")
-
-    try:
-        route = routes[0][__RX]
-    except:
-        print("value incorrect select from {'R1': 'DIGITS', 'R2': 'CMDS', 'R3': 'FACEREC', 'R4': 'AUTOMOUSE', 'R5': 'SLEEP','R6': 'OFFLINE'}\n")
-
-
-    match route:
-        case 'DIGITS':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
-            print(routes[0]['R1'])
-        case 'CMDS':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
-            print(routes[0]['R2'])
-        case 'FACEREC':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
-            print(routes[0]['R3'])
-        case 'AUTOMOUSE':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
-            print(routes[0]['R4'])
-        case _:
-            print("[ Invalid ENTRY ]")
+# route = routes[0]['R1']
+# # //>  MATCH CASE
+# def route_selector(__RX):
+#     route = routes[0][__RX]
+#     return route
+#
+# while True:
+#     __RX = input("Press enter a route from to quit {'R1': 'DIGITS', 'R2': 'CMDS', 'R3': 'FACEREC', 'R4': 'AUTOMOUSE', 'R5': 'SLEEP','R6': 'OFFLINE'}\n")
+#
+#     try:
+#         route = routes[0][__RX]
+#     except:
+#         print("value incorrect select from {'R1': 'DIGITS', 'R2': 'CMDS', 'R3': 'FACEREC', 'R4': 'AUTOMOUSE', 'R5': 'SLEEP','R6': 'OFFLINE'}\n")
+#
+#
+#     match route:
+#         case 'DIGITS':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
+#             print(routes[0]['R1'])
+#         case 'CMDS':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
+#             print(routes[0]['R2'])
+#         case 'FACEREC':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
+#             print(routes[0]['R3'])
+#         case 'AUTOMOUSE':  # //> STARTS SINGLE LH DIGITS RECOGNITION COMMAND
+#             print(routes[0]['R4'])
+#         case _:
+#             print("[ Invalid ENTRY ]")
 
 
 
