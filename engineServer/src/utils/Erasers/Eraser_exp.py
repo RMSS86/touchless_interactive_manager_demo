@@ -166,23 +166,46 @@ def insert_new_user(__user_data, __faces_collection, __log=False):
 
 
 # //> [ 1.5 ]CREATION OF FACE DATA RAW_IMG_SOURCE_PATH,
-CLASS_NAMES, _ENCODE_ = face_embeddings(__face_loc=RAW_IMG_SOURCE_PATH, __cv=cv2, __log=True)
+# CLASS_NAMES, _ENCODE_ = face_embeddings(__face_loc=RAW_IMG_SOURCE_PATH, __cv=cv2, __log=True)
 
-# //> CONNECTS TO MONGODB SERVER
-FACES_COLLECTION, STORED_EMBEDDINGS, STORED_NAMES = DB_connect(dotenv_path, 'test','users')
-
-# //> PERFORMS CALCULATIONS COMPARING DISTANCES
-# //> ON IMPLEMENTATION, REMEMBER TO SET INPUT _ENCODE_ TO face_recognition.face_encodings(_img)[0] I/O
-get_similarity(_ENCODE_, STORED_EMBEDDINGS, STORED_NAMES, True) # //> _ENCODE_[0].tolist()
-
+# # //> CONNECTS TO MONGODB SERVER
+# FACES_COLLECTION, STORED_EMBEDDINGS, STORED_NAMES = DB_connect(dotenv_path, 'test','users')
+#
+# # //> PERFORMS CALCULATIONS COMPARING DISTANCES
+# # //> ON IMPLEMENTATION, REMEMBER TO SET INPUT _ENCODE_ TO face_recognition.face_encodings(_img)[0] I/O
+# get_similarity(_ENCODE_, STORED_EMBEDDINGS, STORED_NAMES, True) # //> _ENCODE_[0].tolist()
+#
 
 # //> IF REQUESTED
-if USER_CREATE_NEW:
+# if USER_CREATE_NEW:
 
-    # //> CREATING NEW USER'S OBJECT
-    NEW_USER_DATA = user_compouser('Robbie Stevenson', _ENCODE_,
-                                   'user909', 'Tigers_IX', 'CEO',
-                                   'robbie_trevor@trax.io')
-
+# # //> CREATING NEW USER'S OBJECT
+# NEW_USER_DATA = user_compouser('Robbie Stevenson', _ENCODE_,
+#                                'user909', 'Tigers_IX', 'CEO',
+#                                'robbie_trevor@trax.io')
+#
+# print(NEW_USER_DATA)
     # //> CREATING NEW USER'S RECORD
-    insert_new_user(NEW_USER_DATA, FACES_COLLECTION)
+    # insert_new_user(NEW_USER_DATA, FACES_COLLECTION)
+
+try:
+    # //> [ PRE ]TAKE REAL BIOMETRICS FROM PICTURED RESOURCES
+    DB_SETTINGS_LOCAL_PATH = '../../database/database.env'
+
+    # //> [ 0 ]LOADS AN ENV FILE FROM RELATIVE PATH,
+    _dotenv_path = Path(DB_SETTINGS_LOCAL_PATH)
+    load_dotenv(dotenv_path=_dotenv_path)
+
+    # //> ONCE DATA IS COLLECTED
+    _DB_ENV_PATH = os.getenv("DB_ENV_PATH")
+    _DB = os.getenv("DB_NAME")
+    _COLLECTION = os.getenv("DB_COLLECTION")
+    print('DB SETTINGS LOADED FROM LOCAL ENV \n_DB_ENV_PATH [ {} ] \n_DB [ {} ] _COLLECTION [ {} ]'.format(_DB_ENV_PATH, _DB, _COLLECTION))
+
+except Exception as e:
+    # //> GENERICAL TEST DATABASE / COL
+    _DB_ENV_PATH ='../../../env/serverengine.env'
+    _DB = 'test'
+    _COLLECTION = 'users'
+
+    print('UNABLE TO FETCH DATA BROM LOCAL SETTING .ENV, ERROR: {} \n DEFAULT DATA LOADED TO DB_MANAGER INIT PROTOCOL'.format(e))

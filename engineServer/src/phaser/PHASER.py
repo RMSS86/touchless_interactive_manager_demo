@@ -16,6 +16,7 @@ class PHASER:
         self.long_select_CMD = None
 
         # //> BUFFER COUNT VARIABLES
+        self.tag_face_command_= []
         self.tag_hand_command_ = []
         self.tag_hand_command_BH = []
         self.tag_mouse_command_ = []
@@ -27,6 +28,7 @@ class PHASER:
             self.slot_capacity = 21
         if __speed == 'fast':
             self.slot_capacity = 15
+
 
     # //> MAKES A COMMUNICATION DEVICE FOR COUNTING COMMANDS
     # //> MAKE FOR SINGLE HAND MODE DIGITS [ SINGLE-HAND ]AND DECODES COMMAND
