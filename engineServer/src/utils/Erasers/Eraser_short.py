@@ -21,6 +21,8 @@ class FACE_RECOGNITION:
                  __path='../data/faces/raw_images', __db_settings='../../database/database.env'):
 
         #//> DYNAMIC CALLABLE PATH FOR RAW IMAGES
+        self._collection = None
+        self._db = None
         self._success = None
         self.most_similar_index = None
         self.similarities = None
@@ -104,22 +106,18 @@ class FACE_RECOGNITION:
             self.Face_embeddings_Counter(self.encodedCurrentFrame[0].tolist(), "SIMPLE")
 
             if __log:
-                print("CURRENT FACIAL LANDMARKS: {} \nAT [ {} ]".format(self.encodedCurrentFrame[0].tolist(),
-                                                                        self.now))
+                print("CURRENT FACIAL LANDMARKS: {} \nAT [ {} ]".format(
+                    self.encodedCurrentFrame[0].tolist(), self.now))
 
         except Exception as e:
             print('OOPS {}'.format(e))
             self.TAG_RESETER_()
 
-
         return _img
-        # //> MAKES AND ARRAY FOR FACE LANDMARKS EMBEDDINGS
 
-
+    # //> MAKES AND ARRAY FOR FACE LANDMARKS EMBEDDINGS
     def get_similarity(self, __target, __records, __names, __log=False):
-        # //> PERFORM SIMILARITY COMPARISON USING
-        # [ scikit-learn's cosine_similarity ]
-
+        # //> PERFORM SIMILARITY COMPARISON USING [ scikit-learn's cosine_similarity ]
         if __records:
 
             # //> GETS THE PROXIMITY OPERATION
@@ -147,9 +145,12 @@ class FACE_RECOGNITION:
             print("NO_FACES_STORED_IN_DATABASE")
             return "NO_FACES_STORED_IN_DATABASE"
 
+    # //> GETS PHASE OF FACES RECOGNIZED TO ENABLE API FETCH
     def FACE_normalizer(self, __embeddings, __slot_len, __log=False):
 
+        # //> PHASER LEN EVALUATION
         if len(__embeddings) == __slot_len:
+
             if __log:
                 print('LAST CONTINUOUS FACE REC: {}'.format(__embeddings[-1]))
 
@@ -169,7 +170,7 @@ class FACE_RECOGNITION:
 
             self.TAG_RESETER_()
 
-
+    # //> GETS LOCAL DATA FOTO FOR INGESTION> EMBEDDING DATA / NAME(USER_ID)
     def face_embeddings(self, __face_loc='FAKE_DATA', __cv=None, __log=False):
         if __face_loc != 'FAKE_DATA':
             # //> [ PRE ]TAKE REAL BIOMETRICS FROM PICTURED RESOURCES
@@ -194,7 +195,7 @@ class FACE_RECOGNITION:
             if __log:
                 print('FROM face_embeddings NAMES, EMBEDDINGS {} {}'.format(self.CLASS_NAMES,
                                                                             self.ENCODED_LIST[0].tolist()))
-
+            # //> RETURNS NORMALIZED VALUES
             return self.CLASS_NAMES, self.ENCODED_LIST[0].tolist()
 
         if __face_loc == 'FAKE_DATA':  # //> FOR DUMMY TESTING PURPOSES GENERATED DATA
@@ -210,27 +211,31 @@ class FACE_RECOGNITION:
             return self.CLASS_NAMES, self.ENCODED_LIST
         return None
 
-    def ADD_new_user(self, __user, __db, __log=False):
+    def ADD_new_user(self, __user, __log=False):
         try:
-            _DBM_.insert_new_user(__user, __db, True)
+            # //> INGESTS NEW COMPOSED USER AND ADDS DATA TO DB
+            _DBM_.insert_new_user(__user, True)
 
         except Exception as e:
             print("UNABLE_TO_GET_NEW_USER_STORED_IN_DATABASE, ERROR {}".format(e))
 
         try:
-
+            # //> FRESH FETCH TO DATABASE [ UPDATED DATA CHECKPOINT ]
             self._db, self._collection = _DBM_.get_db_settings(self.DB_SETTINGS_LOCAL_PATH, True)
             _DBM_.fetch_whole_db_to_Local(self._db, self._collection ,True)
 
         except Exception as e:
             print("UNABLE_TO_GET_NEW_USER_STORED_IN_DATABASE, ERROR {}".format(e))
 
-
+    # //> CONTINUOUS PHASE / COMM COMMANDER
     def USER_Phaser(self,_id, _parser, _comm):
         self._user_recd_counter_.append(_id)
         print(self._user_recd_counter_)
         if len(self._user_recd_counter_) == _parser:
-
+            # TODO: ADD COMMIO ENTRY HERE!
+            # TODO: PROVE THAT LOGGED USER STILL LOGGED WHEN MAKING DESICIONS ON THE FLOW
+            # TODO: MAKING A LOG OUT WHEN NO USER INFRONT PAGE FOR AS LONG AS 15SECS / MODE TO HOME PAGE
+            # TODO: WHEN RECOGNIZING A FACE, GOT TO USER PAGE AUTOMATICALLY [CREATE A UI_DO COMMAND]
             self.USER_RESETER_()
 
     def USER_RESETER_(self):
@@ -248,10 +253,7 @@ if __name__ == '__main__':
     _FR_.FacialRotor()
 
 
-
-
-
-
+# //> TODO: SWITCHER ON MODE MECHANISM! [URGENT]
 # [local]TODO: #1
 
 # with open('../../modules/hand_recognition/keypoint_classifier/keypoint_classifier_label.csv',

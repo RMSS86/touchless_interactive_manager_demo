@@ -11,34 +11,14 @@ import os
 class DB_MANAGER:
     def __init__(self, __path='../../database/database.env', __log=False):
 
-        # //> TODO MAKE GENERIC FUNCTION
+        # //> GETS DB PUBLIC VARS
+        self.DB_SETTINGS_LOCAL_PATH = None
+        self._DB_ENV_PATH = None
+        self._COLLECTION = None
+        self._DB = None
+
+        # //> UPDATING SETTINGS VARIABLES
         self.get_db_settings(__path, __log)
-        # try:
-        #     # //> [ PRE ]TAKE REAL BIOMETRICS FROM PICTURED RESOURCES
-        #     DB_SETTINGS_LOCAL_PATH = __path
-        #
-        #     # //> [ 0 ]LOADS AN ENV FILE FROM RELATIVE PATH,
-        #     _dotenv_path = Path(DB_SETTINGS_LOCAL_PATH)
-        #     load_dotenv(dotenv_path=_dotenv_path)
-        #
-        #     # //> ONCE DATA IS COLLECTED
-        #     self._DB_ENV_PATH = os.getenv("DB_ENV_PATH")
-        #     self._DB = os.getenv("DB_NAME")
-        #     self._COLLECTION = os.getenv("DB_COLLECTION")
-        #
-        #     if __log:
-        #         print('DB SETTINGS LOADED FROM LOCAL ENV \n_DB_ENV_PATH [ {} ] \n_DB [ {} ] _COLLECTION [ {} ]'.format(
-        #             self._DB_ENV_PATH, self._DB, self._COLLECTION))
-        #
-        # except Exception as e:
-        #     # //> GENERICAL TEST DATABASE / COL
-        #     self._DB_ENV_PATH = '../../../env/serverengine.env'
-        #     self._DB = 'test'
-        #     self._COLLECTION = 'users'
-        #
-        #     print(
-        #         'UNABLE TO FETCH DATA BROM LOCAL SETTING .ENV, ERROR: {} \n DEFAULT DATA LOADED TO DB_MANAGER INIT PROTOCOL'.format(
-        #             e))
 
         # //> INITIAL VARIABLES
         self._STORED_NAMES = None
@@ -57,8 +37,8 @@ class DB_MANAGER:
 
 
         # //> INITIAL VARIABLES FOR CONSTRUCTING DATABASE API ENCORE
-        self.FACES_COLLECTION, self.STORED_EMBEDDINGS, self.STORED_NAMES = self.DB_connect(self._DB_ENV_PATH, self._DB,
-                                                                                           self._COLLECTION, __log )
+        self.FACES_COLLECTION, self.STORED_EMBEDDINGS, self.STORED_NAMES \
+            = self.DB_connect(self._DB_ENV_PATH, self._DB, self._COLLECTION, __log )
 
     # //> CONNECTS INSTANCE TO MONGODB SERVER
     def DB_connect(self, __path, __db, __collection, __log=True):
@@ -76,41 +56,24 @@ class DB_MANAGER:
             self.ES_TEMPLATE_PWD = '<db_password>'
 
             # //> REPLACES TEMPLATE TARGET STRINGS FROM ES_DATABASE_RAW_CONN_STRING FOR AUTH CONNECTION TO SERVER
-            self.ES_DATABASE_URL_CONN_STRING = self.ES_DATABASE_RAW_CONN_STRING.replace(self.ES_TEMPLATE_USER,
-                                                                              self.ES_MONGODB_USERNAME).replace(
-                                                                            self.ES_TEMPLATE_PWD, self.ES_MONGODB_PASSWORD)
+            self.ES_DATABASE_URL_CONN_STRING = self.ES_DATABASE_RAW_CONN_STRING.replace(
+                self.ES_TEMPLATE_USER, self.ES_MONGODB_USERNAME).replace(self.ES_TEMPLATE_PWD, self.ES_MONGODB_PASSWORD)
 
-            try:  # //> SEND PING ON A SUCCESSFUL CONNECTION
+            try:
+                # //> SEND PING ON A SUCCESSFUL CONNECTION
                 # //> CREATES A NEW CLIENT AND CONNECTS TO SERVER
                 self._MONGO_CLIENT = MongoClient(self.ES_DATABASE_URL_CONN_STRING, server_api=ServerApi('1'))
+
                 # //> CONFIRMS THAT MONGO CLIENT HAD CREATED INSTANCE SUCCESSFULLY
                 self._MONGO_CLIENT.admin.command('ping')
                 print("PING RESPONSE: CONNECTED TO MONGODB DATABASE")
 
-                # TODO: MAKE A FUNCTION FOR USAGE
-                # try:
+                # //> RETURNS DIRECTLY [ self._FACES_COLLECTION, self._STORED_EMBEDDINGS, self._STORED_NAMES ]
                 return self.fetch_whole_db_to_Local(__db,__collection,True)
-                #     # //> [ 2 ]POINTER FOR SERVER DB AND COLLECTION
-                #     self.DB_ = self._MONGO_CLIENT[__db]  # //> REPLACE WITH FINAL DB
-                #     self._FACES_COLLECTION = self.DB_[__collection]  # //> REPLACE WITH FINAL COLLECTION
-                #     # //> FETCHES ALL OBJECTS UNDER THE FACES_COLLECTION DB
-                #     self._STORED_FACES_ALL = list(self._FACES_COLLECTION.find({}))
-                #     # //> MAKES PARALLEL ARRAYS FOR STORED_EMBEDDINGS, STORED_NAMES
-                #     self._STORED_EMBEDDINGS = [doc['embedding'] for doc in self._STORED_FACES_ALL]
-                #     self._STORED_NAMES = [doc['name'] for doc in self._STORED_FACES_ALL]
-                #
-                #     if __log:
-                #         print('STORED_EMBEDDINGS {} \nSTORED_NAMES {}'.format(self._STORED_EMBEDDINGS, self._STORED_NAMES))
-                #
-                #     return self._FACES_COLLECTION, self._STORED_EMBEDDINGS, self._STORED_NAMES
-                #
-                # except Exception as e:
-                #     print('AN UNEXPECTED ERROR OCCURRED: {}'.format(e))
-                #     return None
 
             except Exception as e:
                 print('AN UNEXPECTED ERROR OCCURRED: {}'.format(e))
-                return None
+                return 'AN_UNEXPECTED_ERROR_OCCURRED'
 
 
     # //> MAKES STRUCTURE FOR NEW ENTRY
@@ -132,6 +95,8 @@ class DB_MANAGER:
                 "embedding": __embedding
             }
 
+
+    # //> GETS THE WHOLE DATABASE EMBEDDINGS AND ARRANGES TO TEMP LOCAL VAR
     def fetch_whole_db_to_Local(self,__db,__collection, __log=True):
         try:
             # //> [ 2 ]POINTER FOR SERVER DB AND COLLECTION
@@ -152,13 +117,15 @@ class DB_MANAGER:
             print('AN UNEXPECTED ERROR OCCURRED: {}'.format(e))
             return ['ERROR_WHILE_FETCHING']
 
+
+    # //> FETCHES FROM .ENV LOCAL FILE DB SETTINGS DB, COLLECTION
     def get_db_settings(self,__path, __log=False):
         try:
             # //> [ PRE ]TAKE REAL BIOMETRICS FROM PICTURED RESOURCES
-            DB_SETTINGS_LOCAL_PATH = __path
+            self.DB_SETTINGS_LOCAL_PATH = __path
 
             # //> [ 0 ]LOADS AN ENV FILE FROM RELATIVE PATH,
-            _dotenv_path = Path(DB_SETTINGS_LOCAL_PATH)
+            _dotenv_path = Path(self.DB_SETTINGS_LOCAL_PATH)
             load_dotenv(dotenv_path=_dotenv_path)
 
             # //> ONCE DATA IS COLLECTED
@@ -170,24 +137,27 @@ class DB_MANAGER:
                 print('DB SETTINGS LOADED FROM LOCAL ENV \n_DB_ENV_PATH [ {} ] \n_DB [ {} ] _COLLECTION [ {} ]'.format(
                     self._DB_ENV_PATH, self._DB, self._COLLECTION))
 
-            return self._DB, self._COLLECTION
+            return self._DB, self._COLLECTION # //< RETURNED VALUES FOR GENERIC USES
 
         except Exception as e:
+
             # //> GENERICAL TEST DATABASE / COL
             self._DB_ENV_PATH = '../../../env/serverengine.env'
             self._DB = 'test'
             self._COLLECTION = 'users'
 
             print(
-                'UNABLE TO FETCH DATA BROM LOCAL SETTING .ENV, ERROR: {} \n DEFAULT DATA LOADED TO DB_MANAGER INIT PROTOCOL'.format(
-                    e))
+                'UNABLE TO FETCH DATA fROM LOCAL SETTING .ENV, ERROR: {} '
+                '\n DEFAULT DATA LOADED TO DB_MANAGER INIT PROTOCOL'.format(e))
+
+            return 'UNABLE_TO_FETCH_DATA_FROM_LOCAL_SETTING_ENV'
 
     # //> MAKES INSERT FOR NEW ENTRY TO TARGET DATABASE
-    def insert_new_user(self, __user_data, __faces_collection, __log=False):
+    def insert_new_user(self, __user_data, __log=False):
 
         try:
             # //> INSERTS A RECORD FOR NEW OBJECT
-            __faces_collection.insert_one(__user_data)
+            self.FACES_COLLECTION.insert_one(__user_data)
 
             if __log:
                 print("USER SUCCESSFULLY CREATED: {}".format(__user_data))
