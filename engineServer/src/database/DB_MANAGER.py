@@ -77,22 +77,22 @@ class DB_MANAGER:
 
 
     # //> MAKES STRUCTURE FOR NEW ENTRY
-    def user_compouser(self, __name,
-                       __embedding,
-                       __id,
-                       __account,
-                       __position,
-                       __email,
+    def user_compouser(self, _name='',
+                       _id='',
+                       _account='',
+                       _position='',
+                       _email='',
+                       _embedding='[128]',
                        __log=False):
 
         # //> RETURNS JSON LIKE OBJECT
         return {
-                "user_id": __id,
-                "name": __name,
-                "account":__account,
-                "position":__position,
-                "email":__email,
-                "embedding": __embedding
+                "user_id": _id,
+                "name": _name,
+                "account":_account,
+                "position":_position,
+                "email":_email,
+                "embedding": _embedding
             }
 
 

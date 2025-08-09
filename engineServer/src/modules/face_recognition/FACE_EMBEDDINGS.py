@@ -33,9 +33,9 @@ class FACE_EMBEDDINGS:
 
             if __log:
                 print('FROM face_embeddings NAMES, EMBEDDINGS {} {}'.format(self.CLASS_NAMES,
-                                                                            self.ENCODED_LIST[0].tolist()))
+                                                                            self.ENCODED_LIST)) # [0].tolist()
             # //> RETURNS NORMALIZED VALUES
-            return self.CLASS_NAMES, self.ENCODED_LIST[0].tolist()
+            return self.CLASS_NAMES, self.ENCODED_LIST #[0].tolist()
 
         if __face_loc == 'FAKE_DATA':  # //> FOR DUMMY TESTING PURPOSES GENERATED DATA
             # //> GENERAL FICTION NAME
