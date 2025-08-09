@@ -232,9 +232,10 @@ class FACE_RECOGNITION:
         self._user_recd_counter_.append(_id)
         print(self._user_recd_counter_)
         if len(self._user_recd_counter_) == _parser:
-            # TODO: ADD COMMIO ENTRY HERE!
+            # TODO: ADD NEW PERSON ENTRY / REMOVE THE DUMMY DATA RECORD FORM DB!
+            # TODO: ADD COMM-IO ENTRY HERE!
             # TODO: PROVE THAT LOGGED USER STILL LOGGED WHEN MAKING DESICIONS ON THE FLOW
-            # TODO: MAKING A LOG OUT WHEN NO USER INFRONT PAGE FOR AS LONG AS 15SECS / MODE TO HOME PAGE
+            # TODO: MAKING A LOG OUT WHEN NO USER IN_FRONT PAGE FOR AS LONG AS 15SECS / MODE TO HOME PAGE
             # TODO: WHEN RECOGNIZING A FACE, GOT TO USER PAGE AUTOMATICALLY [CREATE A UI_DO COMMAND]
             self.USER_RESETER_()
 

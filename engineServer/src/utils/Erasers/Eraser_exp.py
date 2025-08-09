@@ -212,7 +212,34 @@
 #     print('UNABLE TO FETCH DATA BROM LOCAL SETTING .ENV, ERROR: {} \n DEFAULT DATA LOADED TO DB_MANAGER INIT PROTOCOL'.format(e))
 #
 
-###########################################################################################
-###########################################################################################
-#
+
+from src.database.DB_MANAGER import DB_MANAGER
+
+# //> INVOKE DB_MANAGER
+_DBM_ = DB_MANAGER()
+
+# //> GET CURRENT DATABASE SETTINGS FROM ENV FILE
+_db, _collection = _DBM_.get_db_settings('../../database/database.env', False)
+
+# //> GET CURRENT DATABASE RECORDS FROM SERVER
+_FACES_COLLECTION, _STORED_EMBEDDINGS, _STORED_NAMES = _DBM_.fetch_whole_db_to_Local(_db, _collection, False)
+
+# //> FETCHING USER FORM DB BY ID[#NAME]
+_FETCHED_USER = _DBM_.fetch_single_user_by_ID('John Doe')
+print('FETCHED USER FROM SERVER::\n{}'.format(_FETCHED_USER))
+
+# //> DELETING USER FROM DB BY ID[#NAME]
+
+
+# //> INSERT USER FROM DB BY ID[#NAME]
+_NEW_USER = _DBM_.user_compouser('')
+
+# //> INSERT USER FROM DB BY ID[#NAME]
+_SAVED_NEW_USER = _DBM_.insert_new_user()
+
+# //> TODO: GET THE USER DATABASE SIMILAR CRUD TO DUMMY USERS COLLECTION PRIOR TO >>>
+# //< TODO: CREATE A REAL USERS DATABASE UNDER A USERS COLLECTION, THEN GET THE FACES EMBEDDINGS INTO
+#  THE USER_EMBEDDINGS COLLECTION STORING EMBS, AND USER [_id] FROM [USERS] COLLECTION! MANAGED BY THE BACK END
+
+
 

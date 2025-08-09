@@ -109,13 +109,14 @@ class DB_MANAGER:
             self._STORED_NAMES = [doc['name'] for doc in self._STORED_FACES_ALL]
 
             if __log:
-                print('fetch_whole_db_to_Local \nSTORED_EMBEDDINGS {} \nSTORED_NAMES {}'.format(self._STORED_EMBEDDINGS, self._STORED_NAMES))
+                print('fetch_whole_db_to_Local \nSTORED_EMBEDDINGS [ {} ] \nSTORED_NAMES {}'.format(len(self._STORED_EMBEDDINGS), self._STORED_NAMES))
 
             return self._FACES_COLLECTION, self._STORED_EMBEDDINGS, self._STORED_NAMES
 
         except Exception as e:
             print('AN UNEXPECTED ERROR OCCURRED: {}'.format(e))
             return ['ERROR_WHILE_FETCHING']
+
 
 
     # //> FETCHES FROM .ENV LOCAL FILE DB SETTINGS DB, COLLECTION
@@ -165,3 +166,31 @@ class DB_MANAGER:
         except Exception as e:
             print('AN UNEXPECTED ERROR OCCURRED: {}'.format(e))
 
+
+    # //> FETCHING USER FORM DB BY ID
+    def fetch_single_user_by_ID(self, __id,__log=False):
+        try:
+            if __log:
+                print('fetch_wholefetch_single_user_by_ID FROM [ {} ] FETCHING [ {} ]'.format(
+                    self._FACES_COLLECTION, __id))
+
+            # return self._FACES_COLLECTION.find_one({"_id": __id})
+            return self._FACES_COLLECTION.find_one({"name": __id})
+
+        except Exception as e:
+            print('AN UNEXPECTED ERROR OCCURRED: {}'.format(e))
+            return ['ERROR_WHILE_FETCHING']
+
+
+    # //> FETCHING USER FORM DB BY ID
+    def delete_single_user_by_ID(self, __id,__log=False):
+        try:
+            if __log:
+                print('fetch_wholefetch_single_user_by_ID FROM [ {} ] DELETING [ {} ]'.format(
+                    self._FACES_COLLECTION, __id))
+
+            return self._FACES_COLLECTION.delete_one({"name": __id})
+
+        except Exception as e:
+            print('AN UNEXPECTED ERROR OCCURRED: {}'.format(e))
+            return ['ERROR_WHILE_DELETING']
