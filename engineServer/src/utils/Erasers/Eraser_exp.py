@@ -9,6 +9,7 @@ from pathlib import Path
 # //> IMPORTS MONGO CLOUDS DB CLASSES
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
+from datetime import datetime
 import os
 
 # //> IMPORTS LOGICAL ML COMPARISON MODULE [ cosine_similarity ]

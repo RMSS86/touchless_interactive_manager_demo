@@ -7,32 +7,38 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 import os
 
-try:
-    # //> [ PRE ]TAKE REAL BIOMETRICS FROM PICTURED RESOURCES
-    DB_SETTINGS_LOCAL_PATH = '../../database/database.env'
-
-    # //> [ 0 ]LOADS AN ENV FILE FROM RELATIVE PATH,
-    _dotenv_path = Path(DB_SETTINGS_LOCAL_PATH)
-    load_dotenv(dotenv_path=_dotenv_path)
-
-    # //> ONCE DATA IS COLLECTED
-    _DB_ENV_PATH = os.getenv("DB_ENV_PATH")
-    _DB = os.getenv("DB_NAME")
-    _COLLECTION = os.getenv("DB_COLLECTION")
-
-    print('DB SETTINGS LOADED FROM LOCAL ENV \n_DB_ENV_PATH [ {} ] \n_DB [ {} ] _COLLECTION [ {} ]'.format(_DB_ENV_PATH, _DB, _COLLECTION))
-
-except Exception as e:
-    # //> GENERICAL TEST DATABASE / COL
-    _DB_ENV_PATH ='../../../env/serverengine.env'
-    _DB = 'test'
-    _COLLECTION = 'users'
-
-    print('UNABLE TO FETCH DATA BROM LOCAL SETTING .ENV, ERROR: {} \n DEFAULT DATA LOADED TO DB_MANAGER INIT PROTOCOL'.format(e))
 
 class DB_MANAGER:
-    def __init__(self, __path=_DB_ENV_PATH,
-                 __db=_DB, __collection=_COLLECTION, __log=False):
+    def __init__(self, __path='../../database/database.env', __log=False):
+
+        # //> TODO MAKE GENERIC FUNCTION
+        self.get_db_settings(__path, __log)
+        # try:
+        #     # //> [ PRE ]TAKE REAL BIOMETRICS FROM PICTURED RESOURCES
+        #     DB_SETTINGS_LOCAL_PATH = __path
+        #
+        #     # //> [ 0 ]LOADS AN ENV FILE FROM RELATIVE PATH,
+        #     _dotenv_path = Path(DB_SETTINGS_LOCAL_PATH)
+        #     load_dotenv(dotenv_path=_dotenv_path)
+        #
+        #     # //> ONCE DATA IS COLLECTED
+        #     self._DB_ENV_PATH = os.getenv("DB_ENV_PATH")
+        #     self._DB = os.getenv("DB_NAME")
+        #     self._COLLECTION = os.getenv("DB_COLLECTION")
+        #
+        #     if __log:
+        #         print('DB SETTINGS LOADED FROM LOCAL ENV \n_DB_ENV_PATH [ {} ] \n_DB [ {} ] _COLLECTION [ {} ]'.format(
+        #             self._DB_ENV_PATH, self._DB, self._COLLECTION))
+        #
+        # except Exception as e:
+        #     # //> GENERICAL TEST DATABASE / COL
+        #     self._DB_ENV_PATH = '../../../env/serverengine.env'
+        #     self._DB = 'test'
+        #     self._COLLECTION = 'users'
+        #
+        #     print(
+        #         'UNABLE TO FETCH DATA BROM LOCAL SETTING .ENV, ERROR: {} \n DEFAULT DATA LOADED TO DB_MANAGER INIT PROTOCOL'.format(
+        #             e))
 
         # //> INITIAL VARIABLES
         self._STORED_NAMES = None
@@ -49,9 +55,10 @@ class DB_MANAGER:
         self.ES_DATABASE_RAW_CONN_STRING = None
         self.DB_ = None
 
+
         # //> INITIAL VARIABLES FOR CONSTRUCTING DATABASE API ENCORE
-        self.FACES_COLLECTION, self.STORED_EMBEDDINGS, self.STORED_NAMES = self.DB_connect(__path, __db,
-                                                                                           __collection, __log )
+        self.FACES_COLLECTION, self.STORED_EMBEDDINGS, self.STORED_NAMES = self.DB_connect(self._DB_ENV_PATH, self._DB,
+                                                                                           self._COLLECTION, __log )
 
     # //> CONNECTS INSTANCE TO MONGODB SERVER
     def DB_connect(self, __path, __db, __collection, __log=True):
@@ -71,7 +78,7 @@ class DB_MANAGER:
             # //> REPLACES TEMPLATE TARGET STRINGS FROM ES_DATABASE_RAW_CONN_STRING FOR AUTH CONNECTION TO SERVER
             self.ES_DATABASE_URL_CONN_STRING = self.ES_DATABASE_RAW_CONN_STRING.replace(self.ES_TEMPLATE_USER,
                                                                               self.ES_MONGODB_USERNAME).replace(
-                self.ES_TEMPLATE_PWD, self.ES_MONGODB_PASSWORD)
+                                                                            self.ES_TEMPLATE_PWD, self.ES_MONGODB_PASSWORD)
 
             try:  # //> SEND PING ON A SUCCESSFUL CONNECTION
                 # //> CREATES A NEW CLIENT AND CONNECTS TO SERVER
@@ -80,24 +87,26 @@ class DB_MANAGER:
                 self._MONGO_CLIENT.admin.command('ping')
                 print("PING RESPONSE: CONNECTED TO MONGODB DATABASE")
 
-                try:
-                    # //> [ 2 ]POINTER FOR SERVER DB AND COLLECTION
-                    self.DB_ = self._MONGO_CLIENT[__db]  # //> REPLACE WITH FINAL DB
-                    self._FACES_COLLECTION = self.DB_[__collection]  # //> REPLACE WITH FINAL COLLECTION
-                    # //> FETCHES ALL OBJECTS UNDER THE FACES_COLLECTION DB
-                    self._STORED_FACES_ALL = list(self._FACES_COLLECTION.find({}))
-                    # //> MAKES PARALLEL ARRAYS FOR STORED_EMBEDDINGS, STORED_NAMES
-                    self._STORED_EMBEDDINGS = [doc['embedding'] for doc in self._STORED_FACES_ALL]
-                    self._STORED_NAMES = [doc['name'] for doc in self._STORED_FACES_ALL]
-
-                    if __log:
-                        print('STORED_EMBEDDINGS {} \nSTORED_NAMES {}'.format(self._STORED_EMBEDDINGS, self._STORED_NAMES))
-
-                    return self._FACES_COLLECTION, self._STORED_EMBEDDINGS, self._STORED_NAMES
-
-                except Exception as e:
-                    print('AN UNEXPECTED ERROR OCCURRED: {}'.format(e))
-                    return None
+                # TODO: MAKE A FUNCTION FOR USAGE
+                # try:
+                return self.fetch_whole_db_to_Local(__db,__collection,True)
+                #     # //> [ 2 ]POINTER FOR SERVER DB AND COLLECTION
+                #     self.DB_ = self._MONGO_CLIENT[__db]  # //> REPLACE WITH FINAL DB
+                #     self._FACES_COLLECTION = self.DB_[__collection]  # //> REPLACE WITH FINAL COLLECTION
+                #     # //> FETCHES ALL OBJECTS UNDER THE FACES_COLLECTION DB
+                #     self._STORED_FACES_ALL = list(self._FACES_COLLECTION.find({}))
+                #     # //> MAKES PARALLEL ARRAYS FOR STORED_EMBEDDINGS, STORED_NAMES
+                #     self._STORED_EMBEDDINGS = [doc['embedding'] for doc in self._STORED_FACES_ALL]
+                #     self._STORED_NAMES = [doc['name'] for doc in self._STORED_FACES_ALL]
+                #
+                #     if __log:
+                #         print('STORED_EMBEDDINGS {} \nSTORED_NAMES {}'.format(self._STORED_EMBEDDINGS, self._STORED_NAMES))
+                #
+                #     return self._FACES_COLLECTION, self._STORED_EMBEDDINGS, self._STORED_NAMES
+                #
+                # except Exception as e:
+                #     print('AN UNEXPECTED ERROR OCCURRED: {}'.format(e))
+                #     return None
 
             except Exception as e:
                 print('AN UNEXPECTED ERROR OCCURRED: {}'.format(e))
@@ -123,6 +132,55 @@ class DB_MANAGER:
                 "embedding": __embedding
             }
 
+    def fetch_whole_db_to_Local(self,__db,__collection, __log=True):
+        try:
+            # //> [ 2 ]POINTER FOR SERVER DB AND COLLECTION
+            self.DB_ = self._MONGO_CLIENT[__db]  # //> REPLACE WITH FINAL DB
+            self._FACES_COLLECTION = self.DB_[__collection]  # //> REPLACE WITH FINAL COLLECTION
+            # //> FETCHES ALL OBJECTS UNDER THE FACES_COLLECTION DB
+            self._STORED_FACES_ALL = list(self._FACES_COLLECTION.find({}))
+            # //> MAKES PARALLEL ARRAYS FOR STORED_EMBEDDINGS, STORED_NAMES
+            self._STORED_EMBEDDINGS = [doc['embedding'] for doc in self._STORED_FACES_ALL]
+            self._STORED_NAMES = [doc['name'] for doc in self._STORED_FACES_ALL]
+
+            if __log:
+                print('fetch_whole_db_to_Local \nSTORED_EMBEDDINGS {} \nSTORED_NAMES {}'.format(self._STORED_EMBEDDINGS, self._STORED_NAMES))
+
+            return self._FACES_COLLECTION, self._STORED_EMBEDDINGS, self._STORED_NAMES
+
+        except Exception as e:
+            print('AN UNEXPECTED ERROR OCCURRED: {}'.format(e))
+            return ['ERROR_WHILE_FETCHING']
+
+    def get_db_settings(self,__path, __log=False):
+        try:
+            # //> [ PRE ]TAKE REAL BIOMETRICS FROM PICTURED RESOURCES
+            DB_SETTINGS_LOCAL_PATH = __path
+
+            # //> [ 0 ]LOADS AN ENV FILE FROM RELATIVE PATH,
+            _dotenv_path = Path(DB_SETTINGS_LOCAL_PATH)
+            load_dotenv(dotenv_path=_dotenv_path)
+
+            # //> ONCE DATA IS COLLECTED
+            self._DB_ENV_PATH = os.getenv("DB_ENV_PATH")
+            self._DB = os.getenv("DB_NAME")
+            self._COLLECTION = os.getenv("DB_COLLECTION")
+
+            if __log:
+                print('DB SETTINGS LOADED FROM LOCAL ENV \n_DB_ENV_PATH [ {} ] \n_DB [ {} ] _COLLECTION [ {} ]'.format(
+                    self._DB_ENV_PATH, self._DB, self._COLLECTION))
+
+            return self._DB, self._COLLECTION
+
+        except Exception as e:
+            # //> GENERICAL TEST DATABASE / COL
+            self._DB_ENV_PATH = '../../../env/serverengine.env'
+            self._DB = 'test'
+            self._COLLECTION = 'users'
+
+            print(
+                'UNABLE TO FETCH DATA BROM LOCAL SETTING .ENV, ERROR: {} \n DEFAULT DATA LOADED TO DB_MANAGER INIT PROTOCOL'.format(
+                    e))
 
     # //> MAKES INSERT FOR NEW ENTRY TO TARGET DATABASE
     def insert_new_user(self, __user_data, __faces_collection, __log=False):

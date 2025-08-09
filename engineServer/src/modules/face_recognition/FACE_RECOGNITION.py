@@ -1,10 +1,12 @@
+import cv2
+
 from src.camera.CAMERA_ import Camera
 from src.database.DB_MANAGER import DB_MANAGER
 
 # //> ML MODULES
-import mediapipe as mp
 import numpy as np
 import face_recognition
+# import mediapipe as mp
 
 # //> SYSTEM MODULE
 import os
@@ -18,9 +20,13 @@ RAW_IMG_SOURCE_PATH = '../../utils/data/faces/raw_images'
 class FACE_RECOGNITION:
     def __init__(self, __cv, __mode='SS'):
 
+        self._img = None
+        self.key_frame = None
+        self.debug_image = None
         if __mode == 'SS':
             # //> [ 1.5 ]CREATION OF FACE DATA RAW_IMG_SOURCE_PATH,
             self.CLASS_NAMES, self._ENCODE_ = self.face_embeddings(RAW_IMG_SOURCE_PATH, __cv, True)
+
         # //> VAR_FOR_QUERIES
         self.encodedCurrentFrame = None
         self.faceCurrentFrame = None
@@ -58,55 +64,56 @@ class FACE_RECOGNITION:
         # //> BUFFER COUNT VARIABLES
         self.tag_face_command_= []
         self.slot_capacity = 8
-
-        # //> MEDIAPIPE INITIALIZATION
-        self.mp_face_mesh = mp.solutions.face_mesh
-        self.face_mesh = self.mp_face_mesh.FaceMesh(
-                                        static_image_mode=self.static_image_mode,
-                                        max_num_faces=self.max_num_faces,
-                                        min_detection_confidence=self.conf_ratio)
+        #
+        # # //> MEDIAPIPE INITIALIZATION
+        # self.mp_face_mesh = mp.solutions.face_mesh
+        # self.face_mesh = self.mp_face_mesh.FaceMesh(
+        #                                 static_image_mode=self.static_image_mode,
+        #                                 max_num_faces=self.max_num_faces,
+        #                                 smooth_landmarks = True,
+        #                                 min_detection_confidence=self.conf_ratio)
+        #
 
 
     def FacialRotor(self, __cv, __mode='mAp'):
 
         # //> MAIN LOOP INITIALIZER
         while __cv.active(): # //> CYCLES BEGIN ON _CAM_ isOPEN VALIDATOR
-
             self.key_frame = __cv.keyframe() # //> SETTING GLOBAL KEY FRAMERS
-            self._success, self._img = __cv.stream_() # //< RAW  FEED FROM CAMERA CLASS self.debug_image
+            self._success, self._img, self.debug_image, = __cv.stream_() # //< RAW  FEED FROM CAMERA CLASS self.debug_image
 
-            if __mode == 'mp':
-                _CAM_.driver_().imshow('MP_MODE',self.MP_PROCESSOR(self._img, True))
+            self.debug_image = self.FC_PROCESOR(self._img, self.debug_image, True)
 
-            else:
-                _CAM_.driver_().imshow('MP_MODE',self.FC_PROCESOR(self._img,True))
+            _CAM_.driver_().imshow('MP_MODE', self.debug_image)
 
 
-    def MP_PROCESSOR(self, __vid, __log=False):
-        self.results = self.face_mesh.process(__vid)
 
-        if self.results.multi_face_landmarks:
-
-            if __log:
-                print('Face Landmarks: {}'.format(self.results.multi_face_landmarks))
-
-        return __vid
-
-
-    def FC_PROCESOR(self, __vid, __log=False):
+    def FC_PROCESOR(self, __vid, __source, __log=False):
         # //> GETTING COORS FROM IMAGE REAL TIME
+        # self.faceCurrentFrame = face_recognition.face_locations(__vid)
+        # self.encodedCurrentFrame = face_recognition.face_encodings(__vid, self.faceCurrentFrame)
         self.faceCurrentFrame = face_recognition.face_locations(__vid)
-        self.encodedCurrentFrame = face_recognition.face_encodings(__vid, self.faceCurrentFrame)
-
+        self.encodedCurrentFrame = face_recognition.face_encodings(__vid)
         if self.encodedCurrentFrame:
 
+            # self._frame_Tagger_(_image=__vid, _faceloc=self.faceCurrentFrame, _squarefac=self._square_tag_factor,
+            #                     _recfac=self._square_text_factor, _nametag=self._nameTagFetching,
+            #                     _reccol=self.square_Match_Color, _text_col=self.tag_NameColor, __cv=__cv.driver_())  # On Matched :)
+
             if __log:
+                # print('faceCurrentFrame : {} {}'.format(self.faceCurrentFrame, self.encodedCurrentFrame[0].tolist()))
                 print('faceCurrentFrame : {} {}'.format(self.faceCurrentFrame, self.encodedCurrentFrame[0].tolist()))
 
-        return __vid
+        return __source
 
+    # def _frame_Tagger_(self, _image, _faceloc, _squarefac, _recfac, _nametag, _reccol,_text_col,__cv, _squarezise=36,_boldsquare=1,_textsize=1,_textoutline=1):
+    #     y1, x2, y2, x1 = _faceloc
+    #     y1, x2, y2, x1 = y1 * _squarefac, x2 * _squarefac, y2 * _squarefac, x1 * _squarefac
+    #     __cv.rectangle(_image, (x1, y1), (x2, y2), _reccol, _boldsquare)
+    #     __cv.rectangle(_image, (x1, y2 - _squarezise), (x2, y2), _reccol, __cv.FILLED)
+    #     __cv.putText(_image, _nametag, (x1 + _recfac, y2 - _recfac), __cv.FONT_HERSHEY_COMPLEX_SMALL, _textsize, _text_col , _textoutline)
 
-    def get_similarity(__target, __records, __names, __log=False):
+    def get_similarity(self, __target, __records, __names, __log=False):
         # //> PERFORM SIMILARITY COMPARISON USING
         # [ scikit-learn's cosine_similarity ]
 
@@ -183,7 +190,7 @@ class FACE_RECOGNITION:
 
 
 _DBM_ = DB_MANAGER()
-_CAM_ = Camera(0)  # //> PROMPTED CAMERA OBJECT WITH DEFAULT DEVICE
+_CAM_ = Camera(1)  # //> PROMPTED CAMERA OBJECT WITH DEFAULT DEVICE
 _FR_ = FACE_RECOGNITION(_CAM_.driver_())
 
 _FR_.FacialRotor(_CAM_)

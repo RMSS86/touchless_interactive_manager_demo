@@ -20,7 +20,7 @@ import os
 #####FACE RECOGNITION#####FACE RECOGNITION#####FACE RECOGNITION#####FACE RECOGNITION#####FACE RECOGNITION#####FACE RECOGNITION#####
 #####FACE RECOGNITION#####FACE RECOGNITION#####FACE RECOGNITION#####FACE RECOGNITION#####FACE RECOGNITION#####FACE RECOGNITION#####
 #####FACE RECOGNITION#####FACE RECOGNITION#####FACE RECOGNITION#####FACE RECOGNITION#####FACE RECOGNITION#####FACE RECOGNITION#####
-class FaceRecognition():
+class FaceRecognition:
     def __init__(self):
         # TODO: Data Sources, in future replaced with a DF from SQL using the _Connection module AKA API
         ####VAR_FOR_QUERIES####VAR_FOR_QUERIES####VAR_FOR_QUERIES####
@@ -142,8 +142,8 @@ class FaceRecognition():
             self._FD_SELF_STORAGE_MODE(face_CF=self.faceCurrentFrame, encoded_CF=self.encodedCurrentFrame ,encodedLK=self._encodeListKnown_)
             #self._FD_API_MODE(face_CF=self.faceCurrentFrame, encoded_CF=self.encodedCurrentFrame)
 
-            return self.img
-
+            # return self.img
+            cv2.imshow('MP_MODE', self.img)
 
     def _FD_SELF_STORAGE_MODE(self, face_CF, encoded_CF, encodedLK):
         for self.encondedFace, self.FaceLoc in zip(encoded_CF, face_CF):
@@ -243,6 +243,6 @@ class FaceRecognition():
         self._tag_counter_ = []
 
 
-_UD_ = UD_API()
-_SW_= _SWITCHER_()
+# _UD_ = UD_API()
+# _SW_= _SWITCHER_()
 
