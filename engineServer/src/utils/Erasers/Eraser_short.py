@@ -234,8 +234,6 @@ class FACE_RECOGNITION:
         # //> WHEN USER IS RECOGNIZED
         if _comm == self.USER_IDENTIFIED:
             self._user_recd_counter_.append(_id)
-            print('_id self._user_recd_counter_ ',self._user_recd_counter_)
-
             if len(self._user_recd_counter_) == _parser:
 
                 counter__ = Counter(self._user_recd_counter_)  # //> GET BUFFER ANALYSIS
@@ -243,8 +241,9 @@ class FACE_RECOGNITION:
 
                     # //> GET THIS REQUESTS ORGANIZED ON COMM-IO
                     _value__, __count_of_ = counter__.most_common()[0]
-                    print('{}!'.format(_value__))
-                    _COMM_.universal_COMM_Receiver_(_value__,'API_USER', self.USER_IDENTIFIED,'UI_UPDATE')
+                    _COMM_.universal_COMM_Receiver_(
+                        _value__,'API_USER',
+                        self.USER_IDENTIFIED,'UI_UPDATE')
 
                     # TODO: PROVE THAT LOGGED USER STILL LOGGED WHEN MAKING DECISIONS ON THE FLOW
                     # TODO: WHEN RECOGNIZING A FACE, GOT TO USER PAGE AUTOMATICALLY [CREATE A UI_DO COMMAND]
@@ -253,20 +252,21 @@ class FACE_RECOGNITION:
         # //> WHEN USER IS NOT BEING RECOGNIZED
         if _comm ==  self.USER_NOT_RECOGNIZED_IN_DATABASE:
             self._user_not_rec_counter_.append(_id)
-            print(self._user_not_rec_counter_)
             if len(self._user_not_rec_counter_) == _parser:
 
                 # //> GET THIS REQUESTS ORGANIZED ON COMM-IO
-                _COMM_.universal_COMM_Receiver_(self.USER_NOT_RECOGNIZED_IN_DATABASE, 'API_USER', self.USER_NOT_RECOGNIZED_IN_DATABASE, 'UI_UPDATE')
+                _COMM_.universal_COMM_Receiver_(
+                    self.USER_NOT_RECOGNIZED_IN_DATABASE,
+                    'API_USER', self.USER_NOT_RECOGNIZED_IN_DATABASE, 'UI_UPDATE')
 
                 # TODO: MAKING A LOG OUT WHEN NO USER IN_FRONT PAGE FOR AS LONG AS 15SECS / MODE TO HOME PAGE
+                # TODO: CREATE USER_LOGGING_LOG COLLECTION
                 self.USER_RESETER_()
 
 
         # //> WHEN USER IS NOT IN FRAME
         if _comm == self.NO_USER_FACE_RECOGNIZED_IN_FRAME:
             self._user_not_in_frame_counter_.append(_id)
-            print(self._user_not_in_frame_counter_)
             if len(self._user_not_in_frame_counter_) == _parser:
 
                 # //> GET THIS REQUESTS ORGANIZED ON COMM-IO
@@ -274,7 +274,6 @@ class FACE_RECOGNITION:
 
                 # TODO: MAKING A LOG OUT WHEN NO USER IN_FRONT PAGE FOR AS LONG AS 15SECS / MODE TO HOME PAGE
                 self.USER_RESETER_()
-
 
 
     # //> RESETS SHORT COUNT ONLY
@@ -289,8 +288,7 @@ class FACE_RECOGNITION:
         self._tag_counter_ = []
         self.tag_face_command_ = []
 
-    # //> LOGGERS
-
+    # //> LOGGERS?
 
 _CAM_ = Camera(0) # //> CAMERA INITIALIZATION
 _DBM_ = DB_MANAGER() # //> DB_MANAGER INITIALIZATION

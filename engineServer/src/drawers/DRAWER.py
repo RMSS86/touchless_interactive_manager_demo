@@ -20,6 +20,7 @@ class DRAWER:
 
     # //> THIS PAINT THE POINT FOR THE LEFT HAND DIGIT COMMAND RECEIVER
     def DGT_point_drawer(self, __img, __points, _color='COR'):
+
         if _color == 'COR':
             self.selected_color = self.LH_hand_counter_point_color
         if _color == 'INC':
@@ -61,6 +62,11 @@ class DRAWER:
             for point in self.lmList:
                 self.__cv.driver_().circle(__img, point, self.dot_radio, self.CRR_hands_counter_point_color,
                                            self.__cv.driver_().FILLED)
+
+    def FR_Drawer(self, __img, __points):
+        pass
+        # //> TODO: MAKE A SQUARE DRAWER FOR FACE_RECOG SIMPLE USAGE
+        # //> TODO: MAKE FE PSEUDO MODAL FOR SQUARE TO ALIGN WITH FACE SQUARE
 
 # //> REFERENCE FROM RESULTS
 # classification {

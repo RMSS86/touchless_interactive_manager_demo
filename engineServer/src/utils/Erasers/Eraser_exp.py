@@ -262,16 +262,7 @@
 # //> TODO: GET THE USER DATABASE SIMILAR CRUD TO DUMMY USERS COLLECTION PRIOR TO >>>
 # //< TODO: CREATE A REAL USERS DATABASE UNDER A USERS COLLECTION, THEN GET THE FACES EMBEDDINGS INTO
 #  THE USER_EMBEDDINGS COLLECTION STORING EMBS, AND USER [_id] FROM [USERS] COLLECTION! MANAGED BY THE BACK END
-from collections import Counter
 
-_count = ['robbie trevor', 'robbie trevor', 'robbie trevor']
-
-count__ = Counter(_count)  # //> GET BUFFER ANALYSIS
-# //> THE Counter FUNCTION GETS ELEMENTS DISTRIBUTION BY NATURES / COUNT
-_value__, _count_of_ = count__.most_common()[0]  # //< VALUES FOR LOGICAL USE\
-
-print('count__ len: [ {} ]'.format(len(count__)))
-print('{} {}'.format(_value__, _count_of_))
 
 
 

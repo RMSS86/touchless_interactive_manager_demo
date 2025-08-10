@@ -9,7 +9,7 @@ import os
 
 
 class DB_MANAGER:
-    def __init__(self, __path='../../database/database.env', __log=False):
+    def __init__(self, __path='database/database.env', __log=False): # '../../database/database.env'
 
         # //> GETS DB PUBLIC VARS
         self.DB_SETTINGS_LOCAL_PATH = None
@@ -26,13 +26,13 @@ class DB_MANAGER:
         self._STORED_FACES_ALL = None
         self._FACES_COLLECTION = None
         self._MONGO_CLIENT = None
-        self.ES_DATABASE_URL_CONN_STRING = None
         self.ES_TEMPLATE_PWD = None
         self.ES_TEMPLATE_USER = None
         self._dotenv_path = None
         self.ES_MONGODB_PASSWORD = None
         self.ES_MONGODB_USERNAME = None
         self.ES_DATABASE_RAW_CONN_STRING = None
+        self.ES_DATABASE_URL_CONN_STRING = None
         self.DB_ = None
 
 
@@ -97,7 +97,7 @@ class DB_MANAGER:
 
 
     # //> GETS THE WHOLE DATABASE EMBEDDINGS AND ARRANGES TO TEMP LOCAL VAR
-    def fetch_whole_db_to_Local(self,__db,__collection, __log=True):
+    def fetch_whole_db_to_Local(self, __db, __collection, __log=True):
         try:
             # //> [ 2 ]POINTER FOR SERVER DB AND COLLECTION
             self.DB_ = self._MONGO_CLIENT[__db]  # //> REPLACE WITH FINAL DB
@@ -120,7 +120,8 @@ class DB_MANAGER:
 
 
     # //> FETCHES FROM .ENV LOCAL FILE DB SETTINGS DB, COLLECTION
-    def get_db_settings(self,__path, __log=False):
+    def get_db_settings(self, __path, __log=False):
+
         try:
             # //> [ PRE ]TAKE REAL BIOMETRICS FROM PICTURED RESOURCES
             self.DB_SETTINGS_LOCAL_PATH = __path
@@ -133,6 +134,7 @@ class DB_MANAGER:
             self._DB_ENV_PATH = os.getenv("DB_ENV_PATH")
             self._DB = os.getenv("DB_NAME")
             self._COLLECTION = os.getenv("DB_COLLECTION")
+
 
             if __log:
                 print('DB SETTINGS LOADED FROM LOCAL ENV \n_DB_ENV_PATH [ {} ] \n_DB [ {} ] _COLLECTION [ {} ]'.format(
@@ -194,3 +196,4 @@ class DB_MANAGER:
         except Exception as e:
             print('AN UNEXPECTED ERROR OCCURRED: {}'.format(e))
             return ['ERROR_WHILE_DELETING']
+

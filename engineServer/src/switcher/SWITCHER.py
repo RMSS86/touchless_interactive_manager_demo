@@ -1,4 +1,5 @@
 from src.modules.auto_mouse.AUTO_MOUSE import AUTO_MOUSE
+from src.modules.face_recognition.FACE_RECOGNITION import FACE_RECOGNITION
 from src.modules.hand_recognition.HANDS_REC_CMD import HR_CMD_Engine_
 from src.modules.hand_recognition.HAND_REC_DIGITS import HAND_REC_DIGITS
 from src.navigator.NAVIGATOR import NAVIGATOR
@@ -26,8 +27,7 @@ class SWITCHER:
                 self.signal_out = HR_CMD_.HandCounter(__ret, __sig_in, __cv)
 
             case 'FACE_REC': # //> COORDINATES THE ACTIVE API FACE RECOGNITION MODULE
-                # //> [local]TODO: #1
-                pass
+                self.signal_out = _FC_.FacialRotor(__ret, __sig_in)
 
             case 'AUTO_MOUSE': # //> CONTROLS GUI DIRECTLY THROUGH CV EMULATING A PHYSICAL MOUSE
                 self.signal_out = _ATM_.AUTO_mouse_(__ret, __sig_in, __cv)
@@ -48,6 +48,7 @@ class SWITCHER:
 
 _HR_= HAND_REC_DIGITS() # //> BROADCASTING TO SELF SERVER ENGINE
 _ATM_ = AUTO_MOUSE() # //> CONTROLLING GUI ON A CV EMULATED MOUSE
+_FC_ = FACE_RECOGNITION()
 HR_CMD_ = HR_CMD_Engine_() # //> DECODES HANDS 4WAY LR-RH COMMANDS
 
 
