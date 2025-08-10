@@ -122,7 +122,7 @@ class COMM_IO:
             print('CMD_compouser [ {} ]'.format(self.CMD_PRE_OUT))
 
             # //> SEND COMPOSED MESSAGE OUT TO COMM-IO DEVICE
-            # self._CMD_SEND_(self.CMD_PRE_OUT, True, False)
+            self._CMD_SEND_(self.CMD_PRE_OUT, True, False)
         # self.match_CMD(__value, __hand, __action ) # TODO: TAKE ACTIONS BASED ON LOGICAL TREE __action
 
 

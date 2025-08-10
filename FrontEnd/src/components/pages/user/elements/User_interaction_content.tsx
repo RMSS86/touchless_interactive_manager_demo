@@ -26,17 +26,30 @@ export default function User_interactive_content({
     console.log(
       `API endpoint ${BROADCAST_ADDRESS} is active (Status: ${_bradcast_response.status})`
     );
+    return _bradcast_response;
   }
 
-  useEffect(() => {
-    try {
-      checkBroadcaststatus();
-    } catch (_) {
-      console.log(_);
-    }
-  }, []);
+  // useEffect(() => {
+  //   try {
+  //     const _bradcast_response = checkBroadcaststatus();
+  //     _bradcast_response.then(
+  //       (value) => {
+  //         setDisplay(BROADCAST_ADDRESS);
+  //         console.log("ONLINE_MODE");
+  //       },
+  //       (error) => {
+  //         setDisplay(Touchless_Interactive_Manager_BG_edit_A);
+  //         console.log("OFFLINE_MODE");
+  //       }
+  //     );
+  //   } catch (_) {
+  //     console.log(_);
+  //   }
+  // }, []);
 
   const [logoIndex, setLogoIndex] = useState(TIM_OFFLINE_);
+  const [display, setDisplay] = useState(BROADCAST_ADDRESS); //BROADCAST_ADDRESS //
+
   //> TODO: MAKE STATES FOR MODE, CMD_TYPE, HANDNESS, VALUE
 
   // TODO: MAKE A CLASSS
@@ -117,6 +130,10 @@ export default function User_interactive_content({
           }
         }
       }
+      //> FOR FACE RECOGNITION
+      if (INCOMING_CMD["CMD_TYPE"] === "UI_UPDATE") {
+        console.log(INCOMING_CMD["VALUE"]);
+      }
     });
   }, [_socket]);
 
@@ -165,11 +182,7 @@ export default function User_interactive_content({
             className="command__tag"
             alt="brandlogo"
           />
-          <img
-            src={BROADCAST_ADDRESS}
-            alt="Web--Cam"
-            className="gallery__photo "
-          />
+          <img src={display} alt="Web--Cam" className="gallery__photo " />
         </figure>
         <Hint_Side_Menu />
         <CMD_Sub_Menu />

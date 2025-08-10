@@ -11,7 +11,7 @@ $menu_dmis: 30rem;
   box-shadow: var(--wp--preset--shadow--minimal);
   margin: 1.5rem;
   bottom: 0%;
-  right: 1%
+  right: 1%;
   transition: all 0.3s ease-in-out;
 
   @include mixins.respond(phone) {
