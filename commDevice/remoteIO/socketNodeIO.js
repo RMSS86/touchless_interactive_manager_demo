@@ -28,7 +28,7 @@ const sendCMD = (req, res, next) => {
   // var RECEIVED_message_ = JSON.parse(CMD_);
   // const _CMD = CMD_["_CMD"];
 
-  // console.log('RECEIVED FROM sendCMD', RECEIVED_message_)
+  console.log('RECEIVED FROM sendCMD', RECEIVED_message_)
 
   try{
     //> GETS MESSAGE SENT TO FRONT END
